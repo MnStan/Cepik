@@ -1,0 +1,607 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F6E2DB5328FE82C700A77743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB5228FE82C700A77743 /* AppDelegate.swift */; };
+		F6E2DB5528FE82C700A77743 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB5428FE82C700A77743 /* SceneDelegate.swift */; };
+		F6E2DB5728FE82C700A77743 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB5628FE82C700A77743 /* ViewController.swift */; };
+		F6E2DB5A28FE82C700A77743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6E2DB5828FE82C700A77743 /* Main.storyboard */; };
+		F6E2DB5C28FE82C900A77743 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E2DB5B28FE82C900A77743 /* Assets.xcassets */; };
+		F6E2DB5F28FE82C900A77743 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6E2DB5D28FE82C900A77743 /* LaunchScreen.storyboard */; };
+		F6E2DB6A28FE82C900A77743 /* CepikTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB6928FE82C900A77743 /* CepikTests.swift */; };
+		F6E2DB7428FE82C900A77743 /* CepikUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB7328FE82C900A77743 /* CepikUITests.swift */; };
+		F6E2DB7628FE82C900A77743 /* CepikUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB7528FE82C900A77743 /* CepikUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F6E2DB6628FE82C900A77743 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6E2DB4728FE82C700A77743 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6E2DB4E28FE82C700A77743;
+			remoteInfo = Cepik;
+		};
+		F6E2DB7028FE82C900A77743 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6E2DB4728FE82C700A77743 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6E2DB4E28FE82C700A77743;
+			remoteInfo = Cepik;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F6E2DB4F28FE82C700A77743 /* Cepik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cepik.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6E2DB5228FE82C700A77743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F6E2DB5428FE82C700A77743 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F6E2DB5628FE82C700A77743 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F6E2DB5928FE82C700A77743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F6E2DB5B28FE82C900A77743 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F6E2DB5E28FE82C900A77743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F6E2DB6028FE82C900A77743 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6E2DB6528FE82C900A77743 /* CepikTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CepikTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6E2DB6928FE82C900A77743 /* CepikTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CepikTests.swift; sourceTree = "<group>"; };
+		F6E2DB6F28FE82C900A77743 /* CepikUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CepikUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6E2DB7328FE82C900A77743 /* CepikUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CepikUITests.swift; sourceTree = "<group>"; };
+		F6E2DB7528FE82C900A77743 /* CepikUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CepikUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F6E2DB4C28FE82C700A77743 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E2DB6228FE82C900A77743 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E2DB6C28FE82C900A77743 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F6E2DB4628FE82C700A77743 = {
+			isa = PBXGroup;
+			children = (
+				F6E2DB5128FE82C700A77743 /* Cepik */,
+				F6E2DB6828FE82C900A77743 /* CepikTests */,
+				F6E2DB7228FE82C900A77743 /* CepikUITests */,
+				F6E2DB5028FE82C700A77743 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F6E2DB5028FE82C700A77743 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F6E2DB4F28FE82C700A77743 /* Cepik.app */,
+				F6E2DB6528FE82C900A77743 /* CepikTests.xctest */,
+				F6E2DB6F28FE82C900A77743 /* CepikUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F6E2DB5128FE82C700A77743 /* Cepik */ = {
+			isa = PBXGroup;
+			children = (
+				F6E2DB5228FE82C700A77743 /* AppDelegate.swift */,
+				F6E2DB5428FE82C700A77743 /* SceneDelegate.swift */,
+				F6E2DB5628FE82C700A77743 /* ViewController.swift */,
+				F6E2DB5828FE82C700A77743 /* Main.storyboard */,
+				F6E2DB5B28FE82C900A77743 /* Assets.xcassets */,
+				F6E2DB5D28FE82C900A77743 /* LaunchScreen.storyboard */,
+				F6E2DB6028FE82C900A77743 /* Info.plist */,
+			);
+			path = Cepik;
+			sourceTree = "<group>";
+		};
+		F6E2DB6828FE82C900A77743 /* CepikTests */ = {
+			isa = PBXGroup;
+			children = (
+				F6E2DB6928FE82C900A77743 /* CepikTests.swift */,
+			);
+			path = CepikTests;
+			sourceTree = "<group>";
+		};
+		F6E2DB7228FE82C900A77743 /* CepikUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F6E2DB7328FE82C900A77743 /* CepikUITests.swift */,
+				F6E2DB7528FE82C900A77743 /* CepikUITestsLaunchTests.swift */,
+			);
+			path = CepikUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F6E2DB4E28FE82C700A77743 /* Cepik */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6E2DB7928FE82C900A77743 /* Build configuration list for PBXNativeTarget "Cepik" */;
+			buildPhases = (
+				F6E2DB4B28FE82C700A77743 /* Sources */,
+				F6E2DB4C28FE82C700A77743 /* Frameworks */,
+				F6E2DB4D28FE82C700A77743 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cepik;
+			productName = Cepik;
+			productReference = F6E2DB4F28FE82C700A77743 /* Cepik.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F6E2DB6428FE82C900A77743 /* CepikTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6E2DB7C28FE82C900A77743 /* Build configuration list for PBXNativeTarget "CepikTests" */;
+			buildPhases = (
+				F6E2DB6128FE82C900A77743 /* Sources */,
+				F6E2DB6228FE82C900A77743 /* Frameworks */,
+				F6E2DB6328FE82C900A77743 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F6E2DB6728FE82C900A77743 /* PBXTargetDependency */,
+			);
+			name = CepikTests;
+			productName = CepikTests;
+			productReference = F6E2DB6528FE82C900A77743 /* CepikTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F6E2DB6E28FE82C900A77743 /* CepikUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6E2DB7F28FE82C900A77743 /* Build configuration list for PBXNativeTarget "CepikUITests" */;
+			buildPhases = (
+				F6E2DB6B28FE82C900A77743 /* Sources */,
+				F6E2DB6C28FE82C900A77743 /* Frameworks */,
+				F6E2DB6D28FE82C900A77743 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F6E2DB7128FE82C900A77743 /* PBXTargetDependency */,
+			);
+			name = CepikUITests;
+			productName = CepikUITests;
+			productReference = F6E2DB6F28FE82C900A77743 /* CepikUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F6E2DB4728FE82C700A77743 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					F6E2DB4E28FE82C700A77743 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					F6E2DB6428FE82C900A77743 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = F6E2DB4E28FE82C700A77743;
+					};
+					F6E2DB6E28FE82C900A77743 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = F6E2DB4E28FE82C700A77743;
+					};
+				};
+			};
+			buildConfigurationList = F6E2DB4A28FE82C700A77743 /* Build configuration list for PBXProject "Cepik" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F6E2DB4628FE82C700A77743;
+			productRefGroup = F6E2DB5028FE82C700A77743 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F6E2DB4E28FE82C700A77743 /* Cepik */,
+				F6E2DB6428FE82C900A77743 /* CepikTests */,
+				F6E2DB6E28FE82C900A77743 /* CepikUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F6E2DB4D28FE82C700A77743 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6E2DB5F28FE82C900A77743 /* LaunchScreen.storyboard in Resources */,
+				F6E2DB5C28FE82C900A77743 /* Assets.xcassets in Resources */,
+				F6E2DB5A28FE82C700A77743 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E2DB6328FE82C900A77743 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E2DB6D28FE82C900A77743 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F6E2DB4B28FE82C700A77743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6E2DB5728FE82C700A77743 /* ViewController.swift in Sources */,
+				F6E2DB5328FE82C700A77743 /* AppDelegate.swift in Sources */,
+				F6E2DB5528FE82C700A77743 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E2DB6128FE82C900A77743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6E2DB6A28FE82C900A77743 /* CepikTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E2DB6B28FE82C900A77743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6E2DB7428FE82C900A77743 /* CepikUITests.swift in Sources */,
+				F6E2DB7628FE82C900A77743 /* CepikUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F6E2DB6728FE82C900A77743 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6E2DB4E28FE82C700A77743 /* Cepik */;
+			targetProxy = F6E2DB6628FE82C900A77743 /* PBXContainerItemProxy */;
+		};
+		F6E2DB7128FE82C900A77743 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6E2DB4E28FE82C700A77743 /* Cepik */;
+			targetProxy = F6E2DB7028FE82C900A77743 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F6E2DB5828FE82C700A77743 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6E2DB5928FE82C700A77743 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F6E2DB5D28FE82C900A77743 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6E2DB5E28FE82C900A77743 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F6E2DB7728FE82C900A77743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F6E2DB7828FE82C900A77743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F6E2DB7A28FE82C900A77743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X899A4BCH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cepik/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maksymilianstan.Cepik;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F6E2DB7B28FE82C900A77743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X899A4BCH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cepik/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maksymilianstan.Cepik;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F6E2DB7D28FE82C900A77743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X899A4BCH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maksymilianstan.CepikTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cepik.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cepik";
+			};
+			name = Debug;
+		};
+		F6E2DB7E28FE82C900A77743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X899A4BCH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maksymilianstan.CepikTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cepik.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cepik";
+			};
+			name = Release;
+		};
+		F6E2DB8028FE82C900A77743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X899A4BCH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maksymilianstan.CepikUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cepik;
+			};
+			name = Debug;
+		};
+		F6E2DB8128FE82C900A77743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X899A4BCH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maksymilianstan.CepikUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cepik;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F6E2DB4A28FE82C700A77743 /* Build configuration list for PBXProject "Cepik" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6E2DB7728FE82C900A77743 /* Debug */,
+				F6E2DB7828FE82C900A77743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6E2DB7928FE82C900A77743 /* Build configuration list for PBXNativeTarget "Cepik" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6E2DB7A28FE82C900A77743 /* Debug */,
+				F6E2DB7B28FE82C900A77743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6E2DB7C28FE82C900A77743 /* Build configuration list for PBXNativeTarget "CepikTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6E2DB7D28FE82C900A77743 /* Debug */,
+				F6E2DB7E28FE82C900A77743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6E2DB7F28FE82C900A77743 /* Build configuration list for PBXNativeTarget "CepikUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6E2DB8028FE82C900A77743 /* Debug */,
+				F6E2DB8128FE82C900A77743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F6E2DB4728FE82C700A77743 /* Project object */;
+}
