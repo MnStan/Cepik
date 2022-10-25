@@ -164,6 +164,7 @@ class SearchVC: UIViewController {
         case 4:
             print("tag 4")
         default:
+            print("Default")
             break
         }
     }
