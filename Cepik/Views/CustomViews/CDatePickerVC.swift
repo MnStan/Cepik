@@ -35,6 +35,10 @@ class CDatePickerVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.formatDate(date: datePicker.date)
+    }
+    
     private func configureButton() {
         doneButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }

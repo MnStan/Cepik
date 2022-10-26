@@ -13,8 +13,8 @@ class SearchVC: UIViewController {
     
     let searchButton = CButton(title: "Search", color: .systemRed)
     let searchSegmentedControl = UISegmentedControl(items: ["Vehicles", "ID", "Statistics"])
-    let stackView = UIStackView()
-    var inputViewsArray: [CItemSettingsView]!
+    var stackView: CItemsStackView!
+    var inputViewsArray: [CItemSettingsView] = []
     
     lazy var datePickerController = CDatePickerVC()
     
@@ -31,7 +31,6 @@ class SearchVC: UIViewController {
         setupSegmentedControl()
         
         setupTestStackView()
-        setTextFieldsDeletages()
     }
     
     private func configureCustomSheetPresentationController() {
@@ -50,29 +49,19 @@ class SearchVC: UIViewController {
         let citem4 = CItemSettingsView(title: "Data type", symbol: SFSymbols.province)
         let citem5 = CItemSettingsView(title: "Fields", symbol: SFSymbols.province)
         
+        inputViewsArray.removeAll()
         inputViewsArray = [citem1, citem2, citem3, citem4, citem5]
+        setTextFieldsDeletages(viewsArray: inputViewsArray)
         
-        var tagCounter = 0
-        
-        inputViewsArray.forEach {
-            stackView.addArrangedSubview($0)
-            $0.textField.tag = tagCounter
-            tagCounter = tagCounter + 1
-        }
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = 20
+        stackView = CItemsStackView(viewsArray: inputViewsArray)
         
         view.addSubview(stackView)
-
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: searchSegmentedControl.bottomAnchor, constant: 30),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            stackView.bottomAnchor.constraint(equalTo: searchButton.topAnchor, constant: -30)
+            stackView.heightAnchor.constraint(equalToConstant: CGFloat(inputViewsArray.count * 75))
         ])
     }
     
@@ -96,7 +85,23 @@ class SearchVC: UIViewController {
     
     @objc func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
         viewModel.segmentedValueChanged(selectedIndex: sender.selectedSegmentIndex)
-        stackView.removeFromSuperview()
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            setupTestStackView()
+            print("Case 0")
+        case 1:
+            stackView.removeFromSuperview()
+            print("Case 1")
+        case 2:
+            stackView.removeFromSuperview()
+            print("Case 2")
+        default:
+            break
+        }
+        
+        
+//        stackView.removeFromSuperview()
     }
     
     private func setupButton() {
@@ -155,6 +160,8 @@ class SearchVC: UIViewController {
             provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
             provinceAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             present(provinceAlertController, animated: true)
+            
+            textField.text = "podkarpackie"
         case 1:
             presentDatePicker(textField: textField)
         case 2:
@@ -185,8 +192,8 @@ extension SearchVC: UITextFieldDelegate {
         showDatePicker(textField: textField)
     }
     
-    private func setTextFieldsDeletages() {
-        inputViewsArray.forEach {
+    private func setTextFieldsDeletages(viewsArray: [CItemSettingsView]) {
+        viewsArray.forEach {
             $0.textField.delegate = self
         }
     }
