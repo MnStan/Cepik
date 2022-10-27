@@ -33,6 +33,23 @@ class SearchVC: UIViewController {
         setupTestStackView()
     }
     
+    private func addSubViews() {
+        view.addSubview(searchButton)
+        view.addSubview(searchSegmentedControl)
+    }
+    
+    // MARK: Navigation Controller configuration
+    
+    private func configureNavigationController() {
+        view.backgroundColor = .systemBackground
+        
+        title = "CEPiK"
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    // MARK: Sheet Presentation Controller configuration
+    
     private func configureCustomSheetPresentationController() {
         if let presentationController = datePickerController.presentationController as? UISheetPresentationController {
             presentationController.detents = [.custom(resolver: { [weak self] _ in
@@ -42,19 +59,59 @@ class SearchVC: UIViewController {
         }
     }
     
-    private func setupTestStackView() {
-        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province)
-        let citem2 = CItemSettingsView(title: "Date from", symbol: SFSymbols.province)
-        let citem3 = CItemSettingsView(title: "Date to", symbol: SFSymbols.province)
-        let citem4 = CItemSettingsView(title: "Data type", symbol: SFSymbols.province)
-        let citem5 = CItemSettingsView(title: "Fields", symbol: SFSymbols.province)
+    // MARK: Button configuration
+    
+    private func setupButton() {
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func searchButtonTapped() {
+        viewModel.fetchData()
+    }
+    
+    // MARK: Segment Controller configuration
+    
+    private func setupSegmentedControl() {
+        searchSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
-        inputViewsArray.removeAll()
-        inputViewsArray = [citem1, citem2, citem3, citem4, citem5]
-        setTextFieldsDeletages(viewsArray: inputViewsArray)
+        searchSegmentedControl.selectedSegmentIndex = 0
+        searchSegmentedControl.selectedSegmentTintColor = UIColor.systemGray4
         
-        stackView = CItemsStackView(viewsArray: inputViewsArray)
+        searchSegmentedControl.addTarget(self, action: #selector(searchSegmentedControlChanged), for: .valueChanged)
+    }
+    
+    @objc func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
+        viewModel.segmentedValueChanged(selectedIndex: sender.selectedSegmentIndex)
         
+        switch sender.selectedSegmentIndex {
+        case 0:
+            stackView.removeFromSuperview()
+            setupTestStackView()
+            print("Case 0")
+        case 1:
+            stackView.removeFromSuperview()
+            setupSecondStackView()
+            print("Case 1")
+        case 2:
+            stackView.removeFromSuperview()
+            print("Case 2")
+        default:
+            break
+        }
+    }
+    
+    // MARK: Constraints
+    
+    private func setupButtonConstraints() {
+        NSLayoutConstraint.activate([
+            searchButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            searchButton.widthAnchor.constraint(equalToConstant: view.frame.width / 2),
+            searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor, multiplier: 0.3),
+            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+    }
+    
+    private func setupStackViewConstraits() {
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
@@ -74,64 +131,37 @@ class SearchVC: UIViewController {
         ])
     }
     
-    private func setupSegmentedControl() {
-        searchSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+    // MARK: View showing funcitons
+    
+    private func setupTestStackView() {
+        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province)
+        let citem2 = CItemSettingsView(title: "Date from", symbol: SFSymbols.province)
+        let citem3 = CItemSettingsView(title: "Date to", symbol: SFSymbols.province)
+        let citem4 = CItemSettingsView(title: "Data type", symbol: SFSymbols.province)
+        let citem5 = CItemSettingsView(title: "Fields", symbol: SFSymbols.province)
         
-        searchSegmentedControl.selectedSegmentIndex = 0
-        searchSegmentedControl.selectedSegmentTintColor = UIColor.systemGray4
+        inputViewsArray.removeAll()
+        inputViewsArray = [citem1, citem2, citem3, citem4, citem5]
+        setTextFieldsDeletages(viewsArray: inputViewsArray)
         
-        searchSegmentedControl.addTarget(self, action: #selector(searchSegmentedControlChanged), for: .valueChanged)
+        stackView = CItemsStackView(viewsArray: inputViewsArray)
+        
+        setupStackViewConstraits()
     }
     
-    @objc func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
-        viewModel.segmentedValueChanged(selectedIndex: sender.selectedSegmentIndex)
+    private func setupSecondStackView() {
+        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province)
+        let citem2 = CItemSettingsView(title: "Date", symbol: SFSymbols.date)
+        let citem3 = CItemSettingsView(title: "Sex", symbol: SFSymbols.checkList)
+        let citem4 = CItemSettingsView(title: "Age", symbol: SFSymbols.date)
         
-        switch sender.selectedSegmentIndex {
-        case 0:
-            setupTestStackView()
-            print("Case 0")
-        case 1:
-            stackView.removeFromSuperview()
-            print("Case 1")
-        case 2:
-            stackView.removeFromSuperview()
-            print("Case 2")
-        default:
-            break
-        }
+        inputViewsArray.removeAll()
+        inputViewsArray = [citem1, citem2, citem3, citem4]
+        setTextFieldsDeletages(viewsArray: inputViewsArray)
         
+        stackView = CItemsStackView(viewsArray: inputViewsArray)
         
-//        stackView.removeFromSuperview()
-    }
-    
-    private func setupButton() {
-        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func searchButtonTapped() {
-        viewModel.fetchData()
-    }
-    
-    private func configureNavigationController() {
-        view.backgroundColor = .systemBackground
-        
-        title = "CEPiK"
-
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    private func addSubViews() {
-        view.addSubview(searchButton)
-        view.addSubview(searchSegmentedControl)
-    }
-    
-    private func setupButtonConstraints() {
-        NSLayoutConstraint.activate([
-            searchButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchButton.widthAnchor.constraint(equalToConstant: view.frame.width / 2),
-            searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor, multiplier: 0.3),
-            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-        ])
+        setupStackViewConstraits()
     }
     
     // MARK: DatePicker functions
