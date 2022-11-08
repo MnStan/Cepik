@@ -23,16 +23,17 @@ class CItemSettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(title: String, symbol: String) {
+    convenience init(title: String, symbol: String, tag: Int) {
         self.init(frame: .zero)
         self.symbol.setImage(imageName: symbol)
         itemLabel.setTitle(title: title)
+        textField.tag = tag
         setupConstraints()
     }
     
     private func setupConstraints() {
         self.translatesAutoresizingMaskIntoConstraints = false
-    
+
         NSLayoutConstraint.activate([
             symbol.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             symbol.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
@@ -44,8 +45,8 @@ class CItemSettingsView: UIView {
             itemLabel.widthAnchor.constraint(equalToConstant: itemLabel.intrinsicContentSize.width),
             itemLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             
-            textField.topAnchor.constraint(equalTo: itemLabel.topAnchor),
-            textField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2),
+            textField.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            textField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.1),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             textField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])

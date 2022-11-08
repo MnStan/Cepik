@@ -10,13 +10,26 @@ import UIKit
 class SearchVC: UIViewController {
     
     private let viewModel = SearchViewModel()
+    private var vehicleSearchInfo = VehicleSearchInfo()
     
     let searchButton = CButton(title: "Search", color: .systemRed)
     let searchSegmentedControl = UISegmentedControl(items: ["Vehicles", "ID", "Statistics"])
     var stackView: CItemsStackView!
     var inputViewsArray: [CItemSettingsView] = []
+    var emptyTextField: Bool = false
     
     lazy var datePickerController = CDatePickerVC()
+    
+    var ageTextField: UITextField!
+    
+    lazy var toolBar: UIToolbar = {
+        let toolbarDone = UIToolbar.init(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 44)))
+        let doneButton = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(doneButtonClicked))
+        toolbarDone.items = [doneButton]
+        toolbarDone.sizeToFit()
+        
+        return toolbarDone
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +44,34 @@ class SearchVC: UIViewController {
         setupSegmentedControl()
         
         setupTestStackView()
+        createDismissKeyboardTapGesture()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if ageTextField.isFirstResponder {
+            navigationItem.title = ""
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                UIView.animate(withDuration: 1, delay: 0) {
+                    self.view.frame.origin.y = -keyboardSize.height
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 1, delay: 0) {
+            self.view.frame.origin.y = 0
+        } completion: { _ in
+            self.navigationItem.title = "CEPiK"
+        }
+
+    }
+    
+    @objc func doneButtonClicked() {
+        view.endEditing(true)
     }
     
     private func addSubViews() {
@@ -38,13 +79,16 @@ class SearchVC: UIViewController {
         view.addSubview(searchSegmentedControl)
     }
     
+    func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
     // MARK: Navigation Controller configuration
     
     private func configureNavigationController() {
         view.backgroundColor = .systemBackground
-        
-        title = "CEPiK"
-
+        navigationItem.title = "CEPiK"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -66,7 +110,54 @@ class SearchVC: UIViewController {
     }
     
     @objc func searchButtonTapped() {
-        viewModel.fetchData()
+        checkTextFields()
+        
+        if emptyTextField != true {
+            viewModel.checkDates(firstDate: inputViewsArray[1].textField.text!, secondDate: inputViewsArray[2].textField.text!) { [weak self] validation in
+                guard let self else { return }
+                
+                if validation {
+                    guard let province = self.inputViewsArray[0].textField.text?.removeDiacritics().replacingOccurrences(of: "-", with: "_") else { return }
+                    guard let dateFrom = self.inputViewsArray[1].textField.text else { return }
+                    guard let dateTo = self.inputViewsArray[2].textField.text else { return }
+                    guard let dataType = self.inputViewsArray[3].textField.text else { return }
+                    
+                    guard let provinceEnum = Provinces(rawValue: province) else { return }
+                    
+                    self.vehicleSearchInfo.provinceNumber = provinceEnum.info.number
+                    self.vehicleSearchInfo.dateFrom = dateFrom
+                    self.vehicleSearchInfo.DateTo = dateTo
+                    self.vehicleSearchInfo.dataType = dataType
+                    
+                    self.viewModel.fetchData(vehicleInfo: self.vehicleSearchInfo )
+                    
+                } else {
+                    #warning("First date bigger than second alert")
+                    let ac = UIAlertController(title: "Wrong dates!", message: "Date to can't be sooner than date from", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                    self.present(ac, animated: true)
+                }
+            }
+        } else {
+            #warning("Show alert")
+            let ac = UIAlertController(title: "All fields need to be filled", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
+            present(ac, animated: true)
+        }
+    }
+    
+    // MARK: TextFields check
+    
+    private func checkTextFields() {
+        emptyTextField = false
+        
+        inputViewsArray.forEach {
+            guard let input = $0.textField.text else { return }
+            if (input.isEmpty) {
+                $0.textField.placeholder = "Can't be empty"
+                emptyTextField = true
+            }
+        }
     }
     
     // MARK: Segment Controller configuration
@@ -87,14 +178,12 @@ class SearchVC: UIViewController {
         case 0:
             stackView.removeFromSuperview()
             setupTestStackView()
-            print("Case 0")
         case 1:
             stackView.removeFromSuperview()
             setupSecondStackView()
-            print("Case 1")
         case 2:
             stackView.removeFromSuperview()
-            print("Case 2")
+            testVC()
         default:
             break
         }
@@ -111,14 +200,14 @@ class SearchVC: UIViewController {
         ])
     }
     
-    private func setupStackViewConstraits() {
+    private func setupStackViewConstraints() {
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: searchSegmentedControl.bottomAnchor, constant: 30),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            stackView.heightAnchor.constraint(equalToConstant: CGFloat(inputViewsArray.count * 75))
+            stackView.bottomAnchor.constraint(equalTo: searchButton.topAnchor, constant: -30)
         ])
     }
     
@@ -131,79 +220,119 @@ class SearchVC: UIViewController {
         ])
     }
     
-    // MARK: View showing funcitons
+    // MARK: View showing functions
     
-    private func setupTestStackView() {
-        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province)
-        let citem2 = CItemSettingsView(title: "Date from", symbol: SFSymbols.province)
-        let citem3 = CItemSettingsView(title: "Date to", symbol: SFSymbols.province)
-        let citem4 = CItemSettingsView(title: "Data type", symbol: SFSymbols.province)
-        let citem5 = CItemSettingsView(title: "Fields", symbol: SFSymbols.province)
+    private func testVC() {
         
-        inputViewsArray.removeAll()
-        inputViewsArray = [citem1, citem2, citem3, citem4, citem5]
-        setTextFieldsDeletages(viewsArray: inputViewsArray)
-        
-        stackView = CItemsStackView(viewsArray: inputViewsArray)
-        
-        setupStackViewConstraits()
     }
     
-    private func setupSecondStackView() {
-        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province)
-        let citem2 = CItemSettingsView(title: "Date", symbol: SFSymbols.date)
-        let citem3 = CItemSettingsView(title: "Sex", symbol: SFSymbols.checkList)
-        let citem4 = CItemSettingsView(title: "Age", symbol: SFSymbols.date)
+    private func setupTestStackView() {
+        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province, tag: 0)
+        let citem2 = CItemSettingsView(title: "Date from", symbol: SFSymbols.calendar, tag: 1)
+        let citem3 = CItemSettingsView(title: "Date to", symbol: SFSymbols.calendar, tag: 2)
+        let citem4 = CItemSettingsView(title: "Data type", symbol: SFSymbols.checkmark, tag: 3)
         
         inputViewsArray.removeAll()
         inputViewsArray = [citem1, citem2, citem3, citem4]
-        setTextFieldsDeletages(viewsArray: inputViewsArray)
+
+        stackView = CItemsStackView(viewsArray: inputViewsArray)
+        
+        setTextFieldsDelegates(viewsArray: inputViewsArray)
+
+        setupStackViewConstraints()
+        
+    }
+    
+    private func setupSecondStackView() {
+        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province, tag: 0)
+        let citem2 = CItemSettingsView(title: "Date", symbol: SFSymbols.calendar, tag: 1)
+        let citem3 = CItemSettingsView(title: "Sex", symbol: SFSymbols.checkList, tag: 5)
+        let citem4 = CItemSettingsView(title: "Age", symbol: SFSymbols.calendar, tag: 6)
+        
+        inputViewsArray.removeAll()
+        inputViewsArray = [citem1, citem2, citem3, citem4]
+
+        setTextFieldsDelegates(viewsArray: inputViewsArray)
         
         stackView = CItemsStackView(viewsArray: inputViewsArray)
         
-        setupStackViewConstraits()
+        setupStackViewConstraints()
     }
     
     // MARK: DatePicker functions
-    
-    private func showDatePicker(textField: UITextField) {
-        textField.resignFirstResponder()
-        
+    #warning("Może tutaj zrobić completion? i tam dodawać do modelu?")
+    private func textFieldEdit(textField: UITextField) {
         switch textField.tag {
         case 0:
-            let provinceAlertController = UIAlertController(title: "Choose province", message: nil, preferredStyle: .actionSheet)
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "1 - wojewodztwo", style: .default))
-            provinceAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            present(provinceAlertController, animated: true)
-            
-            textField.text = "podkarpackie"
+            textField.resignFirstResponder()
+            presentProvinceAlertController(textField: textField)
         case 1:
+            textField.resignFirstResponder()
             presentDatePicker(textField: textField)
         case 2:
+            textField.resignFirstResponder()
             presentDatePicker(textField: textField)
         case 3:
-            print("tag 3")
-        case 4:
-            print("tag 4")
+            textField.resignFirstResponder()
+            presentDataTypeAlertController(textField: textField)
+        case 5:
+            textField.resignFirstResponder()
+            presentSexAlertController(textfield: textField)
+        case 6:
+            ageTextField = textField
+            textField.inputAccessoryView = toolBar
+            textField.returnKeyType = .done
+            textField.keyboardType = .numberPad
+            textField.keyboardAppearance = .default
+            
+            print("Test")
         default:
             print("Default")
             break
         }
+    }
+    
+    private func presentDataTypeAlertController(textField: UITextField) {
+        let dataTypeAlertController = UIAlertController(title: "Choose data type for vehicles", message: nil, preferredStyle: .actionSheet)
+        
+        dataTypeAlertController.addAction(UIAlertAction(title: "registered", style: .default, handler: { alert in
+            textField.text = alert.title
+        }))
+        
+        dataTypeAlertController.addAction(UIAlertAction(title: "all", style: .default, handler: { alert in
+            textField.text = alert.title
+        }))
+        
+        dataTypeAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(dataTypeAlertController, animated: true)
+    }
+    
+    private func presentSexAlertController(textfield: UITextField) {
+        let sexAlertController = UIAlertController(title: "Choose sex you want to search", message: nil, preferredStyle: .actionSheet)
+        
+        sexAlertController.addAction(UIAlertAction(title: "Female", style: .default, handler: { alert in
+            textfield.text = alert.title
+        }))
+        
+        sexAlertController.addAction(UIAlertAction(title: "Male", style: .default, handler: { alert in
+            textfield.text = alert.title
+        }))
+        
+        sexAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(sexAlertController, animated: true)
+    }
+    
+    private func presentProvinceAlertController(textField: UITextField) {
+        let provinceAlertController = UIAlertController(title: "Choose province you want to search", message: nil, preferredStyle: .actionSheet)
+
+        Provinces.allCases.forEach {
+            provinceAlertController.addAction(UIAlertAction(title: $0.info.name, style: .default, handler: { alert in
+                textField.text = alert.title
+            }))
+        }
+        
+        provinceAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(provinceAlertController, animated: true)
     }
     
     private func presentDatePicker(textField: UITextField) {
@@ -219,10 +348,15 @@ class SearchVC: UIViewController {
 extension SearchVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        showDatePicker(textField: textField)
+        textFieldEdit(textField: textField)
     }
     
-    private func setTextFieldsDeletages(viewsArray: [CItemSettingsView]) {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    private func setTextFieldsDelegates(viewsArray: [CItemSettingsView]) {
         viewsArray.forEach {
             $0.textField.delegate = self
         }

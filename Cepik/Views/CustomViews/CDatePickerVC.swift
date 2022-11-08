@@ -30,7 +30,7 @@ class CDatePickerVC: UIViewController {
         configureButton()
         view.backgroundColor = .systemBackground
         
-        viewModel.formattedDate.bind { date in
+        viewModel.pickedDate.bind { date in
             self.delegate?.updateTextLabel(withText: date ?? "")
         }
     }
@@ -69,9 +69,14 @@ class CDatePickerVC: UIViewController {
     private func configureDatePicker() {
         datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "en")
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         datePicker.preferredDatePickerStyle = .wheels
-        datePicker.maximumDate = .now
+        datePicker.timeZone = TimeZone.current
+        datePicker.maximumDate = Calendar.current.date(byAdding: .day, value: -7, to: Date.now)
+        print(Calendar.current)
+        guard let currentMaximumDate = datePicker.maximumDate else { return }
+        datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -2, to: currentMaximumDate)
         textField.inputView = datePicker
         view.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false

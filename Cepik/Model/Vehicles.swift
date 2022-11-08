@@ -8,15 +8,17 @@
 import Foundation
 
 struct Vehicles: Codable {
-    var data: [VehiclesData]
+    var data: [VehiclesData]?
 }
 
 struct VehiclesData: Codable {
-    var id: String
-    var type: String
-    var attributes: VehiclesDataAtributes
+    var id: String?
+    var type: String?
+    var attributes: VehiclesDataAtributes?
 }
 
 struct VehiclesDataAtributes: Codable {
-    var marka: String
+    var marka: String?
+    let model: String?
+    let wariant: String?
 }

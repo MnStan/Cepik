@@ -21,11 +21,16 @@ class NetworkManager {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
     
-    func getVehiclesInfo() async throws -> Vehicles {
-        guard let url = URL(string: baseURL + restURL) else {
+    func getVehiclesInfo(province: String, dateFrom: String, dateTo: String, registered: String, page: Int) async throws -> Vehicles {
+        print(province, dateFrom, dateTo, registered)
+        
+        let endPoint = baseURL + "pojazdy?wojewodztwo=\(province)&data-od=\(dateFrom)&data-do=\(dateTo)&typ-daty=1&tylko-zarejestrowane=\(registered)&pokaz-wszystkie-pola=false&limit=200&page=\(page)"
+        guard let url = URL(string: endPoint) else {
             print("Url error")
             throw CError.defaultError
         }
+        
+        print(url)
         
         #warning("Change errors")
         

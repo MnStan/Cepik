@@ -9,7 +9,8 @@ import UIKit
 
 enum SFSymbols {
     static let province = "flag"
-    static let date = "calendar"
     static let checkList = "checklist"
     static let placeholder = "questionmark"
+    static let calendar = "calendar"
+    static let checkmark = "checkmark"
 }

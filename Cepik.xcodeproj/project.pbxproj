@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F634F5AB290D142700DA10CF /* Provinces.swift in Sources */ = {isa = PBXBuildFile; fileRef = F634F5AA290D142700DA10CF /* Provinces.swift */; };
+		F634F5B2290D5D1500DA10CF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F634F5B1290D5D1500DA10CF /* Date+Ext.swift */; };
 		F65818B528FF01CC009059EA /* CButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818B428FF01CC009059EA /* CButton.swift */; };
 		F65818B728FF0E27009059EA /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818B628FF0E27009059EA /* Vehicles.swift */; };
 		F65818BA28FF0EA3009059EA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818B928FF0EA3009059EA /* NetworkManager.swift */; };
@@ -29,6 +31,9 @@
 		F6E2DB8828FE8CC500A77743 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB8728FE8CC500A77743 /* SearchVC.swift */; };
 		F6E2DB8E28FEBDBA00A77743 /* CLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB8D28FEBDBA00A77743 /* CLogoView.swift */; };
 		F6E2DB9428FEBFAB00A77743 /* CTItleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB9328FEBFAB00A77743 /* CTItleLabel.swift */; };
+		F6F481FA2912E0DD00B285F1 /* VehicleSeachInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481F92912E0DD00B285F1 /* VehicleSeachInfo.swift */; };
+		F6F481FC2913A3C200B285F1 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481FB2913A3C200B285F1 /* String+Ext.swift */; };
+		F6F481FE2913B0B100B285F1 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481FD2913B0B100B285F1 /* DataType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F634F5AA290D142700DA10CF /* Provinces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provinces.swift; sourceTree = "<group>"; };
+		F634F5B1290D5D1500DA10CF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		F65818B428FF01CC009059EA /* CButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CButton.swift; sourceTree = "<group>"; };
 		F65818B628FF0E27009059EA /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
 		F65818B928FF0EA3009059EA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -75,6 +82,9 @@
 		F6E2DB8728FE8CC500A77743 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F6E2DB8D28FEBDBA00A77743 /* CLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLogoView.swift; sourceTree = "<group>"; };
 		F6E2DB9328FEBFAB00A77743 /* CTItleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTItleLabel.swift; sourceTree = "<group>"; };
+		F6F481F92912E0DD00B285F1 /* VehicleSeachInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleSeachInfo.swift; sourceTree = "<group>"; };
+		F6F481FB2913A3C200B285F1 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		F6F481FD2913B0B100B285F1 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +112,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F634F5B0290D5D0200DA10CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F634F5B1290D5D1500DA10CF /* Date+Ext.swift */,
+				F6F481FB2913A3C200B285F1 /* String+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F65818B328FF01AE009059EA /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +143,8 @@
 				F65818BD28FF1025009059EA /* CError.swift */,
 				F65818C5290139A9009059EA /* SFSymbols.swift */,
 				F65818D029029806009059EA /* ObservableObject.swift */,
+				F634F5AA290D142700DA10CF /* Provinces.swift */,
+				F6F481FD2913B0B100B285F1 /* DataType.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -151,6 +172,7 @@
 		F6E2DB5128FE82C700A77743 /* Cepik */ = {
 			isa = PBXGroup;
 			children = (
+				F634F5B0290D5D0200DA10CF /* Extensions */,
 				F65818BB28FF1011009059EA /* Utilities */,
 				F65818B828FF0E8D009059EA /* Managers */,
 				F6E2DB8628FE849E00A77743 /* Support */,
@@ -198,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				F65818B628FF0E27009059EA /* Vehicles.swift */,
+				F6F481F92912E0DD00B285F1 /* VehicleSeachInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -385,17 +408,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				F65818C0290129C9009059EA /* SearchViewModel.swift in Sources */,
+				F634F5AB290D142700DA10CF /* Provinces.swift in Sources */,
 				F65818C829013C25009059EA /* CTextField.swift in Sources */,
 				F65818CA29013EEF009059EA /* CItemSettingsView.swift in Sources */,
 				F65818CF29027F05009059EA /* CImageView.swift in Sources */,
+				F6F481FA2912E0DD00B285F1 /* VehicleSeachInfo.swift in Sources */,
 				F65818BE28FF1025009059EA /* CError.swift in Sources */,
 				F65818BA28FF0EA3009059EA /* NetworkManager.swift in Sources */,
 				F6E2DB8828FE8CC500A77743 /* SearchVC.swift in Sources */,
+				F6F481FE2913B0B100B285F1 /* DataType.swift in Sources */,
 				F65818C6290139A9009059EA /* SFSymbols.swift in Sources */,
+				F634F5B2290D5D1500DA10CF /* Date+Ext.swift in Sources */,
 				F6BB4D1829067C9A00DC71FE /* CDatePickerVC.swift in Sources */,
 				F6E2DB8E28FEBDBA00A77743 /* CLogoView.swift in Sources */,
 				F65818B528FF01CC009059EA /* CButton.swift in Sources */,
 				F65818B728FF0E27009059EA /* Vehicles.swift in Sources */,
+				F6F481FC2913A3C200B285F1 /* String+Ext.swift in Sources */,
 				F6E2DB9428FEBFAB00A77743 /* CTItleLabel.swift in Sources */,
 				F6E2DB5328FE82C700A77743 /* AppDelegate.swift in Sources */,
 				F65818D129029806009059EA /* ObservableObject.swift in Sources */,

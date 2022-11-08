@@ -23,20 +23,17 @@ class CItemsStackView: UIStackView {
     private func setupStackView() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
-        self.distribution = .fillEqually
         self.spacing = 10
+        self.distribution = .fillEqually
     }
     
     convenience init(viewsArray: [CItemSettingsView]) {
         self.init(frame: .zero)
-        inputViewsArray = viewsArray
         
-        var tagCounter = 0
         
-        inputViewsArray.forEach {
+        
+        viewsArray.forEach {
             self.addArrangedSubview($0)
-            $0.textField.tag = tagCounter
-            tagCounter = tagCounter + 1
         }
     }
 }
