@@ -138,9 +138,10 @@ class SearchVC: UIViewController {
                     guard let province = self.inputViewsArray[0].textField.text?.removeDiacritics().replacingOccurrences(of: "-", with: "_") else { return }
                     guard let dataType = self.inputViewsArray[3].textField.text else { return }
                     guard let provinceEnum = Provinces(rawValue: province) else { return }
+                    guard let dataTypeEnum = DataType(rawValue: dataType) else { return }
                     
                     self.vehicleSearchInfo.provinceNumber = provinceEnum.info.number
-                    self.vehicleSearchInfo.dataType = dataType
+                    self.vehicleSearchInfo.dataType = dataTypeEnum.info.bool
                 
                     self.viewModel.fetchData(vehicleInfo: self.vehicleSearchInfo )
                     
