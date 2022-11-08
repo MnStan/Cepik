@@ -11,6 +11,6 @@ struct VehicleSearchInfo {
     
     var provinceNumber: String?
     var dateFrom: Date?
-    var DateTo: Date?
+    var dateTo: Date?
     var dataType: String?
 }

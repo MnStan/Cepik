@@ -12,6 +12,7 @@ class SearchViewModel {
     var vehicles: Vehicles!
     
     static let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
+    static let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
     
     func segmentedValueChanged(selectedIndex: Int) {
         print(selectedIndex)
@@ -21,7 +22,7 @@ class SearchViewModel {
         print(vehicleInfo)
         guard let province = vehicleInfo.provinceNumber else { return }
         guard let dateFrom = vehicleInfo.dateFrom else { return }
-        guard let dateTo = vehicleInfo.DateTo else { return }
+        guard let dateTo = vehicleInfo.dateTo else { return }
         guard let dataType = vehicleInfo.dataType else { return }
         
         print(dateFrom, dateTo)
@@ -37,12 +38,8 @@ class SearchViewModel {
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
-        print("String date", stringDate)
-        var convertedString = stringDate.components(separatedBy: ".")
-        if convertedString.first?.count == 1 {
-            convertedString[0] = "0" + convertedString[0]
-        }
-        print(convertedString)
+        var convertedString = stringDate.components(separatedBy: "/")
+
         return convertedString.reversed().joined()
     }
     

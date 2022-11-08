@@ -11,6 +11,7 @@ extension Date {
     
     func convertToDayMonthYearFormat() -> String {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_PL_POSIX")
         formatter.timeStyle = .none
         formatter.dateStyle = .short
         return formatter.string(from: self)

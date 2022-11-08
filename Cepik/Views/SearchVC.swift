@@ -47,10 +47,12 @@ class SearchVC: UIViewController {
         createDismissKeyboardTapGesture()
         
         setDatesBindings()
-        
+        addObserversForKeyboard()
+    }
+    
+    private func addObserversForKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     
     private func setDatesBindings() {
@@ -59,10 +61,10 @@ class SearchVC: UIViewController {
             guard let date else { return }
             self.vehicleSearchInfo.dateFrom = date
         }
-        SearchViewModel.pickedDate.bind { [weak self] date in
+        SearchViewModel.pickedDateTo.bind { [weak self] date in
             guard let self else { return }
             guard let date else { return }
-            self.vehicleSearchInfo.DateTo = date
+            self.vehicleSearchInfo.dateTo = date
         }
     }
     

@@ -11,6 +11,7 @@ extension String {
     
     func convertStringToDate() -> Date {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_PL_POSIX")
         formatter.timeStyle = .none
         return formatter.date(from: self) ?? Date()
     }

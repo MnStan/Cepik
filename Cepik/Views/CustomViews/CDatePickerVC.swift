@@ -30,14 +30,23 @@ class CDatePickerVC: UIViewController {
         configureButton()
         view.backgroundColor = .systemBackground
         
+        bindDates()
+    }
+    
+    private func bindDates() {
         SearchViewModel.pickedDate.bind { [weak self] date in
+            guard let self else { return }
+            self.delegate?.updateTextLabel(withText: date?.convertToDayMonthYearFormat() ?? "")
+        }
+        
+        SearchViewModel.pickedDateTo.bind { [weak self] date in
             guard let self else { return }
             self.delegate?.updateTextLabel(withText: date?.convertToDayMonthYearFormat() ?? "")
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        SearchViewModel.pickedDate.value = datePicker.date
+        chooseDateToUpdate()
     }
     
     private func configureButton() {
@@ -83,8 +92,19 @@ class CDatePickerVC: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    private func chooseDateToUpdate() {
+        print(textField.tag)
+        switch textField.tag {
+        case 1:
+            SearchViewModel.pickedDate.value = datePicker.date
+        case 2:
+            SearchViewModel.pickedDateTo.value = datePicker.date
+        default:
+            break
+        }
+    }
+    
     @objc func dateChanged() {
-        SearchViewModel.pickedDate.value = datePicker.date
-        print("date changed")
+        chooseDateToUpdate()
     }
 }
