@@ -93,7 +93,6 @@ class CDatePickerVC: UIViewController {
     }
     
     private func chooseDateToUpdate() {
-        print(textField.tag)
         switch textField.tag {
         case 1:
             SearchViewModel.pickedDate.value = datePicker.date

@@ -19,13 +19,10 @@ class SearchViewModel {
     }
     
     func fetchData(vehicleInfo: VehicleSearchInfo) {
-        print(vehicleInfo)
         guard let province = vehicleInfo.provinceNumber else { return }
         guard let dateFrom = vehicleInfo.dateFrom else { return }
         guard let dateTo = vehicleInfo.dateTo else { return }
         guard let dataType = vehicleInfo.dataType else { return }
-        
-        print(dateFrom, dateTo)
         
         Task {
             do {
@@ -38,7 +35,7 @@ class SearchViewModel {
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
-        var convertedString = stringDate.components(separatedBy: "/")
+        let convertedString = stringDate.components(separatedBy: "/")
 
         return convertedString.reversed().joined()
     }

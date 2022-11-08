@@ -50,6 +50,8 @@ class SearchVC: UIViewController {
         addObserversForKeyboard()
     }
     
+    // MARK: Bindings and Observers functions
+    
     private func addObserversForKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -88,14 +90,7 @@ class SearchVC: UIViewController {
 
     }
     
-    @objc func doneButtonClicked() {
-        view.endEditing(true)
-    }
-    
-    private func addSubViews() {
-        view.addSubview(searchButton)
-        view.addSubview(searchSegmentedControl)
-    }
+    // MARK: Tap Gesture Recognizer
     
     func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
@@ -158,6 +153,10 @@ class SearchVC: UIViewController {
             ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
             present(ac, animated: true)
         }
+    }
+    
+    @objc func doneButtonClicked() {
+        view.endEditing(true)
     }
     
     // MARK: TextFields check
@@ -235,6 +234,11 @@ class SearchVC: UIViewController {
     }
     
     // MARK: View showing functions
+    
+    private func addSubViews() {
+        view.addSubview(searchButton)
+        view.addSubview(searchSegmentedControl)
+    }
     
     private func testVC() {
         
