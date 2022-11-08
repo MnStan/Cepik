@@ -46,8 +46,24 @@ class SearchVC: UIViewController {
         setupTestStackView()
         createDismissKeyboardTapGesture()
         
+        setDatesBindings()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    private func setDatesBindings() {
+        SearchViewModel.pickedDate.bind { [weak self] date in
+            guard let self else { return }
+            guard let date else { return }
+            self.vehicleSearchInfo.dateFrom = date
+        }
+        SearchViewModel.pickedDate.bind { [weak self] date in
+            guard let self else { return }
+            guard let date else { return }
+            self.vehicleSearchInfo.DateTo = date
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -118,17 +134,12 @@ class SearchVC: UIViewController {
                 
                 if validation {
                     guard let province = self.inputViewsArray[0].textField.text?.removeDiacritics().replacingOccurrences(of: "-", with: "_") else { return }
-                    guard let dateFrom = self.inputViewsArray[1].textField.text else { return }
-                    guard let dateTo = self.inputViewsArray[2].textField.text else { return }
                     guard let dataType = self.inputViewsArray[3].textField.text else { return }
-                    
                     guard let provinceEnum = Provinces(rawValue: province) else { return }
                     
                     self.vehicleSearchInfo.provinceNumber = provinceEnum.info.number
-                    self.vehicleSearchInfo.dateFrom = dateFrom
-                    self.vehicleSearchInfo.DateTo = dateTo
                     self.vehicleSearchInfo.dataType = dataType
-                    
+                
                     self.viewModel.fetchData(vehicleInfo: self.vehicleSearchInfo )
                     
                 } else {

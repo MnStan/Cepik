@@ -11,7 +11,7 @@ class SearchViewModel {
     
     var vehicles: Vehicles!
     
-    var pickedDate: ObservableObject<String?> = ObservableObject(value: nil)
+    static let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
     
     func segmentedValueChanged(selectedIndex: Int) {
         print(selectedIndex)
@@ -24,9 +24,11 @@ class SearchViewModel {
         guard let dateTo = vehicleInfo.DateTo else { return }
         guard let dataType = vehicleInfo.dataType else { return }
         
+        print(dateFrom, dateTo)
+        
         Task {
             do {
-                vehicles = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom), dateTo: convertDateForNetworkCall(stringDate: dateTo), registered: dataType, page: 1)
+                vehicles = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: 1)
                 countObjects(vehiclesData: vehicles)
             } catch {
                 print("Something went wrong")
@@ -35,14 +37,13 @@ class SearchViewModel {
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
-        var convertedString = stringDate.components(separatedBy: "/")
-        convertedString.swapAt(0, 1)
+        print("String date", stringDate)
+        var convertedString = stringDate.components(separatedBy: ".")
+        if convertedString.first?.count == 1 {
+            convertedString[0] = "0" + convertedString[0]
+        }
+        print(convertedString)
         return convertedString.reversed().joined()
-    }
-    
-    func formatDate(date: Date) {
-        print(date)
-        pickedDate.value = date.convertToDayMonthYearFormat()
     }
     
     func formatStringToDate(stringDate: String) -> Date? {

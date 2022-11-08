@@ -30,13 +30,14 @@ class CDatePickerVC: UIViewController {
         configureButton()
         view.backgroundColor = .systemBackground
         
-        viewModel.pickedDate.bind { date in
-            self.delegate?.updateTextLabel(withText: date ?? "")
+        SearchViewModel.pickedDate.bind { [weak self] date in
+            guard let self else { return }
+            self.delegate?.updateTextLabel(withText: date?.convertToDayMonthYearFormat() ?? "")
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.formatDate(date: datePicker.date)
+        SearchViewModel.pickedDate.value = datePicker.date
     }
     
     private func configureButton() {
@@ -83,6 +84,7 @@ class CDatePickerVC: UIViewController {
     }
     
     @objc func dateChanged() {
-        viewModel.formatDate(date: datePicker.date)
+        SearchViewModel.pickedDate.value = datePicker.date
+        print("date changed")
     }
 }

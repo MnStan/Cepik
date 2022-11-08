@@ -10,7 +10,7 @@ import Foundation
 struct VehicleSearchInfo {
     
     var provinceNumber: String?
-    var dateFrom: String?
-    var DateTo: String?
+    var dateFrom: Date?
+    var DateTo: Date?
     var dataType: String?
 }
