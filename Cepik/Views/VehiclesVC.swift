@@ -22,7 +22,7 @@ class VehiclesVC: UIViewController {
         
         configureTableView()
         setBindings()
-//        getVehicles()
+        getVehicles()
     }
     
     private func setBindings() {
@@ -56,18 +56,16 @@ class VehiclesVC: UIViewController {
 extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(vehicles.data.count)
-//        return vehicles.data.count
-        return 2
+        return vehicles.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CSearchResultCell.reuseID) as! CSearchResultCell
-//        let vehicle = vehicles.data[indexPath.row]
-//        
-//        guard let vehicleCompany = vehicle.attributes?.marka else { return cell}
-//        guard let vehicleName = vehicle.attributes?.model else { return cell }
-//        cell.setTitle(title: vehicleCompany + " " + vehicleName)
-        cell.setTitle(title: "MERCEDES-BENZ CLK 200 KOMPRESSOR")
+        let vehicle = vehicles.data[indexPath.row]
+
+        guard let vehicleCompany = vehicle.attributes?.marka else { return cell}
+        guard let vehicleName = vehicle.attributes?.model else { return cell }
+        cell.setTitle(title: vehicleCompany + " " + vehicleName)
         return cell
     }
     
