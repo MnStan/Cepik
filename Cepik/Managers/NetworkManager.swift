@@ -21,27 +21,25 @@ class NetworkManager {
         
         let endPoint = baseURL + "pojazdy?wojewodztwo=\(province)&data-od=\(dateFrom)&data-do=\(dateTo)&typ-daty=1&tylko-zarejestrowane=\(registered)&pokaz-wszystkie-pola=false&limit=200&page=\(page)"
         guard let url = URL(string: endPoint) else {
-            print("Url error")
-            throw CError.defaultError
+            throw CError.invalidVehicleInfo
         }
         
+        #warning("Url print")
         print(url)
-        
-        #warning("Change errors")
         
         let (data, response) = try await
         URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             print("Response error")
-            throw CError.defaultError
+            throw CError.invalidResponse
         }
         
         do {
             return try decoder.decode(Vehicles.self, from: data)
         } catch {
             print(error)
-            throw CError.defaultError
+            throw CError.invalidDataFromServer
         }
         
     }

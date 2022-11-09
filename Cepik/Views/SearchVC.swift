@@ -278,7 +278,7 @@ class SearchVC: UIViewController {
     }
     
     // MARK: DatePicker functions
-    #warning("Może tutaj zrobić completion? i tam dodawać do modelu?")
+    
     private func textFieldEdit(textField: UITextField) {
         switch textField.tag {
         case 0:
