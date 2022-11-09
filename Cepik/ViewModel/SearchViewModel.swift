@@ -13,6 +13,9 @@ class SearchViewModel {
     
     static let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
     static let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
+    static let vehicleNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
+    
+    
     
     func segmentedValueChanged(selectedIndex: Int) {
         print(selectedIndex)
@@ -26,12 +29,17 @@ class SearchViewModel {
         
         Task {
             do {
-                vehicles = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: 1)
-                countObjects(vehiclesData: vehicles)
+                SearchViewModel.vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: 1)
+//                countObjects(vehiclesData: vehicles)
             } catch {
                 print("Something went wrong")
             }
         }
+    }
+    
+    func getVehicles(vehicleInfo: VehicleSearchInfo) -> Vehicles {
+        fetchData(vehicleInfo: vehicleInfo)
+        return vehicles
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
@@ -59,7 +67,7 @@ class SearchViewModel {
     private func countObjects(vehiclesData: Vehicles) {
         var vehiclesDictionary: [String: Int] = [:]
         
-        vehiclesData.data?.forEach {
+        vehiclesData.data.forEach {
             var valueToDictionary: Int!
             
             if let value = vehiclesDictionary[$0.attributes?.marka ?? "Unkowned"] {
@@ -71,10 +79,10 @@ class SearchViewModel {
             vehiclesDictionary.updateValue(valueToDictionary, forKey: $0.attributes?.marka ?? "Unknowned")
         }
         
-        vehiclesDictionary.sorted { $0.1 > $1.1 }.forEach {
-            print($0.key, $0.value)
-        }
+//        vehiclesDictionary.sorted { $0.1 > $1.1 }.forEach {
+//            print($0.key, $0.value)
+//        }
         
-        print(vehiclesData)
+//        print(vehiclesData)
     }
 }

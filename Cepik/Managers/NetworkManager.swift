@@ -38,7 +38,7 @@ class NetworkManager {
         do {
             return try decoder.decode(Vehicles.self, from: data)
         } catch {
-            print(error)
+            #warning("error alert!")
             throw CError.invalidDataFromServer
         }
         

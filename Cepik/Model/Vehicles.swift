@@ -8,7 +8,7 @@
 import Foundation
 
 struct Vehicles: Codable {
-    var data: [VehiclesData]?
+    var data: [VehiclesData] = []
 }
 
 struct VehiclesData: Codable {

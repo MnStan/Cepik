@@ -10,6 +10,7 @@
 		F634F5AB290D142700DA10CF /* Provinces.swift in Sources */ = {isa = PBXBuildFile; fileRef = F634F5AA290D142700DA10CF /* Provinces.swift */; };
 		F634F5B2290D5D1500DA10CF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F634F5B1290D5D1500DA10CF /* Date+Ext.swift */; };
 		F6469C69291B95160079BE52 /* VehiclesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6469C68291B95160079BE52 /* VehiclesVC.swift */; };
+		F6469C6D291B975D0079BE52 /* CSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6469C6C291B975D0079BE52 /* CSearchResultCell.swift */; };
 		F65818B528FF01CC009059EA /* CButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818B428FF01CC009059EA /* CButton.swift */; };
 		F65818B728FF0E27009059EA /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818B628FF0E27009059EA /* Vehicles.swift */; };
 		F65818BA28FF0EA3009059EA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818B928FF0EA3009059EA /* NetworkManager.swift */; };
@@ -58,6 +59,7 @@
 		F634F5AA290D142700DA10CF /* Provinces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provinces.swift; sourceTree = "<group>"; };
 		F634F5B1290D5D1500DA10CF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		F6469C68291B95160079BE52 /* VehiclesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesVC.swift; sourceTree = "<group>"; };
+		F6469C6C291B975D0079BE52 /* CSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSearchResultCell.swift; sourceTree = "<group>"; };
 		F65818B428FF01CC009059EA /* CButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CButton.swift; sourceTree = "<group>"; };
 		F65818B628FF0E27009059EA /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
 		F65818B928FF0EA3009059EA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -121,6 +123,14 @@
 				F6F481FB2913A3C200B285F1 /* String+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F6469C6B291B97230079BE52 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F6469C6C291B975D0079BE52 /* CSearchResultCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		F65818B328FF01AE009059EA /* Buttons */ = {
@@ -208,6 +218,7 @@
 		F6E2DB8328FE838300A77743 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F6469C6B291B97230079BE52 /* Cells */,
 				F65818B328FF01AE009059EA /* Buttons */,
 				F6E2DB9228FEBF9400A77743 /* Labels */,
 				F6E2DB8F28FEBDF600A77743 /* TextFields */,
@@ -412,6 +423,7 @@
 			files = (
 				F65818C0290129C9009059EA /* SearchViewModel.swift in Sources */,
 				F634F5AB290D142700DA10CF /* Provinces.swift in Sources */,
+				F6469C6D291B975D0079BE52 /* CSearchResultCell.swift in Sources */,
 				F65818C829013C25009059EA /* CTextField.swift in Sources */,
 				F65818CA29013EEF009059EA /* CItemSettingsView.swift in Sources */,
 				F65818CF29027F05009059EA /* CImageView.swift in Sources */,

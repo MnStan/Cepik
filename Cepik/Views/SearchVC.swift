@@ -137,14 +137,18 @@ class SearchVC: UIViewController {
                     
                     self.vehicleSearchInfo.provinceNumber = provinceEnum.info.number
                     self.vehicleSearchInfo.dataType = dataTypeEnum.info.bool
-                
-                    self.viewModel.fetchData(vehicleInfo: self.vehicleSearchInfo )
                     
                 } else {
                     #warning("First date bigger than second alert")
                     let ac = UIAlertController(title: "Wrong dates!", message: "Date to can't be sooner than date from", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
                     self.present(ac, animated: true)
+                }
+                
+                let vehiclesVC = VehiclesVC()
+                vehiclesVC.vehiclesSearchInfo = self.vehicleSearchInfo
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(vehiclesVC, animated: true)
                 }
             }
         } else {

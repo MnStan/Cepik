@@ -21,10 +21,11 @@ class CTItleLabel: UILabel {
     private func configureTitleLabel() {
         textColor = .label
         
-        font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        textAlignment = .center
+        font = UIFont.preferredFont(forTextStyle: .title3)
+        adjustsFontForContentSizeCategory = true
+        textAlignment = .left
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.9
+        minimumScaleFactor = 0.8
         
         translatesAutoresizingMaskIntoConstraints = false
     }
