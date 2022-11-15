@@ -24,7 +24,8 @@ class CTItleLabel: UILabel {
         font = UIFont.preferredFont(forTextStyle: .title3)
         adjustsFontForContentSizeCategory = true
         textAlignment = .left
-        adjustsFontSizeToFitWidth = true
+        #warning("Comented adjustFontSizeToFitWidth")
+//        adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.8
         
         translatesAutoresizingMaskIntoConstraints = false

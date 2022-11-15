@@ -13,6 +13,8 @@ class VehiclesVC: UIViewController {
     var vehiclesSearchInfo: VehicleSearchInfo!
     private let searchViewModel = SearchViewModel()
     var vehicles = Vehicles()
+    private var page: Int = 1
+    private var areThereMoreVehicles: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +24,15 @@ class VehiclesVC: UIViewController {
         
         configureTableView()
         setBindings()
-        getVehicles()
+        getVehicles(page: 1)
     }
     
     private func setBindings() {
         SearchViewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
             guard let self else { return }
             guard let vehicles else { return }
-            self.vehicles = vehicles
+            
+            self.vehicles.data.append(contentsOf: vehicles.data)
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -48,8 +51,8 @@ class VehiclesVC: UIViewController {
         tableView.register(CSearchResultCell.self, forCellReuseIdentifier: CSearchResultCell.reuseID)
     }
     
-    private func getVehicles() {
-        searchViewModel.fetchData(vehicleInfo: vehiclesSearchInfo)
+    private func getVehicles(page: Int) {
+            searchViewModel.fetchData(vehicleInfo: vehiclesSearchInfo)
     }
 }
 
@@ -65,44 +68,27 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
 
         guard let vehicleCompany = vehicle.attributes?.marka else { return cell}
         guard let vehicleName = vehicle.attributes?.model else { return cell }
-        cell.setTitle(title: vehicleCompany + " " + vehicleName)
+        
+        if vehicleName.contains("---") {
+            cell.setTitle(title: vehicleCompany)
+        } else {
+            if vehicleName.contains(vehicleCompany) {
+                cell.setTitle(title: vehicleName)
+            } else {
+                cell.setTitle(title: vehicleCompany + " " + vehicleName)
+            }
+        }
+        
         return cell
     }
     
-    
-}
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-        // this variable is used for injecting the current view controller
-        let viewController: VehiclesVC
-
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
-        }
-
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            print("end")
         }
     }
-
-    func toPreview() -> some View {
-        // inject self (the current view controller) for the preview
-        Preview(viewController: self as! VehiclesVC)
-    }
 }
-
-
-@available(iOS 13, *)
-struct InfoVCPreview: PreviewProvider {
-    
-    static var previews: some View {
-        // view controller using programmatic UI
-        VehiclesVC().toPreview().previewInterfaceOrientation(.portrait)
-        VehiclesVC().toPreview().previewInterfaceOrientation(.landscapeLeft)
-    }
-}
-#endif

@@ -15,31 +15,36 @@ class SearchViewModel {
     static let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
     static let vehicleNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     
-    
+    private var page: Int = 1
+    private var areThereMoreVehicles: Bool = true
     
     func segmentedValueChanged(selectedIndex: Int) {
         print(selectedIndex)
     }
     
     func fetchData(vehicleInfo: VehicleSearchInfo) {
-        guard let province = vehicleInfo.provinceNumber else { return }
-        guard let dateFrom = vehicleInfo.dateFrom else { return }
-        guard let dateTo = vehicleInfo.dateTo else { return }
-        guard let dataType = vehicleInfo.dataType else { return }
-        
-        Task {
-            do {
-                SearchViewModel.vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: 1)
-//                countObjects(vehiclesData: vehicles)
-            } catch {
-                print("Something went wrong")
+        if areThereMoreVehicles {
+            guard let province = vehicleInfo.provinceNumber else { return }
+            guard let dateFrom = vehicleInfo.dateFrom else { return }
+            guard let dateTo = vehicleInfo.dateTo else { return }
+            guard let dataType = vehicleInfo.dataType else { return }
+            
+            Task {
+                do {
+                    SearchViewModel.vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: page)
+                    
+                    if SearchViewModel.vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
+                        areThereMoreVehicles = false
+                        print("Vehicles", SearchViewModel.vehicleNetworkRequest.value?.data.count ?? 0)
+                    } else {
+                        page += 1
+                        fetchData(vehicleInfo: vehicleInfo)
+                    }
+                } catch {
+                    print("Something went wrong")
+                }
             }
         }
-    }
-    
-    func getVehicles(vehicleInfo: VehicleSearchInfo) -> Vehicles {
-        fetchData(vehicleInfo: vehicleInfo)
-        return vehicles
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
