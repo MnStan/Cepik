@@ -50,11 +50,64 @@ class SearchViewModel {
     
     func sortVehicles(vehicles: Vehicles) {
         var sorted = vehicles
-        sorted.data.sort {
-            $0.attributes?.marka ?? "" < $1.attributes?.marka ?? ""
+
+        sorted.data.sort { first, second in
+            let lhsCompany = first.attributes?.marka ?? "unknowned"
+            let lhsModel = first.attributes?.model ?? "unknowned"
+            let rhsCompany = second.attributes?.marka ?? "unknowned"
+            let rhsModel = second.attributes?.model ?? "unknowned"
+            
+            let lhs = lhsCompany + " " + lhsModel
+            let rhs = rhsCompany + " " + rhsModel
+            
+            if lhsModel.contains(lhsCompany) {
+                return lhsModel < rhs
+            }
+            
+            if rhsModel.contains(rhsCompany) {
+                return lhs < rhsModel
+            }
+            
+            if lhsModel.contains(lhsCompany) && rhsModel.contains(rhsCompany) {
+                return lhsModel < rhsModel
+            }
+            
+            return lhs < rhs
+        }
+
+        sortedVehicles.value = sorted
+    }
+    
+    func getNameToDisplay(vehicle: VehiclesData) -> String{
+        if let vehicleCompany = vehicle.attributes?.marka, let vehicleName = vehicle.attributes?.model {
+            if vehicleName.contains("---") {
+                return vehicleCompany
+            } else {
+                if vehicleName.contains(vehicleCompany) {
+                    return vehicleName
+                } else {
+                    return vehicleCompany + " " + vehicleName
+                }
+            }
+        } else {
+            if let vehicleCompany = vehicle.attributes?.marka {
+                if vehicleCompany.contains("---") {
+                    return "Unknowned"
+                } else {
+                    return vehicleCompany
+                }
+            }
+            
+            if let vehicleName = vehicle.attributes?.model {
+                if vehicleName.contains("---") {
+                    return "Unknowned"
+                } else {
+                    return vehicleName
+                }
+            }
         }
         
-        sortedVehicles.value = sorted
+        return "Unknowned"
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {

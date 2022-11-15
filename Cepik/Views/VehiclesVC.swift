@@ -109,21 +109,14 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CSearchResultCell.reuseID) as! CSearchResultCell
         let vehicle = vehicles.data[indexPath.row]
-
-        guard let vehicleCompany = vehicle.attributes?.marka else { return cell}
-        guard let vehicleName = vehicle.attributes?.model else { return cell }
         
-        if vehicleName.contains("---") {
-            cell.setTitle(title: vehicleCompany)
-        } else {
-            if vehicleName.contains(vehicleCompany) {
-                cell.setTitle(title: vehicleName)
-            } else {
-                cell.setTitle(title: vehicleCompany + " " + vehicleName)
-            }
-        }
+        cell.setTitle(title: searchViewModel.getNameToDisplay(vehicle: vehicle))
     
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(vehicles.data[indexPath.row])
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
