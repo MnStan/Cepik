@@ -30,6 +30,11 @@ class CSearchResultCell: UITableViewCell {
         ])
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.resultLabel.text = nil
+    }
+    
     func setTitle(title: String) {
         resultLabel.setTitle(title: title)
     }

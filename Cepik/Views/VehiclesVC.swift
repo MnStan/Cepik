@@ -14,7 +14,8 @@ class VehiclesVC: UIViewController {
     private let searchViewModel = SearchViewModel()
     var vehicles = Vehicles()
     private var page: Int = 1
-    private var areThereMoreVehicles: Bool = true
+//    private var areThereMoreVehicles: Bool = true
+    private let activityIndicator = UIActivityIndicatorView(style: .medium)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,30 @@ class VehiclesVC: UIViewController {
         configureTableView()
         setBindings()
         getVehicles(page: 1)
+        
+        showLoadingIndicator()
     }
+    
+    // MARK: Activity indicator when loading vehicles data
+    
+    private func showLoadingIndicator() {
+        let barItem = UIBarButtonItem(customView: activityIndicator)
+        navigationItem.rightBarButtonItem = barItem
+        activityIndicator.startAnimating()
+    }
+    
+    // MARK: Sorting vehicles
+    
+    private func showSortingButton() {
+        let sortingBarButton = UIBarButtonItem(image: UIImage(systemName: SFSymbols.sort), style: .done, target: self, action: #selector(sortVehicles))
+        navigationItem.rightBarButtonItem = sortingBarButton
+    }
+    
+    @objc private func sortVehicles() {
+        searchViewModel.sortVehicles(vehicles: vehicles)
+    }
+    
+    // MARK: Bindings
     
     private func setBindings() {
         SearchViewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
@@ -36,6 +60,26 @@ class VehiclesVC: UIViewController {
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
+        }
+        
+        searchViewModel.sortedVehicles.bind { [weak self] vehicles in
+            guard let self else { return }
+            self.vehicles.data = vehicles?.data ?? self.vehicles.data
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+        searchViewModel.areThereMoreVehicles.bind { [weak self] noMoreData in
+            guard let self else { return }
+            
+            if !noMoreData {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.showSortingButton()
+                }
             }
         }
     }
@@ -78,7 +122,7 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
                 cell.setTitle(title: vehicleCompany + " " + vehicleName)
             }
         }
-        
+    
         return cell
     }
     

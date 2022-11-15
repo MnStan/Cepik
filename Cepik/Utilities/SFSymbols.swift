@@ -13,4 +13,5 @@ enum SFSymbols {
     static let placeholder = "questionmark"
     static let calendar = "calendar"
     static let checkmark = "checkmark"
+    static let sort = "list.bullet.clipboard.fill"
 }

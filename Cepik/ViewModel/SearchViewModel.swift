@@ -14,16 +14,17 @@ class SearchViewModel {
     static let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
     static let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
     static let vehicleNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
+    let sortedVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     
     private var page: Int = 1
-    private var areThereMoreVehicles: Bool = true
+    var areThereMoreVehicles: ObservableObject<Bool> = ObservableObject(value: true)
     
     func segmentedValueChanged(selectedIndex: Int) {
         print(selectedIndex)
     }
     
     func fetchData(vehicleInfo: VehicleSearchInfo) {
-        if areThereMoreVehicles {
+        if areThereMoreVehicles.value {
             guard let province = vehicleInfo.provinceNumber else { return }
             guard let dateFrom = vehicleInfo.dateFrom else { return }
             guard let dateTo = vehicleInfo.dateTo else { return }
@@ -34,7 +35,7 @@ class SearchViewModel {
                     SearchViewModel.vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: page)
                     
                     if SearchViewModel.vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
-                        areThereMoreVehicles = false
+                        areThereMoreVehicles.value = false
                         print("Vehicles", SearchViewModel.vehicleNetworkRequest.value?.data.count ?? 0)
                     } else {
                         page += 1
@@ -45,6 +46,15 @@ class SearchViewModel {
                 }
             }
         }
+    }
+    
+    func sortVehicles(vehicles: Vehicles) {
+        var sorted = vehicles
+        sorted.data.sort {
+            $0.attributes?.marka ?? "" < $1.attributes?.marka ?? ""
+        }
+        
+        sortedVehicles.value = sorted
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
