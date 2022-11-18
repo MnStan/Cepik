@@ -141,17 +141,17 @@ class SearchVC: UIViewController {
                     self.vehicleSearchInfo.provinceNumber = provinceEnum.info.number
                     self.vehicleSearchInfo.dataType = dataTypeEnum.info.bool
                     
+                    let vehiclesVC = VehiclesVC()
+                    vehiclesVC.vehiclesSearchInfo = self.vehicleSearchInfo
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(vehiclesVC, animated: true)
+                    }
+                    
                 } else {
                     #warning("First date bigger than second alert")
                     let ac = UIAlertController(title: "Wrong dates!", message: "Date to can't be sooner than date from", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
                     self.present(ac, animated: true)
-                }
-                
-                let vehiclesVC = VehiclesVC()
-                vehiclesVC.vehiclesSearchInfo = self.vehicleSearchInfo
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(vehiclesVC, animated: true)
                 }
             }
         } else {
@@ -309,10 +309,7 @@ class SearchVC: UIViewController {
             textField.returnKeyType = .done
             textField.keyboardType = .numberPad
             textField.keyboardAppearance = .default
-            
-            print("Test")
         default:
-            print("Default")
             break
         }
     }

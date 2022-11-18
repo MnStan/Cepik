@@ -24,7 +24,6 @@ class SearchViewModel {
     }
     
     func checkDates(firstDate: String, secondDate: String, completion: @escaping ((_ validation: Bool) -> Void)) {
-        
         let firstDateConverted = firstDate.convertStringToDate()
         let secondDateConverted = secondDate.convertStringToDate()
         

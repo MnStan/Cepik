@@ -19,15 +19,20 @@ class VehiclesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .systemBackground
         title = "Vehicles"
+        view.backgroundColor = .systemBackground
         
         configureTableView()
         setBindings()
         getVehicles(page: 1)
         configureSearchController()
         showLoadingIndicator()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        vehicles = Vehicles()
+        viewModel.saveVehicles(vehicles: vehicles)
     }
     
     // MARK: Search Controller
