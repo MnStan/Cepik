@@ -71,23 +71,26 @@ class SearchVC: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if ageTextField.isFirstResponder {
-            navigationItem.title = ""
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                UIView.animate(withDuration: 1, delay: 0) {
-                    self.view.frame.origin.y = -keyboardSize.height
+        if searchSegmentedControl.tag == 1 {
+            if ageTextField.isFirstResponder {
+                navigationItem.title = ""
+                if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        self.view.frame.origin.y = -keyboardSize.height
+                    }
                 }
             }
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        UIView.animate(withDuration: 1, delay: 0) {
-            self.view.frame.origin.y = 0
-        } completion: { _ in
-            self.navigationItem.title = "CEPiK"
+        if searchSegmentedControl.tag == 1 {
+            UIView.animate(withDuration: 1, delay: 0) {
+                self.view.frame.origin.y = 0
+            } completion: { _ in
+                self.navigationItem.title = "CEPiK"
+            }
         }
-
     }
     
     // MARK: Tap Gesture Recognizer

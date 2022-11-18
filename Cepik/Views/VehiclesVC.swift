@@ -15,6 +15,7 @@ class VehiclesVC: UIViewController {
     var vehicles = Vehicles()
     private var page: Int = 1
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
+    private var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class VehiclesVC: UIViewController {
     
     // MARK: Search Controller
     private func configureSearchController() {
-        let searchController = UISearchController()
+        searchController = UISearchController()
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search for a Vehicle"
         searchController.obscuresBackgroundDuringPresentation = false
@@ -112,6 +113,7 @@ class VehiclesVC: UIViewController {
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.keyboardDismissMode = .onDrag
         
         tableView.register(CSearchResultCell.self, forCellReuseIdentifier: CSearchResultCell.reuseID)
     }
