@@ -100,6 +100,7 @@ class VehiclesVC: UIViewController {
                     self.activityIndicator.stopAnimating()
                     self.showSortingButton()
                 }
+                self.viewModel.saveVehicles(vehicles: self.vehicles)
             }
         }
     }
@@ -165,6 +166,6 @@ extension VehiclesVC: UISearchResultsUpdating {
             viewModel.notSearching()
             return
         }
-        viewModel.searchVehicles(vehicles: vehicles, filter: filter)
+        viewModel.searchVehicles(filter: filter)
     }
 }

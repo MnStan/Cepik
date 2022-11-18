@@ -10,21 +10,21 @@ import Foundation
 class VehicleViewModel {
     
     static let vehicleNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
-    var startVehicles: Vehicles!
+    var startVehicles = Vehicles()
     let sortedVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     let filteredVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     
     private var page: Int = 1
     var areThereMoreVehicles: ObservableObject<Bool> = ObservableObject(value: true)
     
-    func searchVehicles(vehicles: Vehicles, filter: String) {
-        startVehicles = vehicles
+    func searchVehicles(filter: String) {
+        let vehicles = startVehicles
         var filteredVehicles = vehicles
         
         filteredVehicles.data = vehicles.data.filter {
             switch ($0.attributes?.model, $0.attributes?.marka) {
             case (let model?, let marka?):
-                return model.lowercased().contains(filter.lowercased()) || marka.lowercased().contains(filter.lowercased())
+                return model.lowercased().contains(filter.lowercased()) || marka.lowercased().contains(filter.lowercased()) || (marka + " " + model).lowercased().contains(filter.lowercased())
             case (let model?, _):
                 return model.lowercased().contains(filter.lowercased())
             case (_, let marka?):
@@ -35,6 +35,10 @@ class VehicleViewModel {
         }
         
         self.filteredVehicles.value = filteredVehicles
+    }
+    
+    func saveVehicles(vehicles: Vehicles) {
+        startVehicles = vehicles
     }
     
     func notSearching() {
@@ -124,8 +128,6 @@ class VehicleViewModel {
                     
                     if VehicleViewModel.vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
                         areThereMoreVehicles.value = false
-//                        guard let moreVehicles = VehicleViewModel.vehicleNetworkRequest.value?.data else { return }
-//                        startVehicles.data.append(contentsOf: moreVehicles)
                         print("Vehicles", VehicleViewModel.vehicleNetworkRequest.value?.data.count ?? 0)
                     } else {
                         page += 1
