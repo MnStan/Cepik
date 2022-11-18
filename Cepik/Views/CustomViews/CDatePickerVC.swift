@@ -46,6 +46,7 @@ class CDatePickerVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        datePicker.date = Date.now
         chooseDateToUpdate()
     }
     
