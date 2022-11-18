@@ -29,9 +29,7 @@ class CItemsStackView: UIStackView {
     
     convenience init(viewsArray: [CItemSettingsView]) {
         self.init(frame: .zero)
-        
-        
-        
+
         viewsArray.forEach {
             self.addArrangedSubview($0)
         }

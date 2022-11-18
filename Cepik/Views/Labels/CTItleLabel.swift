@@ -18,16 +18,20 @@ class CTItleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
+    convenience init(title: String) {
+        self.init(frame: .zero)
+        self.text = title
+    }
+    
     private func configureTitleLabel() {
         textColor = .label
         
         font = UIFont.preferredFont(forTextStyle: .title3)
         adjustsFontForContentSizeCategory = true
         textAlignment = .left
-        #warning("Comented adjustFontSizeToFitWidth")
-//        adjustsFontSizeToFitWidth = true
+        adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.8
-        
+        numberOfLines = 0
         translatesAutoresizingMaskIntoConstraints = false
     }
     

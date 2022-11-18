@@ -11,7 +11,7 @@ class VehiclesVC: UIViewController {
 
     private let tableView = UITableView()
     var vehiclesSearchInfo: VehicleSearchInfo!
-    private let searchViewModel = SearchViewModel()
+    private let viewModel = VehicleViewModel()
     var vehicles = Vehicles()
     private var page: Int = 1
 //    private var areThereMoreVehicles: Bool = true
@@ -46,13 +46,13 @@ class VehiclesVC: UIViewController {
     }
     
     @objc private func sortVehicles() {
-        searchViewModel.sortVehicles(vehicles: vehicles)
+        viewModel.sortVehicles(vehicles: vehicles)
     }
     
     // MARK: Bindings
     
     private func setBindings() {
-        SearchViewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
+        VehicleViewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
             guard let self else { return }
             guard let vehicles else { return }
             
@@ -63,7 +63,7 @@ class VehiclesVC: UIViewController {
             }
         }
         
-        searchViewModel.sortedVehicles.bind { [weak self] vehicles in
+        viewModel.sortedVehicles.bind { [weak self] vehicles in
             guard let self else { return }
             self.vehicles.data = vehicles?.data ?? self.vehicles.data
             
@@ -72,7 +72,7 @@ class VehiclesVC: UIViewController {
             }
         }
         
-        searchViewModel.areThereMoreVehicles.bind { [weak self] noMoreData in
+        viewModel.areThereMoreVehicles.bind { [weak self] noMoreData in
             guard let self else { return }
             
             if !noMoreData {
@@ -96,7 +96,7 @@ class VehiclesVC: UIViewController {
     }
     
     private func getVehicles(page: Int) {
-            searchViewModel.fetchData(vehicleInfo: vehiclesSearchInfo)
+        viewModel.fetchData(vehicleInfo: vehiclesSearchInfo)
     }
 }
 
@@ -110,13 +110,18 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CSearchResultCell.reuseID) as! CSearchResultCell
         let vehicle = vehicles.data[indexPath.row]
         
-        cell.setTitle(title: searchViewModel.getNameToDisplay(vehicle: vehicle))
+        cell.setTitle(title: viewModel.getNameToDisplay(vehicle: vehicle))
     
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(vehicles.data[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vehicleInfoVC = VehicleInfoVC()
+        vehicleInfoVC.vehicleId = vehicles.data[indexPath.row].id
+        navigationController?.pushViewController(vehicleInfoVC, animated: true)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

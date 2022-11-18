@@ -389,6 +389,8 @@ extension SearchVC: UITextFieldDelegate {
 
 extension UITextField: DatePickerVCDelegate {
     func updateTextLabel(withText text: String) {
-        self.text = text
+        DispatchQueue.main.async {
+            self.text = text
+        }
     }
 }

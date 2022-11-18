@@ -28,6 +28,7 @@ class CLogoView: UIView {
     
     private func configureLogoView() {
         addSubview(logoImageView)
+        logoImageView.contentMode = .scaleAspectFit
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = UIImage(systemName: SFSymbols.placeholder)
