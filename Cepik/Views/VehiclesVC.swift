@@ -14,7 +14,6 @@ class VehiclesVC: UIViewController {
     private let viewModel = VehicleViewModel()
     var vehicles = Vehicles()
     private var page: Int = 1
-//    private var areThereMoreVehicles: Bool = true
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
     
     override func viewDidLoad() {
@@ -26,8 +25,18 @@ class VehiclesVC: UIViewController {
         configureTableView()
         setBindings()
         getVehicles(page: 1)
-        
+        configureSearchController()
         showLoadingIndicator()
+    }
+    
+    // MARK: Search Controller
+    private func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search for a Vehicle"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     // MARK: Activity indicator when loading vehicles data
@@ -52,6 +61,17 @@ class VehiclesVC: UIViewController {
     // MARK: Bindings
     
     private func setBindings() {
+        viewModel.filteredVehicles.bind { [weak self] vehicles in
+            guard let self else { return }
+            guard let vehicles else { return }
+            
+            self.vehicles.data = vehicles.data
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
         VehicleViewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
             guard let self else { return }
             guard let vehicles else { return }
@@ -100,6 +120,8 @@ class VehiclesVC: UIViewController {
     }
 }
 
+// MARK: Table View delegate and data source extnesion
+
 extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(vehicles.data.count)
@@ -132,5 +154,17 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
         if offsetY > contentHeight - height {
             print("end")
         }
+    }
+}
+
+// MARK: Search extension
+
+extension VehiclesVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+            viewModel.notSearching()
+            return
+        }
+        viewModel.searchVehicles(vehicles: vehicles, filter: filter)
     }
 }

@@ -40,7 +40,7 @@ class VehicleInfoVC: UIViewController {
                 self.configureContentView()
                 self.configureStackView()
                 info.forEach {
-                    self.stackView.addArrangedSubview(CVehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: "pencil"))
+                    self.stackView.addArrangedSubview(CVehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: "number"))
                     print($0.key, $0.value)
                 }
             }
