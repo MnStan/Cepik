@@ -16,7 +16,7 @@ class SearchViewModel {
 
     
     func segmentedValueChanged(selectedIndex: Int) {
-        print(selectedIndex)
+        print("Tag", selectedIndex)
     }
 
     func formatStringToDate(stringDate: String) -> Date? {

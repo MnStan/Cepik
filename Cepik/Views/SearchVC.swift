@@ -47,7 +47,6 @@ class SearchVC: UIViewController {
         createDismissKeyboardTapGesture()
         
         setDatesBindings()
-        addObserversForKeyboard()
     }
     
     // MARK: Bindings and Observers functions
@@ -55,6 +54,10 @@ class SearchVC: UIViewController {
     private func addObserversForKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeObserversForKeyboard() {
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setDatesBindings() {
@@ -71,27 +74,25 @@ class SearchVC: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if searchSegmentedControl.tag == 1 {
-            if ageTextField.isFirstResponder {
-                navigationItem.title = ""
-                if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                    UIView.animate(withDuration: 1, delay: 0) {
-                        self.view.frame.origin.y = -keyboardSize.height
-                    }
+        if ageTextField.isFirstResponder {
+            navigationItem.title = ""
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                UIView.animate(withDuration: 1, delay: 0) {
+                    self.view.frame.origin.y = -keyboardSize.height
                 }
             }
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if searchSegmentedControl.tag == 1 {
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.view.frame.origin.y = 0
-            } completion: { _ in
-                self.navigationItem.title = "CEPiK"
-            }
+        
+        UIView.animate(withDuration: 1, delay: 0) {
+            self.view.frame.origin.y = 0
+        } completion: { _ in
+            self.navigationItem.title = "CEPiK"
         }
     }
+
     
     // MARK: Tap Gesture Recognizer
     
@@ -196,12 +197,15 @@ class SearchVC: UIViewController {
         
         switch sender.selectedSegmentIndex {
         case 0:
+            removeObserversForKeyboard()
             stackView.removeFromSuperview()
             setupTestStackView()
         case 1:
+            addObserversForKeyboard()
             stackView.removeFromSuperview()
             setupSecondStackView()
         case 2:
+            removeObserversForKeyboard()
             stackView.removeFromSuperview()
             testVC()
         default:
@@ -262,9 +266,14 @@ class SearchVC: UIViewController {
 
         stackView = CItemsStackView(viewsArray: inputViewsArray)
         
+        UIView.animate(withDuration: 0.5, delay: 0) {
+            self.setupStackViewConstraints()
+            self.stackView.layoutIfNeeded()
+        }
+        
         setTextFieldsDelegates(viewsArray: inputViewsArray)
 
-        setupStackViewConstraints()
+        
         
     }
     
@@ -281,7 +290,10 @@ class SearchVC: UIViewController {
         
         stackView = CItemsStackView(viewsArray: inputViewsArray)
         
-        setupStackViewConstraints()
+        UIView.animate(withDuration: 0.5, delay: 0) {
+            self.setupStackViewConstraints()
+            self.stackView.layoutIfNeeded()
+        }
     }
     
     // MARK: DatePicker functions
@@ -301,9 +313,16 @@ class SearchVC: UIViewController {
             textField.resignFirstResponder()
             presentDataTypeAlertController(textField: textField)
         case 5:
+            textField.isUserInteractionEnabled = false
             textField.resignFirstResponder()
             presentSexAlertController(textfield: textField)
         case 6:
+            inputViewsArray.forEach {
+                if $0.textField != textField {
+                    $0.textField.isUserInteractionEnabled = false
+                }
+            }
+            textField.addTarget(self, action: #selector(textFieldDidEnd), for: .editingDidEnd)
             ageTextField = textField
             textField.inputAccessoryView = toolBar
             textField.returnKeyType = .done
@@ -311,6 +330,12 @@ class SearchVC: UIViewController {
             textField.keyboardAppearance = .default
         default:
             break
+        }
+    }
+    
+    @objc func textFieldDidEnd() {
+        inputViewsArray.forEach {
+            $0.textField.isUserInteractionEnabled = true
         }
     }
     

@@ -42,11 +42,11 @@ class CItemSettingsView: UIView {
             
             itemLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             itemLabel.leadingAnchor.constraint(equalTo: symbol.trailingAnchor, constant: 10),
-            itemLabel.widthAnchor.constraint(equalToConstant: itemLabel.intrinsicContentSize.width),
+            itemLabel.trailingAnchor.constraint(equalTo: textField.leadingAnchor, constant: -10),
             itemLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             
             textField.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            textField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.1),
+            textField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.2),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             textField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])
