@@ -22,21 +22,26 @@ class VehiclesVC: UIViewController {
         title = "Vehicles"
         view.backgroundColor = .systemBackground
         
-        configureTableView()
-        setBindings()
         getVehicles(page: 1)
-        configureSearchController()
+        configureTableView()
         showLoadingIndicator()
+        setBindings()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        vehicles = Vehicles()
+//        vehicles.data.removeAll()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.notSearching()
+//        vehicles.data.removeAll()
+//        viewModel.notSearching()
+//
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: Search Controller
@@ -80,9 +85,11 @@ class VehiclesVC: UIViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+            
+//            self.viewModel.saveVehicles(vehicles: self.vehicles)
         }
         
-        VehicleViewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
+        viewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
             guard let self else { return }
             guard let vehicles else { return }
             
@@ -100,6 +107,8 @@ class VehiclesVC: UIViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+            
+            self.viewModel.saveVehicles(vehicles: self.vehicles)
         }
         
         viewModel.areThereMoreVehicles.bind { [weak self] noMoreData in
@@ -109,6 +118,7 @@ class VehiclesVC: UIViewController {
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.showSortingButton()
+                    self.configureSearchController()
                 }
                 self.viewModel.saveVehicles(vehicles: self.vehicles)
             }

@@ -9,7 +9,7 @@ import Foundation
 
 class VehicleViewModel {
     
-    static let vehicleNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
+    let vehicleNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     var startVehicles = Vehicles()
     let sortedVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     let filteredVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
@@ -122,13 +122,15 @@ class VehicleViewModel {
             guard let dateTo = vehicleInfo.dateTo else { return }
             guard let dataType = vehicleInfo.dataType else { return }
             
+            vehicleNetworkRequest.value = nil
+            
             Task {
                 do {
-                    VehicleViewModel.vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: page)
+                    vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: page)
                     
-                    if VehicleViewModel.vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
+                    if vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
                         areThereMoreVehicles.value = false
-                        print("Vehicles", VehicleViewModel.vehicleNetworkRequest.value?.data.count ?? 0)
+                        print("Vehicles", vehicleNetworkRequest.value?.data.count ?? 0)
                     } else {
                         page += 1
                         fetchData(vehicleInfo: vehicleInfo)
