@@ -29,10 +29,14 @@ class VehiclesVC: UIViewController {
         showLoadingIndicator()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        vehicles = Vehicles()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        vehicles = Vehicles()
-        viewModel.saveVehicles(vehicles: vehicles)
+        viewModel.notSearching()
     }
     
     // MARK: Search Controller
@@ -128,7 +132,7 @@ class VehiclesVC: UIViewController {
     }
 }
 
-// MARK: Table View delegate and data source extnesion
+// MARK: Table View delegate and data source extension
 
 extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
