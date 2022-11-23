@@ -14,13 +14,20 @@ class SearchViewModel {
     static let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
     static let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
 
+    let datesNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
+    
+    func getDates() {
+        Task {
+            do {
+                datesNetworkRequest.value = try await NetworkManager.shared.getDatesForDatePicker()
+            } catch {
+                print("Something went wrong with dates network request")
+            }
+        }
+    }
     
     func segmentedValueChanged(selectedIndex: Int) {
         print("Tag", selectedIndex)
-    }
-
-    func formatStringToDate(stringDate: String) -> Date? {
-        stringDate.convertStringToDate()
     }
     
     func checkDates(firstDate: String, secondDate: String, completion: @escaping ((_ validation: Bool) -> Void)) {

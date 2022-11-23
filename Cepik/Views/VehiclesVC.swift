@@ -98,6 +98,8 @@ class VehiclesVC: UIViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+            
+            print("                 ",vehicles.meta?.datePublished, vehicles.meta?.dateModified)
         }
         
         viewModel.sortedVehicles.bind { [weak self] vehicles in

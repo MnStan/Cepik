@@ -24,24 +24,39 @@ class CDatePickerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureDatePicker()
-        addSubviews()
-        setupConstraints()
-        configureButton()
         view.backgroundColor = .systemBackground
         
+        viewModel.getDates()
         bindDates()
     }
     
     private func bindDates() {
         SearchViewModel.pickedDate.bind { [weak self] date in
             guard let self else { return }
-            self.delegate?.updateTextLabel(withText: date?.convertToDayMonthYearFormat() ?? "")
+            guard let date else { return }
+            self.delegate?.updateTextLabel(withText: date.convertToDayMonthYearFormat())
         }
         
         SearchViewModel.pickedDateTo.bind { [weak self] date in
             guard let self else { return }
-            self.delegate?.updateTextLabel(withText: date?.convertToDayMonthYearFormat() ?? "")
+            guard let date else { return }
+            self.delegate?.updateTextLabel(withText: date.convertToDayMonthYearFormat())
+        }
+        
+        viewModel.datesNetworkRequest.bind { [weak self] dates in
+            guard let self else { return }
+            guard let dates else { return }
+            guard let meta = dates.meta else { return }
+            
+            DispatchQueue.main.async {
+                self.configureDatePicker()
+                self.addSubviews()
+                self.setupConstraints()
+                self.configureButton()
+                self.datePicker.minimumDate = meta.datePublished.convertStringToDatePickerDate()
+                self.datePicker.maximumDate = meta.dateModified.convertStringToDatePickerDate()
+                self.dateChanged()
+            }
         }
     }
     
@@ -80,14 +95,10 @@ class CDatePickerVC: UIViewController {
     private func configureDatePicker() {
         datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "en")
+        datePicker.locale = Locale(identifier: "en_PL_POSIX")
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.timeZone = TimeZone.current
-        datePicker.maximumDate = Calendar.current.date(byAdding: .day, value: -7, to: Date.now)
-        print(Calendar.current)
-        guard let currentMaximumDate = datePicker.maximumDate else { return }
-        datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -2, to: currentMaximumDate)
         textField.inputView = datePicker
         view.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false

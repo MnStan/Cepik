@@ -122,8 +122,6 @@ class VehicleViewModel {
             guard let dateTo = vehicleInfo.dateTo else { return }
             guard let dataType = vehicleInfo.dataType else { return }
             
-            vehicleNetworkRequest.value = nil
-            
             Task {
                 do {
                     vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: page)

@@ -10,6 +10,7 @@ import Foundation
 struct Vehicles: Codable {
     
     var data: [VehiclesData] = []
+    var meta: MetaInformations?
 }
 
 struct VehiclesData: Codable {
@@ -23,4 +24,14 @@ struct VehiclesDataAtributes: Codable {
     
     var marka: String?
     var model: String?
+}
+
+struct MetaInformations: Codable {
+    var datePublished: String
+    var dateModified: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case datePublished = "schema:datePublished"
+        case dateModified = "schema:dateModified"
+    }
 }

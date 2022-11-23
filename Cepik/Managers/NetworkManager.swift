@@ -70,4 +70,28 @@ class NetworkManager {
             throw CError.invalidDataFromServer
         }
     }
+    
+    func getDatesForDatePicker() async throws -> Vehicles {
+        let endPoint = baseURL + "pojazdy?wojewodztwo=12&data-od=20221119&data-do=20221119&typ-daty=1&tylko-zarejestrowane=true&pokaz-wszystkie-pola=false&limit=1&page=1"
+        
+        
+        guard let url = URL(string: endPoint) else {
+            throw CError.invalidVehicleInfo
+        }
+        
+        let (data, response) = try await
+        URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            print("Response error")
+            throw CError.invalidResponse
+        }
+        
+        do {
+            return try decoder.decode(Vehicles.self, from: data)
+        } catch {
+#warning("error alert!")
+            throw CError.invalidDataFromServer
+        }
+    }
 }

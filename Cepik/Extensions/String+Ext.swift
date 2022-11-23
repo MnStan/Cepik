@@ -11,9 +11,15 @@ extension String {
     
     func convertStringToDate() -> Date {
         let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
         formatter.locale = Locale(identifier: "en_PL_POSIX")
-        formatter.timeStyle = .none
-        formatter.dateStyle = .short
+        return formatter.date(from: self) ?? Date()
+    }
+    
+    func convertStringToDatePickerDate() -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_PL_POSIX")
         return formatter.date(from: self) ?? Date()
     }
     
