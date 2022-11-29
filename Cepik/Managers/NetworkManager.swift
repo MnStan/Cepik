@@ -17,7 +17,6 @@ class NetworkManager {
     }
     
     func getVehiclesInfo(province: String, dateFrom: String, dateTo: String, registered: String, page: Int = 1) async throws -> Vehicles {
-        print(province, dateFrom, dateTo, registered)
         var endPoint = String()
         
         endPoint = baseURL + "pojazdy?wojewodztwo=\(province)&data-od=\(dateFrom)&data-do=\(dateTo)&typ-daty=1&tylko-zarejestrowane=\(registered)&pokaz-wszystkie-pola=false&limit=500&page=\(page)"
@@ -27,13 +26,11 @@ class NetworkManager {
         }
         
 #warning("Url print")
-        print(url)
         
         let (data, response) = try await
         URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            print("Response error")
             throw CError.invalidResponse
         }
         
@@ -53,13 +50,11 @@ class NetworkManager {
         }
         
 #warning("Url print")
-        print(url)
         
         let (data, response) = try await
         URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            print("Response error")
             throw CError.invalidResponse
         }
         
@@ -83,7 +78,6 @@ class NetworkManager {
         URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            print("Response error")
             throw CError.invalidResponse
         }
         

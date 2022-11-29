@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VehiclesVC: UIViewController {
+class VehiclesVC: CLoadingVC {
 
     private let tableView = UITableView()
     var vehiclesSearchInfo: VehicleSearchInfo!
@@ -25,6 +25,7 @@ class VehiclesVC: UIViewController {
         getVehicles(page: 1)
         configureTableView()
         showLoadingIndicator()
+        showLoadingView(backgroundColor: true)
         setBindings()
     }
     
@@ -98,8 +99,6 @@ class VehiclesVC: UIViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-            
-            print("                 ",vehicles.meta?.datePublished, vehicles.meta?.dateModified)
         }
         
         viewModel.sortedVehicles.bind { [weak self] vehicles in
@@ -117,12 +116,28 @@ class VehiclesVC: UIViewController {
             guard let self else { return }
             
             if !noMoreData {
+                self.dismissLoadingView()
                 DispatchQueue.main.async {
+                    self.tableView.isUserInteractionEnabled = true
                     self.activityIndicator.stopAnimating()
-                    self.showSortingButton()
-                    self.configureSearchController()
                 }
                 self.viewModel.saveVehicles(vehicles: self.vehicles)
+                
+                self.checkIfThereAreVehicles()
+            }
+        }
+    }
+    
+    private func checkIfThereAreVehicles() {
+        if vehicles.data.isEmpty {
+            DispatchQueue.main.async {
+                self.tableView.removeFromSuperview()
+                self.showEmptyState(with: "No vehicles", in: self.view)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showSortingButton()
+                self.configureSearchController()
             }
         }
     }
@@ -137,6 +152,8 @@ class VehiclesVC: UIViewController {
         tableView.keyboardDismissMode = .onDrag
         
         tableView.register(CSearchResultCell.self, forCellReuseIdentifier: CSearchResultCell.reuseID)
+        
+        tableView.isUserInteractionEnabled = false
     }
     
     private func getVehicles(page: Int) {
@@ -148,7 +165,6 @@ class VehiclesVC: UIViewController {
 
 extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(vehicles.data.count)
         return vehicles.data.count
     }
     
@@ -162,7 +178,6 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(vehicles.data[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
         
         let vehicleInfoVC = VehicleInfoVC()
@@ -176,7 +191,6 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
         let height = scrollView.frame.size.height
         
         if offsetY > contentHeight - height {
-            print("end")
         }
     }
 }

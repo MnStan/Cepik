@@ -20,6 +20,11 @@ class CButton: UIButton {
     
     convenience init(title: String, color: UIColor) {
         self.init(frame: .zero)
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        titleLabel?.maximumContentSizeCategory = .accessibilityExtraLarge
+        titleLabel?.minimumScaleFactor = 0.7
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        titleLabel?.numberOfLines = 1
         set(title: title, color: color)
     }
     

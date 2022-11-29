@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VehicleInfoVC: UIViewController {
+class VehicleInfoVC: CLoadingVC {
 
     let scrollView = UIScrollView()
     let stackView = CItemsStackView()
@@ -20,12 +20,10 @@ class VehicleInfoVC: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-//        configureScrollView()
-//        configureContentView()
-//        configureStackView()
         title = "Details"
         addItems()
         setBindings()
+        showLoadingView(backgroundColor: true)
         viewModel.fetchData(vehicleId: vehicleId)
     }
     
@@ -35,15 +33,17 @@ class VehicleInfoVC: UIViewController {
             guard let vehicleInfo = vehicle?.data.attributes else { return }
             let info = self.viewModel.getInformation(vehicleInfo: vehicleInfo)
             
+            self.dismissLoadingView()
             DispatchQueue.main.async {
                 self.configureScrollView()
                 self.configureContentView()
                 self.configureStackView()
                 info.forEach {
                     self.stackView.addArrangedSubview(CVehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: "number"))
-                    print($0.key, $0.value)
                 }
             }
+            
+            
         }
     }
     
@@ -90,40 +90,3 @@ class VehicleInfoVC: UIViewController {
     }
 
 }
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-        // this variable is used for injecting the current view controller
-        let viewController: UIViewController
-
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
-        }
-
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        }
-    }
-
-    func toPreview() -> some View {
-        // inject self (the current view controller) for the preview
-        Preview(viewController: self)
-    }
-}
-#endif
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct InfoVCPreview: PreviewProvider {
-    
-    static var previews: some View {
-        // view controller using programmatic UI
-        VehicleInfoVC().toPreview().previewInterfaceOrientation(.portrait)
-    }
-}
-#endif

@@ -11,7 +11,7 @@ protocol DatePickerVCDelegate: UITextField {
     func updateTextLabel(withText text: String)
 }
 
-class CDatePickerVC: UIViewController {
+class CDatePickerVC: CLoadingVC {
     
     private let viewModel = SearchViewModel()
     
@@ -25,9 +25,18 @@ class CDatePickerVC: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
+        bindDates()
+        configureDatePicker()
+        addSubviews()
+        setupConstraints()
+        configureButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         viewModel.getDates()
-        bindDates()
+        showLoadingView(backgroundColor: false)
     }
     
     private func bindDates() {
@@ -48,14 +57,32 @@ class CDatePickerVC: UIViewController {
             guard let dates else { return }
             guard let meta = dates.meta else { return }
             
+            self.dismissLoadingView()
+            
             DispatchQueue.main.async {
-                self.configureDatePicker()
-                self.addSubviews()
-                self.setupConstraints()
-                self.configureButton()
                 self.datePicker.minimumDate = meta.datePublished.convertStringToDatePickerDate()
-                self.datePicker.maximumDate = meta.dateModified.convertStringToDatePickerDate()
+                self.datePicker.maximumDate = self.viewModel.substractOneDay(date: meta.dateModified.convertStringToDatePickerDate())
                 self.dateChanged()
+                
+                UIView.animate(withDuration: 0.5, delay: 0) {
+                    self.datePicker.alpha = 1.0
+                }
+            }
+        }
+        
+        viewModel.networkError.bind { [weak self] errorBool in
+            guard let self else { return }
+            
+            if errorBool {
+                DispatchQueue.main.async {
+                    let ac = UIAlertController(title: "Can't get modification dates from database", message: "Please try again", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
+                        self.dismissLoadingView()
+                        self.dismissView()
+                    }))
+                    
+                    self.present(ac, animated: true)
+                }
             }
         }
     }
@@ -102,6 +129,7 @@ class CDatePickerVC: UIViewController {
         textField.inputView = datePicker
         view.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.alpha = 0.0
     }
     
     private func chooseDateToUpdate() {

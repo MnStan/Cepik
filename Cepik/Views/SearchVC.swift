@@ -265,16 +265,16 @@ class SearchVC: UIViewController {
         inputViewsArray = [citem1, citem2, citem3, citem4]
 
         stackView = CItemsStackView(viewsArray: inputViewsArray)
+        stackView.alpha = 0.0
+        
+        self.setupStackViewConstraints()
+        self.stackView.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.5, delay: 0) {
-            self.setupStackViewConstraints()
-            self.stackView.layoutIfNeeded()
+            self.stackView.alpha = 1.0
         }
         
         setTextFieldsDelegates(viewsArray: inputViewsArray)
-
-        
-        
     }
     
     private func setupSecondStackView() {
@@ -289,10 +289,13 @@ class SearchVC: UIViewController {
         setTextFieldsDelegates(viewsArray: inputViewsArray)
         
         stackView = CItemsStackView(viewsArray: inputViewsArray)
+        stackView.alpha = 0.0
+        
+        self.setupStackViewConstraints()
+        self.stackView.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.5, delay: 0) {
-            self.setupStackViewConstraints()
-            self.stackView.layoutIfNeeded()
+            self.stackView.alpha = 1.0
         }
     }
     
@@ -351,7 +354,10 @@ class SearchVC: UIViewController {
         }))
         
         dataTypeAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(dataTypeAlertController, animated: true)
+        
+        DispatchQueue.main.async {
+            self.present(dataTypeAlertController, animated: true)
+        }
     }
     
     private func presentSexAlertController(textfield: UITextField) {
@@ -366,7 +372,10 @@ class SearchVC: UIViewController {
         }))
         
         sexAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(sexAlertController, animated: true)
+        
+        DispatchQueue.main.async {
+            self.present(sexAlertController, animated: true)
+        }
     }
     
     private func presentProvinceAlertController(textField: UITextField) {
@@ -379,14 +388,19 @@ class SearchVC: UIViewController {
         }
         
         provinceAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(provinceAlertController, animated: true)
+        
+        DispatchQueue.main.async {
+            self.present(provinceAlertController, animated: true)
+        }
     }
     
     private func presentDatePicker(textField: UITextField) {
         configureCustomSheetPresentationController()
         datePickerController.textField = textField
         datePickerController.delegate = textField
-        present(datePickerController, animated: true)
+        DispatchQueue.main.async {
+            self.present(self.datePickerController, animated: true)
+        }
     }
 }
 

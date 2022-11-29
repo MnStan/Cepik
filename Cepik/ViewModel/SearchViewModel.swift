@@ -13,6 +13,7 @@ class SearchViewModel {
     
     static let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
     static let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
+    let networkError: ObservableObject<Bool> = ObservableObject(value: false)
 
     let datesNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     
@@ -21,13 +22,16 @@ class SearchViewModel {
             do {
                 datesNetworkRequest.value = try await NetworkManager.shared.getDatesForDatePicker()
             } catch {
-                print("Something went wrong with dates network request")
+                networkError.value = true
             }
         }
     }
     
     func segmentedValueChanged(selectedIndex: Int) {
-        print("Tag", selectedIndex)
+    }
+    
+    func substractOneDay(date: Date) -> Date {
+        Calendar.current.date(byAdding: .day, value: -1, to: date) ?? date
     }
     
     func checkDates(firstDate: String, secondDate: String, completion: @escaping ((_ validation: Bool) -> Void)) {

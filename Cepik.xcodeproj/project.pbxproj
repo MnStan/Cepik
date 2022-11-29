@@ -27,6 +27,8 @@
 		F65818CF29027F05009059EA /* CImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818CE29027F05009059EA /* CImageView.swift */; };
 		F65818D129029806009059EA /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818D029029806009059EA /* ObservableObject.swift */; };
 		F658864D292E21EE00437D8F /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658864C292E21EE00437D8F /* DatePickerViewModel.swift */; };
+		F658864F292F589E00437D8F /* CEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658864E292F589E00437D8F /* CEmptyState.swift */; };
+		F6588651292F5B0200437D8F /* CLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6588650292F5B0200437D8F /* CLoadingVC.swift */; };
 		F6BB4D1829067C9A00DC71FE /* CDatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */; };
 		F6BFFD8F2924E93A00431A8B /* VehicleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BFFD8E2924E93A00431A8B /* VehicleViewModel.swift */; };
 		F6BFFD912924EB7B00431A8B /* VehicleInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */; };
@@ -86,6 +88,8 @@
 		F65818CE29027F05009059EA /* CImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CImageView.swift; sourceTree = "<group>"; };
 		F65818D029029806009059EA /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
 		F658864C292E21EE00437D8F /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
+		F658864E292F589E00437D8F /* CEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEmptyState.swift; sourceTree = "<group>"; };
+		F6588650292F5B0200437D8F /* CLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLoadingVC.swift; sourceTree = "<group>"; };
 		F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDatePickerVC.swift; sourceTree = "<group>"; };
 		F6BFFD8E2924E93A00431A8B /* VehicleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleViewModel.swift; sourceTree = "<group>"; };
 		F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfoVC.swift; sourceTree = "<group>"; };
@@ -248,6 +252,7 @@
 				F6E2DB8C28FEBD6C00A77743 /* CustomViews */,
 				F6E2DB8928FEBD0E00A77743 /* ImageViews */,
 				F6E2DB8728FE8CC500A77743 /* SearchVC.swift */,
+				F6588650292F5B0200437D8F /* CLoadingVC.swift */,
 				F6469C68291B95160079BE52 /* VehiclesVC.swift */,
 				F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */,
 			);
@@ -300,6 +305,7 @@
 				F65818C929013EEF009059EA /* CItemSettingsView.swift */,
 				F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */,
 				F6BFFD922924F54800431A8B /* CVehicleDetailInfoItem.swift */,
+				F658864E292F589E00437D8F /* CEmptyState.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6BFFD952924F65400431A8B /* CBodyLabel.swift in Sources */,
+				F6588651292F5B0200437D8F /* CLoadingVC.swift in Sources */,
 				F65818C0290129C9009059EA /* SearchViewModel.swift in Sources */,
 				F634F5AB290D142700DA10CF /* Provinces.swift in Sources */,
 				F6469C6D291B975D0079BE52 /* CSearchResultCell.swift in Sources */,
@@ -472,6 +479,7 @@
 				F658864D292E21EE00437D8F /* DatePickerViewModel.swift in Sources */,
 				F60E39A429262C1700C68AA9 /* SearchType.swift in Sources */,
 				F6BFFD912924EB7B00431A8B /* VehicleInfoVC.swift in Sources */,
+				F658864F292F589E00437D8F /* CEmptyState.swift in Sources */,
 				F6E2DB8E28FEBDBA00A77743 /* CLogoView.swift in Sources */,
 				F6469C69291B95160079BE52 /* VehiclesVC.swift in Sources */,
 				F650E81329277B0A005FFACB /* Dictionary+Ext.swift in Sources */,

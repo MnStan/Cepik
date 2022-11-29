@@ -30,7 +30,8 @@ class CTItleLabel: UILabel {
         adjustsFontForContentSizeCategory = true
         textAlignment = .left
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.8
+        minimumScaleFactor = 0.5
+        maximumContentSizeCategory = .extraExtraLarge
         numberOfLines = 0
         translatesAutoresizingMaskIntoConstraints = false
     }

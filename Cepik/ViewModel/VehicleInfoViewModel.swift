@@ -39,7 +39,6 @@ class VehicleInfoViewModel {
                 vehicleDetailNetworkRequest.value = try await NetworkManager.shared.getVehiclesDetailInfo(id: vehicleId)
             } catch {
                 print("Something went wrong with detailData")
-                print(error.localizedDescription)
             }
         }
     }

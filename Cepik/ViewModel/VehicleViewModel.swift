@@ -128,7 +128,6 @@ class VehicleViewModel {
                     
                     if vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
                         areThereMoreVehicles.value = false
-                        print("Vehicles", vehicleNetworkRequest.value?.data.count ?? 0)
                     } else {
                         page += 1
                         fetchData(vehicleInfo: vehicleInfo)
