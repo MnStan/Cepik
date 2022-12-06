@@ -13,6 +13,7 @@
 		F634F5B2290D5D1500DA10CF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F634F5B1290D5D1500DA10CF /* Date+Ext.swift */; };
 		F6469C69291B95160079BE52 /* VehiclesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6469C68291B95160079BE52 /* VehiclesVC.swift */; };
 		F6469C6D291B975D0079BE52 /* CSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6469C6C291B975D0079BE52 /* CSearchResultCell.swift */; };
+		F64A96EB293F2FA5006A095F /* CTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64A96EA293F2FA5006A095F /* CTabBarController.swift */; };
 		F650E81129277934005FFACB /* VehicleInfoDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E81029277934005FFACB /* VehicleInfoDescription.swift */; };
 		F650E81329277B0A005FFACB /* Dictionary+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E81229277B0A005FFACB /* Dictionary+Ext.swift */; };
 		F65818B528FF01CC009059EA /* CButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65818B428FF01CC009059EA /* CButton.swift */; };
@@ -45,6 +46,7 @@
 		F6E2DB8828FE8CC500A77743 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB8728FE8CC500A77743 /* SearchVC.swift */; };
 		F6E2DB8E28FEBDBA00A77743 /* CLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB8D28FEBDBA00A77743 /* CLogoView.swift */; };
 		F6E2DB9428FEBFAB00A77743 /* CTItleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB9328FEBFAB00A77743 /* CTItleLabel.swift */; };
+		F6F3C5B92937700400ADFEFD /* CIDChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3C5B82937700400ADFEFD /* CIDChartView.swift */; };
 		F6F481FA2912E0DD00B285F1 /* VehicleSeachInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481F92912E0DD00B285F1 /* VehicleSeachInfo.swift */; };
 		F6F481FC2913A3C200B285F1 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481FB2913A3C200B285F1 /* String+Ext.swift */; };
 		F6F481FE2913B0B100B285F1 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481FD2913B0B100B285F1 /* DataType.swift */; };
@@ -74,6 +76,7 @@
 		F634F5B1290D5D1500DA10CF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		F6469C68291B95160079BE52 /* VehiclesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesVC.swift; sourceTree = "<group>"; };
 		F6469C6C291B975D0079BE52 /* CSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSearchResultCell.swift; sourceTree = "<group>"; };
+		F64A96EA293F2FA5006A095F /* CTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTabBarController.swift; sourceTree = "<group>"; };
 		F650E81029277934005FFACB /* VehicleInfoDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfoDescription.swift; sourceTree = "<group>"; };
 		F650E81229277B0A005FFACB /* Dictionary+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Ext.swift"; sourceTree = "<group>"; };
 		F65818B428FF01CC009059EA /* CButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CButton.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		F6E2DB8728FE8CC500A77743 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F6E2DB8D28FEBDBA00A77743 /* CLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLogoView.swift; sourceTree = "<group>"; };
 		F6E2DB9328FEBFAB00A77743 /* CTItleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTItleLabel.swift; sourceTree = "<group>"; };
+		F6F3C5B82937700400ADFEFD /* CIDChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIDChartView.swift; sourceTree = "<group>"; };
 		F6F481F92912E0DD00B285F1 /* VehicleSeachInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleSeachInfo.swift; sourceTree = "<group>"; };
 		F6F481FB2913A3C200B285F1 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		F6F481FD2913B0B100B285F1 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
@@ -158,6 +162,18 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F64A96E9293F2F76006A095F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F6E2DB8728FE8CC500A77743 /* SearchVC.swift */,
+				F6588650292F5B0200437D8F /* CLoadingVC.swift */,
+				F6469C68291B95160079BE52 /* VehiclesVC.swift */,
+				F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */,
+				F64A96EA293F2FA5006A095F /* CTabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		F65818B328FF01AE009059EA /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +207,7 @@
 		F6E2DB4628FE82C700A77743 = {
 			isa = PBXGroup;
 			children = (
+				F6F3C5B82937700400ADFEFD /* CIDChartView.swift */,
 				F6E2DB5128FE82C700A77743 /* Cepik */,
 				F6E2DB6828FE82C900A77743 /* CepikTests */,
 				F6E2DB7228FE82C900A77743 /* CepikUITests */,
@@ -245,16 +262,13 @@
 		F6E2DB8328FE838300A77743 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F64A96E9293F2F76006A095F /* Controllers */,
 				F6469C6B291B97230079BE52 /* Cells */,
 				F65818B328FF01AE009059EA /* Buttons */,
 				F6E2DB9228FEBF9400A77743 /* Labels */,
 				F6E2DB8F28FEBDF600A77743 /* TextFields */,
 				F6E2DB8C28FEBD6C00A77743 /* CustomViews */,
 				F6E2DB8928FEBD0E00A77743 /* ImageViews */,
-				F6E2DB8728FE8CC500A77743 /* SearchVC.swift */,
-				F6588650292F5B0200437D8F /* CLoadingVC.swift */,
-				F6469C68291B95160079BE52 /* VehiclesVC.swift */,
-				F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -479,6 +493,7 @@
 				F658864D292E21EE00437D8F /* DatePickerViewModel.swift in Sources */,
 				F60E39A429262C1700C68AA9 /* SearchType.swift in Sources */,
 				F6BFFD912924EB7B00431A8B /* VehicleInfoVC.swift in Sources */,
+				F6F3C5B92937700400ADFEFD /* CIDChartView.swift in Sources */,
 				F658864F292F589E00437D8F /* CEmptyState.swift in Sources */,
 				F6E2DB8E28FEBDBA00A77743 /* CLogoView.swift in Sources */,
 				F6469C69291B95160079BE52 /* VehiclesVC.swift in Sources */,
@@ -491,6 +506,7 @@
 				F60E39A629262E3A00C68AA9 /* VehicleDetailInfo.swift in Sources */,
 				F6E2DB5328FE82C700A77743 /* AppDelegate.swift in Sources */,
 				F65818D129029806009059EA /* ObservableObject.swift in Sources */,
+				F64A96EB293F2FA5006A095F /* CTabBarController.swift in Sources */,
 				F65818C22901384B009059EA /* CItemsStackView.swift in Sources */,
 				F6E2DB5528FE82C700A77743 /* SceneDelegate.swift in Sources */,
 			);

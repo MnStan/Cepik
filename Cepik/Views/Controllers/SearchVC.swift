@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SearchVC: UIViewController {
     
@@ -13,7 +14,7 @@ class SearchVC: UIViewController {
     private var vehicleSearchInfo = VehicleSearchInfo()
     
     let searchButton = CButton(title: "Search", color: .systemRed)
-    let searchSegmentedControl = UISegmentedControl(items: ["Vehicles", "ID", "Statistics"])
+    let searchSegmentedControl = UISegmentedControl(items: ["Vehicles", "ID"])
     var stackView: CItemsStackView!
     var inputViewsArray: [CItemSettingsView] = []
     var emptyTextField: Bool = false
@@ -204,10 +205,6 @@ class SearchVC: UIViewController {
             addObserversForKeyboard()
             stackView.removeFromSuperview()
             setupSecondStackView()
-        case 2:
-            removeObserversForKeyboard()
-            stackView.removeFromSuperview()
-            testVC()
         default:
             break
         }
@@ -284,7 +281,7 @@ class SearchVC: UIViewController {
         let citem4 = CItemSettingsView(title: "Age", symbol: SFSymbols.calendar, tag: 6)
         
         inputViewsArray.removeAll()
-        inputViewsArray = [citem1, citem2, citem3, citem4]
+        inputViewsArray = [citem1, citem2, citem3]
 
         setTextFieldsDelegates(viewsArray: inputViewsArray)
         
