@@ -10,7 +10,7 @@ import UIKit
 class CItemSettingsView: UIView {
 
     var itemLabel = CTItleLabel()
-    var symbol = CImageView(frame: .zero)
+//    var symbol = CImageView(frame: .zero)
     var textField = CTextField()
     
     override init(frame: CGRect) {
@@ -25,7 +25,7 @@ class CItemSettingsView: UIView {
     
     convenience init(title: String, symbol: String, tag: Int) {
         self.init(frame: .zero)
-        self.symbol.setImage(imageName: symbol)
+//        self.symbol.setImage(imageName: symbol)
         itemLabel.setTitle(title: title)
         textField.tag = tag
         setupConstraints()
@@ -35,32 +35,30 @@ class CItemSettingsView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            symbol.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            symbol.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            symbol.widthAnchor.constraint(equalToConstant: 20),
-            symbol.heightAnchor.constraint(equalTo: symbol.widthAnchor),
+//            symbol.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+//            symbol.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+//            symbol.widthAnchor.constraint(equalToConstant: 20),
+//            symbol.heightAnchor.constraint(equalTo: symbol.widthAnchor),
             
-            itemLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            itemLabel.leadingAnchor.constraint(equalTo: symbol.trailingAnchor, constant: 10),
-            itemLabel.trailingAnchor.constraint(equalTo: textField.leadingAnchor, constant: -10),
-            itemLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            itemLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            itemLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            itemLabel.heightAnchor.constraint(equalToConstant: 30),
+            itemLabel.widthAnchor.constraint(equalToConstant: 200),
             
-            textField.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            textField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.2),
+            textField.topAnchor.constraint(equalTo: itemLabel.bottomAnchor),
+            textField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             textField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])
     }
 
     private func addSubviews() {
-        self.addSubview(symbol)
+//        self.addSubview(symbol)
         self.addSubview(itemLabel)
         self.addSubview(textField)
     }
 
     private func setupViewStyle() {
-        self.layer.cornerRadius = 10
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.systemGray3.cgColor
+//        self.layer.cornerRadius = 10
     }
 }

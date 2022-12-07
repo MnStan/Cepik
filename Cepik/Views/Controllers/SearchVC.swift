@@ -13,7 +13,7 @@ class SearchVC: UIViewController {
     private let viewModel = SearchViewModel()
     private var vehicleSearchInfo = VehicleSearchInfo()
     
-    let searchButton = CButton(title: "Search", color: .systemRed)
+    let searchButton = CButton(title: "Search", color: UIColor(red: 0.698, green: 0.2314, blue: 0.1294, alpha: 1.0))
     let searchSegmentedControl = UISegmentedControl(items: ["Vehicles", "ID"])
     var stackView: CItemsStackView!
     var inputViewsArray: [CItemSettingsView] = []
@@ -34,6 +34,7 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureNavigationController()
         
         addSubViews()
@@ -48,6 +49,12 @@ class SearchVC: UIViewController {
         createDismissKeyboardTapGesture()
         
         setDatesBindings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: Bindings and Observers functions
@@ -105,7 +112,11 @@ class SearchVC: UIViewController {
     // MARK: Navigation Controller configuration
     
     private func configureNavigationController() {
-        view.backgroundColor = .systemBackground
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.colors = [UIColor(red: 0.7882, green: 0.7608, blue: 0.7412, alpha: 1.0).cgColor, UIColor(hue: 0.125, saturation: 0, brightness: 0.85, alpha: 1.0).cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
         navigationItem.title = "CEPiK"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -256,7 +267,7 @@ class SearchVC: UIViewController {
         let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province, tag: 0)
         let citem2 = CItemSettingsView(title: "Date from", symbol: SFSymbols.calendar, tag: 1)
         let citem3 = CItemSettingsView(title: "Date to", symbol: SFSymbols.calendar, tag: 2)
-        let citem4 = CItemSettingsView(title: "Data type", symbol: SFSymbols.checkmark, tag: 3)
+        let citem4 = CItemSettingsView(title: "Origin", symbol: SFSymbols.checkmark, tag: 3)
         
         inputViewsArray.removeAll()
         inputViewsArray = [citem1, citem2, citem3, citem4]
@@ -340,13 +351,13 @@ class SearchVC: UIViewController {
     }
     
     private func presentDataTypeAlertController(textField: UITextField) {
-        let dataTypeAlertController = UIAlertController(title: "Choose data type for vehicles", message: nil, preferredStyle: .actionSheet)
+        let dataTypeAlertController = UIAlertController(title: "Choose origin", message: nil, preferredStyle: .actionSheet)
         
-        dataTypeAlertController.addAction(UIAlertAction(title: "registered", style: .default, handler: { alert in
+        dataTypeAlertController.addAction(UIAlertAction(title: "New", style: .default, handler: { alert in
             textField.text = alert.title
         }))
         
-        dataTypeAlertController.addAction(UIAlertAction(title: "all", style: .default, handler: { alert in
+        dataTypeAlertController.addAction(UIAlertAction(title: "Used", style: .default, handler: { alert in
             textField.text = alert.title
         }))
         

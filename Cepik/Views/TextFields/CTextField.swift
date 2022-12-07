@@ -22,8 +22,8 @@ class CTextField: UITextField {
         translatesAutoresizingMaskIntoConstraints = false
         
         layer.cornerRadius = 10
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.systemGray3.cgColor
+        layer.borderWidth = 0.1
+        backgroundColor = .gray
         
         textColor = .label
         tintColor = .label

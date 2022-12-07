@@ -19,6 +19,7 @@ class VehiclesVC: CLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         title = "Vehicles"
         view.backgroundColor = .systemBackground
         
