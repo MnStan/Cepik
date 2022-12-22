@@ -16,16 +16,19 @@ class NetworkManager {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
     
-    func getVehiclesInfo(province: String, dateFrom: String, dateTo: String, registered: String, page: Int = 1) async throws -> Vehicles {
+    func getVehiclesInfo(province: String, dateFrom: String, dateTo: String, origin: String, page: Int = 1) async throws -> Vehicles {
         var endPoint = String()
         
-        endPoint = baseURL + "pojazdy?wojewodztwo=\(province)&data-od=\(dateFrom)&data-do=\(dateTo)&typ-daty=1&tylko-zarejestrowane=\(registered)&pokaz-wszystkie-pola=false&limit=500&page=\(page)"
+        endPoint = baseURL + "pojazdy?wojewodztwo=\(province)&data-od=\(dateFrom)&data-do=\(dateTo)&typ-daty=1&pokaz-wszystkie-pola=false&limit=500&page=\(page)\(origin)"
         
-        guard let url = URL(string: endPoint) else {
-            throw CError.invalidVehicleInfo
-        }
+        guard let encodedURL = endPoint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { throw CError.invalidVehicleInfo }
+        
+            guard let url = URL(string: encodedURL) else {
+                throw CError.invalidVehicleInfo
+            }
         
 #warning("Url print")
+        print(url)
         
         let (data, response) = try await
         URLSession.shared.data(from: url)
@@ -68,7 +71,7 @@ class NetworkManager {
     
     func getDatesForDatePicker() async throws -> Vehicles {
         let endPoint = baseURL + "pojazdy?wojewodztwo=12&data-od=20221119&data-do=20221119&typ-daty=1&tylko-zarejestrowane=true&pokaz-wszystkie-pola=false&limit=1&page=1"
-        
+        #warning("Tu zmien na datę dzisiejszą bo zrobi fikołka za 2 lata")
         
         guard let url = URL(string: endPoint) else {
             throw CError.invalidVehicleInfo

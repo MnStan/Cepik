@@ -10,8 +10,7 @@ import UIKit
 class VehiclesVC: CLoadingVC {
 
     private let tableView = UITableView()
-    var vehiclesSearchInfo: VehicleSearchInfo!
-    private let viewModel = VehicleViewModel()
+    var viewModel = VehicleViewModel()
     var vehicles = Vehicles()
     private var page: Int = 1
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -158,7 +157,7 @@ class VehiclesVC: CLoadingVC {
     }
     
     private func getVehicles(page: Int) {
-        viewModel.fetchData(vehicleInfo: vehiclesSearchInfo)
+        viewModel.fetchData()
     }
 }
 

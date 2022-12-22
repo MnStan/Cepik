@@ -13,7 +13,7 @@ protocol DatePickerVCDelegate: UITextField {
 
 class CDatePickerVC: CLoadingVC {
     
-    private let viewModel = SearchViewModel()
+    var viewModel: SearchViewModel!
     
     weak var delegate: DatePickerVCDelegate?
 
@@ -40,13 +40,13 @@ class CDatePickerVC: CLoadingVC {
     }
     
     private func bindDates() {
-        SearchViewModel.pickedDate.bind { [weak self] date in
+        viewModel.pickedDate.bind { [weak self] date in
             guard let self else { return }
             guard let date else { return }
             self.delegate?.updateTextLabel(withText: date.convertToDayMonthYearFormat())
         }
         
-        SearchViewModel.pickedDateTo.bind { [weak self] date in
+        viewModel.pickedDateTo.bind { [weak self] date in
             guard let self else { return }
             guard let date else { return }
             self.delegate?.updateTextLabel(withText: date.convertToDayMonthYearFormat())
@@ -135,9 +135,9 @@ class CDatePickerVC: CLoadingVC {
     private func chooseDateToUpdate() {
         switch textField.tag {
         case 1:
-            SearchViewModel.pickedDate.value = datePicker.date
+            viewModel.pickedDate.value = datePicker.date
         case 2:
-            SearchViewModel.pickedDateTo.value = datePicker.date
+            viewModel.pickedDateTo.value = datePicker.date
         default:
             break
         }

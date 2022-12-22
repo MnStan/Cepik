@@ -11,8 +11,8 @@ class SearchViewModel {
     
     var vehicles: Vehicles!
     
-    static let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
-    static let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
+    let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
+    let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
     let networkError: ObservableObject<Bool> = ObservableObject(value: false)
 
     let datesNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
@@ -43,6 +43,20 @@ class SearchViewModel {
         } else {
             completion(true)
         }
+    }
+    
+    func createVC(province: String, dataType: String) -> VehiclesVC {
+        let province = province.removeDiacritics().replacingOccurrences(of: "-", with: "_")
+        
+        let info = VehicleSearchInfo(provinceNumber: Provinces(rawValue: province)?.info.number, dateFrom: self.pickedDate.value, dateTo: self.pickedDateTo.value, dataType: dataType)
+        
+        #warning("SEARCHVM PRINT")
+        print(info)
+        
+        let vehiclesVC = VehiclesVC()
+        vehiclesVC.viewModel.vehicleInfo = info
+        
+        return vehiclesVC
     }
     
     private func countObjects(vehiclesData: Vehicles) {

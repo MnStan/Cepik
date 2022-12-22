@@ -43,8 +43,6 @@ class VehicleInfoVC: CLoadingVC {
                     self.stackView.addArrangedSubview(CVehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: "number"))
                 }
             }
-            
-            
         }
     }
     

@@ -11,7 +11,6 @@ import SwiftUI
 class SearchVC: UIViewController {
     
     private let viewModel = SearchViewModel()
-    private var vehicleSearchInfo = VehicleSearchInfo()
     
     let searchButton = CButton(title: "Search", color: UIColor(red: 0.698, green: 0.2314, blue: 0.1294, alpha: 1.0))
     let searchSegmentedControl = UISegmentedControl(items: ["Vehicles", "ID"])
@@ -47,8 +46,6 @@ class SearchVC: UIViewController {
         
         setupTestStackView()
         createDismissKeyboardTapGesture()
-        
-        setDatesBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,19 +64,7 @@ class SearchVC: UIViewController {
     private func removeObserversForKeyboard() {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    private func setDatesBindings() {
-        SearchViewModel.pickedDate.bind { [weak self] date in
-            guard let self else { return }
-            guard let date else { return }
-            self.vehicleSearchInfo.dateFrom = date
-        }
-        SearchViewModel.pickedDateTo.bind { [weak self] date in
-            guard let self else { return }
-            guard let date else { return }
-            self.vehicleSearchInfo.dateTo = date
-        }
-    }
+
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if ageTextField.isFirstResponder {
@@ -146,18 +131,11 @@ class SearchVC: UIViewController {
                 guard let self else { return }
                 
                 if validation {
-                    guard let province = self.inputViewsArray[0].textField.text?.removeDiacritics().replacingOccurrences(of: "-", with: "_") else { return }
+                    guard let province = self.inputViewsArray[0].textField.text else { return }
                     guard let dataType = self.inputViewsArray[3].textField.text else { return }
-                    guard let provinceEnum = Provinces(rawValue: province) else { return }
-                    guard let dataTypeEnum = DataType(rawValue: dataType) else { return }
-                    
-                    self.vehicleSearchInfo.provinceNumber = provinceEnum.info.number
-                    self.vehicleSearchInfo.dataType = dataTypeEnum.info.bool
-                    
-                    let vehiclesVC = VehiclesVC()
-                    vehiclesVC.vehiclesSearchInfo = self.vehicleSearchInfo
+
                     DispatchQueue.main.async {
-                        self.navigationController?.pushViewController(vehiclesVC, animated: true)
+                        self.navigationController?.pushViewController(self.viewModel.createVC(province: province, dataType: dataType), animated: true)
                     }
                     
                 } else {
@@ -353,11 +331,15 @@ class SearchVC: UIViewController {
     private func presentDataTypeAlertController(textField: UITextField) {
         let dataTypeAlertController = UIAlertController(title: "Choose origin", message: nil, preferredStyle: .actionSheet)
         
-        dataTypeAlertController.addAction(UIAlertAction(title: "New", style: .default, handler: { alert in
+        dataTypeAlertController.addAction(UIAlertAction(title: "all", style: .default, handler: { alert in
             textField.text = alert.title
         }))
         
-        dataTypeAlertController.addAction(UIAlertAction(title: "Used", style: .default, handler: { alert in
+        dataTypeAlertController.addAction(UIAlertAction(title: "new", style: .default, handler: { alert in
+            textField.text = alert.title
+        }))
+        
+        dataTypeAlertController.addAction(UIAlertAction(title: "used", style: .default, handler: { alert in
             textField.text = alert.title
         }))
         
@@ -406,6 +388,7 @@ class SearchVC: UIViewController {
         configureCustomSheetPresentationController()
         datePickerController.textField = textField
         datePickerController.delegate = textField
+        datePickerController.viewModel = viewModel
         DispatchQueue.main.async {
             self.present(self.datePickerController, animated: true)
         }

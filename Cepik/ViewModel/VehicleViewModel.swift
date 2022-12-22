@@ -13,9 +13,14 @@ class VehicleViewModel {
     var startVehicles = Vehicles()
     let sortedVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     let filteredVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
-    
-    private var page: Int = 1
+    var vehicleInfo: VehicleSearchInfo!
+    var dispatchGroup: DispatchGroup!
+
     var areThereMoreVehicles: ObservableObject<Bool> = ObservableObject(value: true)
+    
+    func getTitle(dataType: String) -> String {
+        return VehicleOrigin(rawValue: dataType)?.info.name ?? ""
+    }
     
     func searchVehicles(filter: String) {
         let vehicles = startVehicles
@@ -79,9 +84,9 @@ class VehicleViewModel {
     
     func sortVehicles(vehicles: Vehicles) {
         var sorted = vehicles
-
+        
         sorted.data.sort { first, second in
-            #warning("Vehicles without company name at the end after sorting")
+#warning("Vehicles without company name at the end after sorting")
             
             let lhsCompany = first.attributes?.marka ?? "unknowned"
             let lhsModel = first.attributes?.model ?? "unknowned"
@@ -105,36 +110,79 @@ class VehicleViewModel {
             
             return lhs < rhs
         }
-
+        
         sortedVehicles.value = sorted
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
         let convertedString = stringDate.components(separatedBy: "/")
-
+        
         return convertedString.reversed().joined()
     }
     
-    func fetchData(vehicleInfo: VehicleSearchInfo) {
+    func fetchData() {
         if areThereMoreVehicles.value {
             guard let province = vehicleInfo.provinceNumber else { return }
             guard let dateFrom = vehicleInfo.dateFrom else { return }
             guard let dateTo = vehicleInfo.dateTo else { return }
             guard let dataType = vehicleInfo.dataType else { return }
+            print(dataType, VehicleOrigin(rawValue: dataType)?.info.urlComponent)
+            print("tutaj")
             
-            Task {
-                do {
-                    vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), registered: dataType, page: page)
+            
+            
+            if dataType == VehicleOrigin.new.rawValue || dataType == VehicleOrigin.all.rawValue {
+                guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else { return }
+                taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: 1)
+            } else {
+                DispatchQueue.global().async {
+                    self.dispatchGroup = DispatchGroup()
+                    self.dispatchGroup.enter()
                     
-                    if vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
-                        areThereMoreVehicles.value = false
-                    } else {
-                        page += 1
-                        fetchData(vehicleInfo: vehicleInfo)
+                    
+                    guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else {
+                        self.dispatchGroup.leave()
+                        return
                     }
-                } catch {
-                    print("Something went wrong")
+                    
+                    self.taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: 1)
+                    
+                    self.dispatchGroup.enter()
+                    
+                    guard let secondOrigin = VehicleOrigin(rawValue: dataType)?.info.urlSecondComponent else {
+                        self.dispatchGroup.leave()
+                        return
+                    }
+                    
+                    self.taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: secondOrigin, page: 1)
+                    
+                    self.dispatchGroup.wait()
+                    self.areThereMoreVehicles.value = false
                 }
+            }
+        }
+    }
+    
+    func taskFetchData(province: String, dateFrom: Date, dateTo: Date, origin: String, page: Int) {
+        print("Origin    ", origin)
+        Task {
+            do {
+                vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), origin: origin, page: page)
+                
+                if vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
+                    if dispatchGroup != nil {
+                        dispatchGroup.leave()
+                    } else {
+                        areThereMoreVehicles.value = false
+                    }
+                    
+                } else {
+                    guard let nextPage = vehicleNetworkRequest.value?.meta?.page else { return }
+                    print("Next page", nextPage)
+                    taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: nextPage + 1)
+                }
+            } catch {
+                print("Something went wrong in taskFetchData", error, error.localizedDescription.debugDescription, error.localizedDescription.description)
             }
         }
     }
