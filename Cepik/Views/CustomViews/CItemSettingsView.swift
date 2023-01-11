@@ -9,7 +9,7 @@ import UIKit
 
 class CItemSettingsView: UIView {
 
-    var itemLabel = CTItleLabel()
+    var itemLabel = CTitleLabel()
 //    var symbol = CImageView(frame: .zero)
     var textField = CTextField()
     

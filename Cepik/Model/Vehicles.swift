@@ -30,10 +30,12 @@ struct MetaInformations: Codable {
     var datePublished: String
     var dateModified: String
     var page: Int
+    var count: Int
     
     private enum CodingKeys: String, CodingKey {
         case datePublished = "schema:datePublished"
         case dateModified = "schema:dateModified"
         case page = "page"
+        case count = "count"
     }
 }

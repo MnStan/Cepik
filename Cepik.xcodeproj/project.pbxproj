@@ -46,7 +46,7 @@
 		F6E2DB7628FE82C900A77743 /* CepikUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB7528FE82C900A77743 /* CepikUITestsLaunchTests.swift */; };
 		F6E2DB8828FE8CC500A77743 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB8728FE8CC500A77743 /* SearchVC.swift */; };
 		F6E2DB8E28FEBDBA00A77743 /* CLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB8D28FEBDBA00A77743 /* CLogoView.swift */; };
-		F6E2DB9428FEBFAB00A77743 /* CTItleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB9328FEBFAB00A77743 /* CTItleLabel.swift */; };
+		F6E2DB9428FEBFAB00A77743 /* CTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2DB9328FEBFAB00A77743 /* CTitleLabel.swift */; };
 		F6F3C5B92937700400ADFEFD /* CIDChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3C5B82937700400ADFEFD /* CIDChartView.swift */; };
 		F6F481FA2912E0DD00B285F1 /* VehicleSeachInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481F92912E0DD00B285F1 /* VehicleSeachInfo.swift */; };
 		F6F481FC2913A3C200B285F1 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F481FB2913A3C200B285F1 /* String+Ext.swift */; };
@@ -114,7 +114,7 @@
 		F6E2DB7528FE82C900A77743 /* CepikUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CepikUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F6E2DB8728FE8CC500A77743 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F6E2DB8D28FEBDBA00A77743 /* CLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLogoView.swift; sourceTree = "<group>"; };
-		F6E2DB9328FEBFAB00A77743 /* CTItleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTItleLabel.swift; sourceTree = "<group>"; };
+		F6E2DB9328FEBFAB00A77743 /* CTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTitleLabel.swift; sourceTree = "<group>"; };
 		F6F3C5B82937700400ADFEFD /* CIDChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIDChartView.swift; sourceTree = "<group>"; };
 		F6F481F92912E0DD00B285F1 /* VehicleSeachInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleSeachInfo.swift; sourceTree = "<group>"; };
 		F6F481FB2913A3C200B285F1 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -338,7 +338,7 @@
 		F6E2DB9228FEBF9400A77743 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
-				F6E2DB9328FEBFAB00A77743 /* CTItleLabel.swift */,
+				F6E2DB9328FEBFAB00A77743 /* CTitleLabel.swift */,
 				F6BFFD942924F65400431A8B /* CBodyLabel.swift */,
 			);
 			path = Labels;
@@ -506,7 +506,7 @@
 				F65818B728FF0E27009059EA /* Vehicles.swift in Sources */,
 				F64A96EF29409210006A095F /* VehicleOrigin.swift in Sources */,
 				F6F481FC2913A3C200B285F1 /* String+Ext.swift in Sources */,
-				F6E2DB9428FEBFAB00A77743 /* CTItleLabel.swift in Sources */,
+				F6E2DB9428FEBFAB00A77743 /* CTitleLabel.swift in Sources */,
 				F60E39A629262E3A00C68AA9 /* VehicleDetailInfo.swift in Sources */,
 				F6E2DB5328FE82C700A77743 /* AppDelegate.swift in Sources */,
 				F65818D129029806009059EA /* ObservableObject.swift in Sources */,

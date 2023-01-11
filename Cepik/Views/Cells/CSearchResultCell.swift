@@ -10,7 +10,7 @@ import UIKit
 class CSearchResultCell: UITableViewCell {
     
     static let reuseID = "SearchResultCell"
-    let resultLabel = CTItleLabel()
+    let resultLabel = CTitleLabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

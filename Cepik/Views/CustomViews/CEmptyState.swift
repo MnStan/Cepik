@@ -42,7 +42,7 @@ class CEmptyState: UIView {
     }
     
     private func configureLabel(title: String) {
-        let label = CTItleLabel(title: title)
+        let label = CTitleLabel(title: title)
         label.textAlignment = .center
         self.addSubview(label)
         

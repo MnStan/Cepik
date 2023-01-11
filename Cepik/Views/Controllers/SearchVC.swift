@@ -134,8 +134,15 @@ class SearchVC: UIViewController {
                     guard let province = self.inputViewsArray[0].textField.text else { return }
                     guard let dataType = self.inputViewsArray[3].textField.text else { return }
 
+                    var dataTypeToPass: String!
+                    VehicleOrigin.allCases.forEach {
+                        if $0.info.name == dataType {
+                            dataTypeToPass = $0.rawValue
+                        }
+                    }
+
                     DispatchQueue.main.async {
-                        self.navigationController?.pushViewController(self.viewModel.createVC(province: province, dataType: dataType), animated: true)
+                        self.navigationController?.pushViewController(self.viewModel.createVC(province: province, dataType: dataTypeToPass), animated: true)
                     }
                     
                 } else {
@@ -331,17 +338,23 @@ class SearchVC: UIViewController {
     private func presentDataTypeAlertController(textField: UITextField) {
         let dataTypeAlertController = UIAlertController(title: "Choose origin", message: nil, preferredStyle: .actionSheet)
         
-        dataTypeAlertController.addAction(UIAlertAction(title: "all", style: .default, handler: { alert in
-            textField.text = alert.title
-        }))
-        
-        dataTypeAlertController.addAction(UIAlertAction(title: "new", style: .default, handler: { alert in
-            textField.text = alert.title
-        }))
-        
-        dataTypeAlertController.addAction(UIAlertAction(title: "used", style: .default, handler: { alert in
-            textField.text = alert.title
-        }))
+        VehicleOrigin.allCases.forEach {
+            dataTypeAlertController.addAction(UIAlertAction(title: $0.info.name, style: .default, handler: { alert in
+                textField.text = alert.title
+            }))
+        }
+//
+//        dataTypeAlertController.addAction(UIAlertAction(title: "all", style: .default, handler: { alert in
+//            textField.text = alert.title
+//        }))
+//
+//        dataTypeAlertController.addAction(UIAlertAction(title: "new", style: .default, handler: { alert in
+//            textField.text = alert.title
+//        }))
+//
+//        dataTypeAlertController.addAction(UIAlertAction(title: "used", style: .default, handler: { alert in
+//            textField.text = alert.title
+//        }))
         
         dataTypeAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         

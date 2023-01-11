@@ -12,7 +12,7 @@ struct CIDChartView: View {
     var body: some View {
         VStack(spacing: 50) {
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-
+            
             Chart {
                 BarMark(
                     x: .value("Test1", "Sty"),
@@ -22,6 +22,10 @@ struct CIDChartView: View {
                     x: .value("Test2", "Lut"),
                     y: .value("Test2", 543)
                 )
+                BarMark(
+                    x: .value("Test22", "Lut"),
+                    y: .value("Test22", 1000)
+                ).foregroundStyle(Color.red)
                 BarMark(
                     x: .value("Test3", "Mar"),
                     y: .value("Test3", 876)

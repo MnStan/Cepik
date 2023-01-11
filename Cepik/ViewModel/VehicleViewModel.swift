@@ -131,7 +131,7 @@ class VehicleViewModel {
             
             
             
-            if dataType == VehicleOrigin.new.rawValue || dataType == VehicleOrigin.all.rawValue {
+            if dataType == VehicleOrigin.all.rawValue {
                 guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else { return }
                 taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: 1)
             } else {
@@ -142,15 +142,18 @@ class VehicleViewModel {
                     
                     guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else {
                         self.dispatchGroup.leave()
+//                        self.areThereMoreVehicles.value = false
                         return
                     }
                     
                     self.taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: 1)
                     
+                    self.dispatchGroup.wait()
                     self.dispatchGroup.enter()
                     
                     guard let secondOrigin = VehicleOrigin(rawValue: dataType)?.info.urlSecondComponent else {
                         self.dispatchGroup.leave()
+                        self.areThereMoreVehicles.value = false
                         return
                     }
                     

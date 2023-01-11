@@ -10,7 +10,7 @@ import UIKit
 class CVehicleDetailInfoItem: UIView {
 
     var logo: CLogoView!
-    var title: CTItleLabel!
+    var title: CTitleLabel!
     var body: CBodyLabel!
     
     override init(frame: CGRect) {
@@ -23,7 +23,7 @@ class CVehicleDetailInfoItem: UIView {
     
     convenience init(titleText: String, bodyText: String, logo: String) {
         self.init(frame: .zero)
-        self.title = CTItleLabel(title: titleText)
+        self.title = CTitleLabel(title: titleText)
         self.body = CBodyLabel(text: bodyText)
         self.logo = CLogoView(image: logo)
         configureLayout()
