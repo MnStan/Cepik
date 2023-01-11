@@ -9,24 +9,34 @@ import Foundation
 
 class VehicleViewModel {
     
-    let vehicleNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     var startVehicles = Vehicles()
-    let sortedVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
-    let filteredVehicles: ObservableObject<Vehicles?> = ObservableObject(value: nil)
+    var vehicles = Vehicles()
+    var vehiclesNetworkRequest = Vehicles()
     var vehicleInfo: VehicleSearchInfo!
     var dispatchGroup: DispatchGroup!
 
     var areThereMoreVehicles: ObservableObject<Bool> = ObservableObject(value: true)
     
+    func countVehicles() -> Int {
+        return vehicles.data.count
+    }
+    
+    func getVehicle(at: Int) -> String {
+        getNameToDisplay(vehicle: vehicles.data[at])
+    }
+    
+    func getVehicleId(at: Int) -> String {
+        vehicles.data[at].id ?? ""
+    }
+    
     func getTitle(dataType: String) -> String {
-        return VehicleOrigin(rawValue: dataType)?.info.name ?? ""
+        VehicleOrigin(rawValue: dataType)?.info.name ?? ""
     }
     
     func searchVehicles(filter: String) {
-        let vehicles = startVehicles
-        var filteredVehicles = vehicles
+        var filteredVehicles = Vehicles()
         
-        filteredVehicles.data = vehicles.data.filter {
+        filteredVehicles.data = startVehicles.data.filter {
             switch ($0.attributes?.model, $0.attributes?.marka) {
             case (let model?, let marka?):
                 return model.lowercased().contains(filter.lowercased()) || marka.lowercased().contains(filter.lowercased()) || (marka + " " + model).lowercased().contains(filter.lowercased())
@@ -39,15 +49,15 @@ class VehicleViewModel {
             }
         }
         
-        self.filteredVehicles.value = filteredVehicles
+        self.vehicles = filteredVehicles
     }
     
-    func saveVehicles(vehicles: Vehicles) {
+    func saveVehicles() {
         startVehicles = vehicles
     }
     
     func notSearching() {
-        filteredVehicles.value = startVehicles
+        vehicles = startVehicles
     }
     
     func getNameToDisplay(vehicle: VehiclesData) -> String{
@@ -83,9 +93,7 @@ class VehicleViewModel {
     }
     
     func sortVehicles(vehicles: Vehicles) {
-        var sorted = vehicles
-        
-        sorted.data.sort { first, second in
+        self.vehicles.data.sort { first, second in
 #warning("Vehicles without company name at the end after sorting")
             
             let lhsCompany = first.attributes?.marka ?? "unknowned"
@@ -111,7 +119,7 @@ class VehicleViewModel {
             return lhs < rhs
         }
         
-        sortedVehicles.value = sorted
+        saveVehicles()
     }
     
     private func convertDateForNetworkCall(stringDate: String) -> String {
@@ -121,6 +129,7 @@ class VehicleViewModel {
     }
     
     func fetchData() {
+        vehicles = Vehicles()
         if areThereMoreVehicles.value {
             guard let province = vehicleInfo.provinceNumber else { return }
             guard let dateFrom = vehicleInfo.dateFrom else { return }
@@ -142,7 +151,6 @@ class VehicleViewModel {
                     
                     guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else {
                         self.dispatchGroup.leave()
-//                        self.areThereMoreVehicles.value = false
                         return
                     }
                     
@@ -170,17 +178,27 @@ class VehicleViewModel {
         print("Origin    ", origin)
         Task {
             do {
-                vehicleNetworkRequest.value = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), origin: origin, page: page)
+                vehiclesNetworkRequest = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), origin: origin, page: page)
                 
-                if vehicleNetworkRequest.value?.data.count ?? 0 < 500 {
+                print("\n")
+                print("\n")
+                print(vehiclesNetworkRequest.meta?.count ?? 0)
+                print(vehicles.data.count)
+                print("\n")
+                print("\n")
+                
+                if vehiclesNetworkRequest.data.count < 500 {
                     if dispatchGroup != nil {
+                        vehicles.data.append(contentsOf: vehiclesNetworkRequest.data)
                         dispatchGroup.leave()
                     } else {
+                        vehicles.data.append(contentsOf: vehiclesNetworkRequest.data)
                         areThereMoreVehicles.value = false
                     }
                     
                 } else {
-                    guard let nextPage = vehicleNetworkRequest.value?.meta?.page else { return }
+                    vehicles.data.append(contentsOf: vehiclesNetworkRequest.data)
+                    guard let nextPage = vehiclesNetworkRequest.meta?.page else { return }
                     print("Next page", nextPage)
                     taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: nextPage + 1)
                 }

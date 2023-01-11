@@ -29,17 +29,9 @@ class VehiclesVC: CLoadingVC {
         setBindings()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        vehicles.data.removeAll()
-        
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        vehicles.data.removeAll()
-//        viewModel.notSearching()
-//
+
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -72,46 +64,12 @@ class VehiclesVC: CLoadingVC {
     
     @objc private func sortVehicles() {
         viewModel.sortVehicles(vehicles: vehicles)
+        tableView.reloadData()
     }
     
     // MARK: Bindings
     
     private func setBindings() {
-        viewModel.filteredVehicles.bind { [weak self] vehicles in
-            guard let self else { return }
-            guard let vehicles else { return }
-            
-            self.vehicles.data = vehicles.data
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-//            self.viewModel.saveVehicles(vehicles: self.vehicles)
-        }
-        
-        viewModel.vehicleNetworkRequest.bind { [weak self] vehicles in
-            guard let self else { return }
-            guard let vehicles else { return }
-            
-            self.vehicles.data.append(contentsOf: vehicles.data)
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        
-        viewModel.sortedVehicles.bind { [weak self] vehicles in
-            guard let self else { return }
-            self.vehicles.data = vehicles?.data ?? self.vehicles.data
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-            self.viewModel.saveVehicles(vehicles: self.vehicles)
-        }
-        
         viewModel.areThereMoreVehicles.bind { [weak self] noMoreData in
             guard let self else { return }
             
@@ -120,8 +78,9 @@ class VehiclesVC: CLoadingVC {
                 DispatchQueue.main.async {
                     self.tableView.isUserInteractionEnabled = true
                     self.activityIndicator.stopAnimating()
+                    self.tableView.reloadData()
                 }
-                self.viewModel.saveVehicles(vehicles: self.vehicles)
+                self.viewModel.saveVehicles()
                 
                 self.checkIfThereAreVehicles()
             }
@@ -129,7 +88,7 @@ class VehiclesVC: CLoadingVC {
     }
     
     private func checkIfThereAreVehicles() {
-        if vehicles.data.isEmpty {
+        if viewModel.countVehicles() == 0 {
             DispatchQueue.main.async {
                 self.tableView.removeFromSuperview()
                 self.showEmptyState(with: "No vehicles", in: self.view)
@@ -165,14 +124,12 @@ class VehiclesVC: CLoadingVC {
 
 extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vehicles.data.count
+        return viewModel.countVehicles()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CSearchResultCell.reuseID) as! CSearchResultCell
-        let vehicle = vehicles.data[indexPath.row]
-        
-        cell.setTitle(title: viewModel.getNameToDisplay(vehicle: vehicle))
+        cell.setTitle(title: viewModel.getVehicle(at: indexPath.row))
     
         return cell
     }
@@ -181,7 +138,8 @@ extension VehiclesVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let vehicleInfoVC = VehicleInfoVC()
-        vehicleInfoVC.vehicleId = vehicles.data[indexPath.row].id
+        vehicleInfoVC.vehicleId = viewModel.getVehicleId(at: indexPath.row)
+        
         navigationController?.pushViewController(vehicleInfoVC, animated: true)
     }
     
@@ -201,8 +159,11 @@ extension VehiclesVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
             viewModel.notSearching()
+            self.tableView.reloadData()
             return
         }
+        
         viewModel.searchVehicles(filter: filter)
+        self.tableView.reloadData()
     }
 }
