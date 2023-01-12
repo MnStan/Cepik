@@ -27,11 +27,11 @@ class CTitleLabel: UILabel {
         textColor = .label
         
         font = UIFont.preferredFont(forTextStyle: .title3)
+        adjustsFontSizeToFitWidth = true
         adjustsFontForContentSizeCategory = true
         textAlignment = .left
-        adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.5
-        maximumContentSizeCategory = .extraExtraLarge
+        minimumScaleFactor = 0.8
+        maximumContentSizeCategory = .accessibilityExtraExtraLarge
         numberOfLines = 0
         translatesAutoresizingMaskIntoConstraints = false
     }

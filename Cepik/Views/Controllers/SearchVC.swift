@@ -13,7 +13,6 @@ class SearchVC: UIViewController {
     private let viewModel = SearchViewModel()
     
     let searchButton = CButton(title: "Szukaj", color: UIColor(red: 0.698, green: 0.2314, blue: 0.1294, alpha: 1.0))
-    let searchSegmentedControl = UISegmentedControl(items: ["Pojazdy", "Uprawnienia"])
     var stackView: CItemsStackView!
     var inputViewsArray: [CItemSettingsView] = []
     var emptyTextField: Bool = false
@@ -33,18 +32,11 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureNavigationController()
-        
         addSubViews()
-        
+        setupStackView()
         setupButtonConstraints()
-        setupSegmentedControlConstraints()
-        
         setupButton()
-        setupSegmentedControl()
-        
-        setupTestStackView()
         createDismissKeyboardTapGesture()
     }
     
@@ -178,34 +170,6 @@ class SearchVC: UIViewController {
         }
     }
     
-    // MARK: Segment Controller configuration
-    
-    private func setupSegmentedControl() {
-        searchSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        
-        searchSegmentedControl.selectedSegmentIndex = 0
-        searchSegmentedControl.selectedSegmentTintColor = UIColor.systemGray4
-        
-        searchSegmentedControl.addTarget(self, action: #selector(searchSegmentedControlChanged), for: .valueChanged)
-    }
-    
-    @objc func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
-        viewModel.segmentedValueChanged(selectedIndex: sender.selectedSegmentIndex)
-        
-        switch sender.selectedSegmentIndex {
-        case 0:
-            removeObserversForKeyboard()
-            stackView.removeFromSuperview()
-            setupTestStackView()
-        case 1:
-            addObserversForKeyboard()
-            stackView.removeFromSuperview()
-            setupSecondStackView()
-        default:
-            break
-        }
-    }
-    
     // MARK: Constraints
     
     private func setupButtonConstraints() {
@@ -221,34 +185,27 @@ class SearchVC: UIViewController {
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: searchSegmentedControl.bottomAnchor, constant: 30),
+//            stackView.topAnchor.constraint(equalTo: searchSegmentedControl.bottomAnchor, constant: 30),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: searchButton.topAnchor, constant: -30)
         ])
     }
     
-    private func setupSegmentedControlConstraints() {
-        NSLayoutConstraint.activate([
-            searchSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            searchSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            searchSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            searchSegmentedControl.heightAnchor.constraint(equalToConstant: 30)
-        ])
-    }
+
     
     // MARK: View showing functions
     
     private func addSubViews() {
         view.addSubview(searchButton)
-        view.addSubview(searchSegmentedControl)
     }
     
     private func testVC() {
         
     }
     
-    private func setupTestStackView() {
+    private func setupStackView() {
         let citem1 = CItemSettingsView(title: "Województwo", symbol: SFSymbols.province, tag: 0)
         let citem2 = CItemSettingsView(title: "Data od", symbol: SFSymbols.calendar, tag: 1)
         let citem3 = CItemSettingsView(title: "Data do", symbol: SFSymbols.calendar, tag: 2)
@@ -268,28 +225,6 @@ class SearchVC: UIViewController {
         }
         
         setTextFieldsDelegates(viewsArray: inputViewsArray)
-    }
-    
-    private func setupSecondStackView() {
-        let citem1 = CItemSettingsView(title: "Województwo", symbol: SFSymbols.province, tag: 0)
-        let citem2 = CItemSettingsView(title: "Data", symbol: SFSymbols.calendar, tag: 1)
-        let citem3 = CItemSettingsView(title: "Płeć", symbol: SFSymbols.checkList, tag: 5)
-        let citem4 = CItemSettingsView(title: "Wiek", symbol: SFSymbols.calendar, tag: 6)
-        
-        inputViewsArray.removeAll()
-        inputViewsArray = [citem1, citem2, citem3]
-
-        setTextFieldsDelegates(viewsArray: inputViewsArray)
-        
-        stackView = CItemsStackView(viewsArray: inputViewsArray)
-        stackView.alpha = 0.0
-        
-        self.setupStackViewConstraints()
-        self.stackView.layoutIfNeeded()
-        
-        UIView.animate(withDuration: 0.5, delay: 0) {
-            self.stackView.alpha = 1.0
-        }
     }
     
     // MARK: DatePicker functions

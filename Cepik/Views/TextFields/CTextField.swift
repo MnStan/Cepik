@@ -28,8 +28,10 @@ class CTextField: UITextField {
         textColor = .label
         tintColor = .label
         textAlignment = .center
-        font = UIFont.preferredFont(forTextStyle: .title2)
+        font = UIFont.preferredFont(forTextStyle: .title3)
+        adjustsFontForContentSizeCategory = true
         adjustsFontSizeToFitWidth = true
+        maximumContentSizeCategory = .accessibilityLarge
         minimumFontSize = 8
         
         backgroundColor = .tertiarySystemBackground

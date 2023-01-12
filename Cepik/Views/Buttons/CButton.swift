@@ -8,7 +8,7 @@
 import UIKit
 
 class CButton: UIButton {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureButton()
@@ -20,11 +20,13 @@ class CButton: UIButton {
     
     convenience init(title: String, color: UIColor) {
         self.init(frame: .zero)
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
         titleLabel?.maximumContentSizeCategory = .accessibilityExtraLarge
+        titleLabel?.adjustsFontForContentSizeCategory = true
         titleLabel?.minimumScaleFactor = 0.7
         titleLabel?.adjustsFontSizeToFitWidth = true
-        titleLabel?.numberOfLines = 1
+        titleLabel?.numberOfLines = 0
+        titleLabel?.sizeToFit()
         set(title: title, color: color)
     }
     

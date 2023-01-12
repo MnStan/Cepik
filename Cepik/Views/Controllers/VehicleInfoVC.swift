@@ -21,7 +21,7 @@ class VehicleInfoVC: CLoadingVC {
         
         self.tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .systemBackground
-        title = "Details"
+        title = "Szczegóły"
         addItems()
         setBindings()
         showLoadingView(backgroundColor: true)

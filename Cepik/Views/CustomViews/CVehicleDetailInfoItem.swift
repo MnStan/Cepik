@@ -44,17 +44,12 @@ class CVehicleDetailInfoItem: UIView {
             
             title.leadingAnchor.constraint(equalTo: logo.trailingAnchor, constant: padding),
             title.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
-//            title.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding),
-            title.heightAnchor.constraint(equalToConstant: 50),
-//            title.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - (logo.frame.width + 4 * padding)) / 3),
             title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
             
-//            body.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: padding),
             body.leadingAnchor.constraint(equalTo: title.leadingAnchor),
             body.topAnchor.constraint(equalTo: title.bottomAnchor, constant: padding),
             body.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
             body.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding),
-//            body.widthAnchor.constraint(equalTo: title.widthAnchor)
         ])
     }
 }

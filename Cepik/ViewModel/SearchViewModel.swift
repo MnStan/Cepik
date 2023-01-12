@@ -27,9 +27,6 @@ class SearchViewModel {
         }
     }
     
-    func segmentedValueChanged(selectedIndex: Int) {
-    }
-    
     func substractOneDay(date: Date) -> Date {
         Calendar.current.date(byAdding: .day, value: -1, to: date) ?? date
     }
