@@ -74,7 +74,7 @@ class VehicleViewModel {
         } else {
             if let vehicleCompany = vehicle.attributes?.marka {
                 if vehicleCompany.contains("---") {
-                    return "Unknowned"
+                    return "Nieznany"
                 } else {
                     return vehicleCompany
                 }
@@ -82,23 +82,23 @@ class VehicleViewModel {
             
             if let vehicleName = vehicle.attributes?.model {
                 if vehicleName.contains("---") {
-                    return "Unknowned"
+                    return "Nieznany"
                 } else {
                     return vehicleName
                 }
             }
         }
         
-        return "Unknowned"
+        return "Nieznany"
     }
     
     func sortVehicles() {
         self.vehicles.data.sort { first, second in
             
-            let lhsCompany = first.attributes?.marka ?? "unknowned"
-            let lhsModel = first.attributes?.model ?? "unknowned"
-            let rhsCompany = second.attributes?.marka ?? "unknowned"
-            let rhsModel = second.attributes?.model ?? "unknowned"
+            let lhsCompany = first.attributes?.marka ?? "Nieznany"
+            let lhsModel = first.attributes?.model ?? "Nieznany"
+            let rhsCompany = second.attributes?.marka ?? "Nieznany"
+            let rhsModel = second.attributes?.model ?? "Nieznany"
             
             let lhs = lhsCompany + " " + lhsModel
             let rhs = rhsCompany + " " + rhsModel

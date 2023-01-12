@@ -65,19 +65,13 @@ class SearchViewModel {
         vehiclesData.data.forEach {
             var valueToDictionary: Int!
             
-            if let value = vehiclesDictionary[$0.attributes?.marka ?? "Unkowned"] {
+            if let value = vehiclesDictionary[$0.attributes?.marka ?? "Nieznany"] {
                 valueToDictionary = value + 1
             } else {
                 valueToDictionary = 1
             }
             
-            vehiclesDictionary.updateValue(valueToDictionary, forKey: $0.attributes?.marka ?? "Unknowned")
+            vehiclesDictionary.updateValue(valueToDictionary, forKey: $0.attributes?.marka ?? "Nieznany")
         }
-        
-//        vehiclesDictionary.sorted { $0.1 > $1.1 }.forEach {
-//            print($0.key, $0.value)
-//        }
-        
-//        print(vehiclesData)
     }
 }

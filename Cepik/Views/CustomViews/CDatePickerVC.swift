@@ -19,7 +19,7 @@ class CDatePickerVC: CLoadingVC {
 
     var datePicker = UIDatePicker()
     var textField: UITextField!
-    var doneButton = CButton(title: "Done", color: .systemRed)
+    var doneButton = CButton(title: "Wybierz", color: .systemRed)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class CDatePickerVC: CLoadingVC {
             
             if errorBool {
                 DispatchQueue.main.async {
-                    let ac = UIAlertController(title: "Can't get modification dates from database", message: "Please try again", preferredStyle: .alert)
+                    let ac = UIAlertController(title: "Nie można pobrać dat modyfikacji bazy danych", message: "Spróbuj ponownie", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
                         self.dismissLoadingView()
                         self.dismissView()
@@ -122,7 +122,7 @@ class CDatePickerVC: CLoadingVC {
     private func configureDatePicker() {
         datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "en_PL_POSIX")
+        datePicker.locale = Locale(identifier: "pl")
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.timeZone = TimeZone.current

@@ -19,19 +19,19 @@ enum VehicleOrigin: String, CaseIterable {
     var info: (name: String, urlComponent: String, urlSecondComponent: String?) {
         switch self {
         case .new:
-            return ("New", "&filter[pochodzenie-pojazdu]=NOWY ZAKUPIONY W KRAJU", "&filter[pochodzenie-pojazdu]=NOWY IMPORT INDYW")
+            return ("Nowe", "&filter[pochodzenie-pojazdu]=NOWY ZAKUPIONY W KRAJU", "&filter[pochodzenie-pojazdu]=NOWY IMPORT INDYW")
         case .newFromCountry:
-            return ("New from country", "&filter[pochodzenie-pojazdu]=NOWY ZAKUPIONY W KRAJU", nil)
+            return ("Nowe zakupione w kraju", "&filter[pochodzenie-pojazdu]=NOWY ZAKUPIONY W KRAJU", nil)
         case .newImported:
-            return ("New imported", "&filter[pochodzenie-pojazdu]=NOWY IMPORT INDYW", nil)
+            return ("Nowe sprowadzone", "&filter[pochodzenie-pojazdu]=NOWY IMPORT INDYW", nil)
         case .used:
-            return ("Used", "&filter[pochodzenie-pojazdu]=UŻYW. IMPORT INDYW", "&filter[pochodzenie-pojazdu]=UŻYW. ZAKUPIONY W KRAJU")
+            return ("Używane", "&filter[pochodzenie-pojazdu]=UŻYW. IMPORT INDYW", "&filter[pochodzenie-pojazdu]=UŻYW. ZAKUPIONY W KRAJU")
         case .usedFromCountry:
-            return ("Used from country", "&filter[pochodzenie-pojazdu]=UŻYW. ZAKUPIONY W KRAJU", nil)
+            return ("Używane zakupione w kraju", "&filter[pochodzenie-pojazdu]=UŻYW. ZAKUPIONY W KRAJU", nil)
         case .usedImported:
-            return ("Used imported", "&filter[pochodzenie-pojazdu]=UŻYW. IMPORT INDYW", nil)
+            return ("Używane sprowadzone", "&filter[pochodzenie-pojazdu]=UŻYW. IMPORT INDYW", nil)
         case .all:
-            return ("All", "", nil)
+            return ("Wszystkie", "", nil)
         }
     }
 }

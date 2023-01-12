@@ -18,7 +18,7 @@ class VehiclesVC: CLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
-        title = "Vehicles"
+        title = "Pojazdy"
         view.backgroundColor = .systemBackground
         
         getVehicles(page: 1)
@@ -40,7 +40,7 @@ class VehiclesVC: CLoadingVC {
     private func configureSearchController() {
         searchController = UISearchController()
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search for a Vehicle"
+        searchController.searchBar.placeholder = "Szukaj pojazdu"
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -90,7 +90,7 @@ class VehiclesVC: CLoadingVC {
         if viewModel.countVehicles() == 0 {
             DispatchQueue.main.async {
                 self.tableView.removeFromSuperview()
-                self.showEmptyState(with: "No vehicles", in: self.view)
+                self.showEmptyState(with: "Brak pojazdów", in: self.view)
             }
         } else {
             DispatchQueue.main.async {

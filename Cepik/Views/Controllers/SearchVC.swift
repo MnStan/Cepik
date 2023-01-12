@@ -12,8 +12,8 @@ class SearchVC: UIViewController {
     
     private let viewModel = SearchViewModel()
     
-    let searchButton = CButton(title: "Search", color: UIColor(red: 0.698, green: 0.2314, blue: 0.1294, alpha: 1.0))
-    let searchSegmentedControl = UISegmentedControl(items: ["Vehicles", "ID"])
+    let searchButton = CButton(title: "Szukaj", color: UIColor(red: 0.698, green: 0.2314, blue: 0.1294, alpha: 1.0))
+    let searchSegmentedControl = UISegmentedControl(items: ["Pojazdy", "Uprawnienia"])
     var stackView: CItemsStackView!
     var inputViewsArray: [CItemSettingsView] = []
     var emptyTextField: Bool = false
@@ -147,14 +147,14 @@ class SearchVC: UIViewController {
                     
                 } else {
                     #warning("First date bigger than second alert")
-                    let ac = UIAlertController(title: "Wrong dates!", message: "Date to can't be sooner than date from", preferredStyle: .alert)
+                    let ac = UIAlertController(title: "Złe daty!", message: "Data od nie może być późniejsza niż data do", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
                     self.present(ac, animated: true)
                 }
             }
         } else {
             #warning("Show alert")
-            let ac = UIAlertController(title: "All fields need to be filled", message: nil, preferredStyle: .alert)
+            let ac = UIAlertController(title: "Wszystkie pola muszą być uzupełnione", message: nil, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
             present(ac, animated: true)
         }
@@ -172,7 +172,7 @@ class SearchVC: UIViewController {
         inputViewsArray.forEach {
             guard let input = $0.textField.text else { return }
             if (input.isEmpty) {
-                $0.textField.placeholder = "Can't be empty"
+                $0.textField.placeholder = "Nie może być puste"
                 emptyTextField = true
             }
         }
@@ -249,10 +249,10 @@ class SearchVC: UIViewController {
     }
     
     private func setupTestStackView() {
-        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province, tag: 0)
-        let citem2 = CItemSettingsView(title: "Date from", symbol: SFSymbols.calendar, tag: 1)
-        let citem3 = CItemSettingsView(title: "Date to", symbol: SFSymbols.calendar, tag: 2)
-        let citem4 = CItemSettingsView(title: "Origin", symbol: SFSymbols.checkmark, tag: 3)
+        let citem1 = CItemSettingsView(title: "Województwo", symbol: SFSymbols.province, tag: 0)
+        let citem2 = CItemSettingsView(title: "Data od", symbol: SFSymbols.calendar, tag: 1)
+        let citem3 = CItemSettingsView(title: "Data do", symbol: SFSymbols.calendar, tag: 2)
+        let citem4 = CItemSettingsView(title: "Pochodzenie", symbol: SFSymbols.checkmark, tag: 3)
         
         inputViewsArray.removeAll()
         inputViewsArray = [citem1, citem2, citem3, citem4]
@@ -271,10 +271,10 @@ class SearchVC: UIViewController {
     }
     
     private func setupSecondStackView() {
-        let citem1 = CItemSettingsView(title: "Province", symbol: SFSymbols.province, tag: 0)
-        let citem2 = CItemSettingsView(title: "Date", symbol: SFSymbols.calendar, tag: 1)
-        let citem3 = CItemSettingsView(title: "Sex", symbol: SFSymbols.checkList, tag: 5)
-        let citem4 = CItemSettingsView(title: "Age", symbol: SFSymbols.calendar, tag: 6)
+        let citem1 = CItemSettingsView(title: "Województwo", symbol: SFSymbols.province, tag: 0)
+        let citem2 = CItemSettingsView(title: "Data", symbol: SFSymbols.calendar, tag: 1)
+        let citem3 = CItemSettingsView(title: "Płeć", symbol: SFSymbols.checkList, tag: 5)
+        let citem4 = CItemSettingsView(title: "Wiek", symbol: SFSymbols.calendar, tag: 6)
         
         inputViewsArray.removeAll()
         inputViewsArray = [citem1, citem2, citem3]
@@ -336,27 +336,15 @@ class SearchVC: UIViewController {
     }
     
     private func presentDataTypeAlertController(textField: UITextField) {
-        let dataTypeAlertController = UIAlertController(title: "Choose origin", message: nil, preferredStyle: .actionSheet)
+        let dataTypeAlertController = UIAlertController(title: "Wybierz pochodzenie", message: nil, preferredStyle: .actionSheet)
         
         VehicleOrigin.allCases.forEach {
             dataTypeAlertController.addAction(UIAlertAction(title: $0.info.name, style: .default, handler: { alert in
                 textField.text = alert.title
             }))
         }
-//
-//        dataTypeAlertController.addAction(UIAlertAction(title: "all", style: .default, handler: { alert in
-//            textField.text = alert.title
-//        }))
-//
-//        dataTypeAlertController.addAction(UIAlertAction(title: "new", style: .default, handler: { alert in
-//            textField.text = alert.title
-//        }))
-//
-//        dataTypeAlertController.addAction(UIAlertAction(title: "used", style: .default, handler: { alert in
-//            textField.text = alert.title
-//        }))
         
-        dataTypeAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        dataTypeAlertController.addAction(UIAlertAction(title: "Anuluj", style: .cancel))
         
         DispatchQueue.main.async {
             self.present(dataTypeAlertController, animated: true)
@@ -364,17 +352,17 @@ class SearchVC: UIViewController {
     }
     
     private func presentSexAlertController(textfield: UITextField) {
-        let sexAlertController = UIAlertController(title: "Choose sex you want to search", message: nil, preferredStyle: .actionSheet)
+        let sexAlertController = UIAlertController(title: "Wybierz płeć", message: nil, preferredStyle: .actionSheet)
         
-        sexAlertController.addAction(UIAlertAction(title: "Female", style: .default, handler: { alert in
+        sexAlertController.addAction(UIAlertAction(title: "Kobieta", style: .default, handler: { alert in
             textfield.text = alert.title
         }))
         
-        sexAlertController.addAction(UIAlertAction(title: "Male", style: .default, handler: { alert in
+        sexAlertController.addAction(UIAlertAction(title: "Mężczyzna", style: .default, handler: { alert in
             textfield.text = alert.title
         }))
         
-        sexAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        sexAlertController.addAction(UIAlertAction(title: "Anuluj", style: .cancel))
         
         DispatchQueue.main.async {
             self.present(sexAlertController, animated: true)
@@ -382,7 +370,7 @@ class SearchVC: UIViewController {
     }
     
     private func presentProvinceAlertController(textField: UITextField) {
-        let provinceAlertController = UIAlertController(title: "Choose province you want to search", message: nil, preferredStyle: .actionSheet)
+        let provinceAlertController = UIAlertController(title: "Wybierz województwo", message: nil, preferredStyle: .actionSheet)
 
         Provinces.allCases.forEach {
             provinceAlertController.addAction(UIAlertAction(title: $0.info.name, style: .default, handler: { alert in
@@ -390,7 +378,7 @@ class SearchVC: UIViewController {
             }))
         }
         
-        provinceAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        provinceAlertController.addAction(UIAlertAction(title: "Anuluj", style: .cancel))
         
         DispatchQueue.main.async {
             self.present(provinceAlertController, animated: true)

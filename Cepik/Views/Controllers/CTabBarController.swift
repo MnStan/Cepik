@@ -19,14 +19,14 @@ class CTabBarController: UITabBarController {
     
     private func createSearchVC() -> UINavigationController {
         let searchVC = SearchVC()
-        searchVC.title = "Search"
+        searchVC.title = "Szukaj"
         
         return UINavigationController(rootViewController: searchVC)
     }
     
     private func createCharVC() -> UINavigationController {
         let swiftUIChartVC = UIHostingController(rootView: CIDChartView())
-        swiftUIChartVC.title = "Chart"
+        swiftUIChartVC.title = "Wykres"
         
         return UINavigationController(rootViewController: swiftUIChartVC)
     }

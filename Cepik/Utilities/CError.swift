@@ -8,9 +8,9 @@
 import Foundation
 
 enum CError: String, Error {
-    case defaultError = "Something went wrong"
-    case invalidResponse = "Invalid response from the server. Please try again"
-    case invalidDataFromServer = "Data received from the server was invalid. Pleas try again"
-    case invalidVehicleInfo = "This vehicle informations created an invalid request. Please try again"
-    case unableToComplete = "Unable to complete this network request. Please check your internet connection"
+    case defaultError = "Coś poszło nie tak"
+    case invalidResponse = "Nieprawidłowa odpowiedź serwera. Proszę spróbować ponownie"
+    case invalidDataFromServer = "Dane odebrane z serwera są nieprawidłowe. Proszę spróbować ponownie"
+    case invalidVehicleInfo = "Nieprawidłowe informacje na temat pojazdu. Proszę spróbować ponownie"
+    case unableToComplete = "Nie można ukończyć żądania do serwera. Proszę sprawdzić połączenie z internetem i spróbować ponownie"
 }
