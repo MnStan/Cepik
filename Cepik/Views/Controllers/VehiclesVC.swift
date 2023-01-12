@@ -11,7 +11,6 @@ class VehiclesVC: CLoadingVC {
 
     private let tableView = UITableView()
     var viewModel = VehicleViewModel()
-    var vehicles = Vehicles()
     private var page: Int = 1
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private var searchController: UISearchController!
@@ -63,7 +62,7 @@ class VehiclesVC: CLoadingVC {
     }
     
     @objc private func sortVehicles() {
-        viewModel.sortVehicles(vehicles: vehicles)
+        viewModel.sortVehicles()
         tableView.reloadData()
     }
     

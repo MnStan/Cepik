@@ -70,8 +70,8 @@ class NetworkManager {
     }
     
     func getDatesForDatePicker() async throws -> Vehicles {
-        let endPoint = baseURL + "pojazdy?wojewodztwo=12&data-od=20221119&data-do=20221119&typ-daty=1&tylko-zarejestrowane=true&pokaz-wszystkie-pola=false&limit=1&page=1"
-        #warning("Tu zmien na datę dzisiejszą bo zrobi fikołka za 2 lata")
+        let todayDate = Date().convertToDayMonthYearFormat().components(separatedBy: "/").reversed().joined()
+        let endPoint = baseURL + "pojazdy?wojewodztwo=12&data-od=\(todayDate)&data-do=\(todayDate)&typ-daty=1&tylko-zarejestrowane=true&pokaz-wszystkie-pola=false&limit=1&page=1"
         
         guard let url = URL(string: endPoint) else {
             throw CError.invalidVehicleInfo

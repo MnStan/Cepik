@@ -92,9 +92,8 @@ class VehicleViewModel {
         return "Unknowned"
     }
     
-    func sortVehicles(vehicles: Vehicles) {
+    func sortVehicles() {
         self.vehicles.data.sort { first, second in
-#warning("Vehicles without company name at the end after sorting")
             
             let lhsCompany = first.attributes?.marka ?? "unknowned"
             let lhsModel = first.attributes?.model ?? "unknowned"
@@ -135,11 +134,7 @@ class VehicleViewModel {
             guard let dateFrom = vehicleInfo.dateFrom else { return }
             guard let dateTo = vehicleInfo.dateTo else { return }
             guard let dataType = vehicleInfo.dataType else { return }
-            print(dataType, VehicleOrigin(rawValue: dataType)?.info.urlComponent)
-            print("tutaj")
-            
-            
-            
+
             if dataType == VehicleOrigin.all.rawValue {
                 guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else { return }
                 taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: 1)
@@ -175,17 +170,9 @@ class VehicleViewModel {
     }
     
     func taskFetchData(province: String, dateFrom: Date, dateTo: Date, origin: String, page: Int) {
-        print("Origin    ", origin)
         Task {
             do {
                 vehiclesNetworkRequest = try await NetworkManager.shared.getVehiclesInfo(province: province, dateFrom: convertDateForNetworkCall(stringDate: dateFrom.convertToDayMonthYearFormat()), dateTo: convertDateForNetworkCall(stringDate: dateTo.convertToDayMonthYearFormat()), origin: origin, page: page)
-                
-                print("\n")
-                print("\n")
-                print(vehiclesNetworkRequest.meta?.count ?? 0)
-                print(vehicles.data.count)
-                print("\n")
-                print("\n")
                 
                 if vehiclesNetworkRequest.data.count < 500 {
                     if dispatchGroup != nil {
@@ -199,7 +186,6 @@ class VehicleViewModel {
                 } else {
                     vehicles.data.append(contentsOf: vehiclesNetworkRequest.data)
                     guard let nextPage = vehiclesNetworkRequest.meta?.page else { return }
-                    print("Next page", nextPage)
                     taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: nextPage + 1)
                 }
             } catch {
