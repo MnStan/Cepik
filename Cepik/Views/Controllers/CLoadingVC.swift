@@ -31,7 +31,7 @@ class CLoadingVC: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            containerView.widthAnchor.constraint(equalToConstant: self.view.frame.width / 2),
+            containerView.widthAnchor.constraint(equalToConstant: self.view.frame.width / 2.5),
             containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor),
             containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
@@ -46,7 +46,7 @@ class CLoadingVC: UIViewController {
     }
     
     private func addLabel() {
-        let label = CBodyLabel(text: "Loading")
+        let label = CBodyLabel(text: "Ładowanie")
         label.textAlignment = .center
         containerView.addSubview(label)
         

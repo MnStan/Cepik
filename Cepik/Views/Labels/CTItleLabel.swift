@@ -32,7 +32,7 @@ class CTitleLabel: UILabel {
         textAlignment = .left
         minimumScaleFactor = 0.8
         maximumContentSizeCategory = .accessibilityExtraExtraLarge
-        numberOfLines = 0
+        numberOfLines = 1
         translatesAutoresizingMaskIntoConstraints = false
     }
     
