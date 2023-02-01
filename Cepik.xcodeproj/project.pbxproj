@@ -31,6 +31,9 @@
 		F658864D292E21EE00437D8F /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658864C292E21EE00437D8F /* DatePickerViewModel.swift */; };
 		F658864F292F589E00437D8F /* CEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658864E292F589E00437D8F /* CEmptyState.swift */; };
 		F6588651292F5B0200437D8F /* CLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6588650292F5B0200437D8F /* CLoadingVC.swift */; };
+		F6ADC75129703C0D00C22338 /* CAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ADC75029703C0D00C22338 /* CAlertVC.swift */; };
+		F6ADC75429703CA200C22338 /* CAlertContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ADC75329703CA200C22338 /* CAlertContainer.swift */; };
+		F6ADC7562970417A00C22338 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ADC7552970417A00C22338 /* UIViewController+Ext.swift */; };
 		F6BB4D1829067C9A00DC71FE /* CDatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */; };
 		F6BFFD8F2924E93A00431A8B /* VehicleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BFFD8E2924E93A00431A8B /* VehicleViewModel.swift */; };
 		F6BFFD912924EB7B00431A8B /* VehicleInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */; };
@@ -95,6 +98,9 @@
 		F658864C292E21EE00437D8F /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		F658864E292F589E00437D8F /* CEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEmptyState.swift; sourceTree = "<group>"; };
 		F6588650292F5B0200437D8F /* CLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLoadingVC.swift; sourceTree = "<group>"; };
+		F6ADC75029703C0D00C22338 /* CAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAlertVC.swift; sourceTree = "<group>"; };
+		F6ADC75329703CA200C22338 /* CAlertContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAlertContainer.swift; sourceTree = "<group>"; };
+		F6ADC7552970417A00C22338 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDatePickerVC.swift; sourceTree = "<group>"; };
 		F6BFFD8E2924E93A00431A8B /* VehicleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleViewModel.swift; sourceTree = "<group>"; };
 		F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfoVC.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 				F634F5B1290D5D1500DA10CF /* Date+Ext.swift */,
 				F6F481FB2913A3C200B285F1 /* String+Ext.swift */,
 				F650E81229277B0A005FFACB /* Dictionary+Ext.swift */,
+				F6ADC7552970417A00C22338 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -172,6 +179,7 @@
 				F6469C68291B95160079BE52 /* VehiclesVC.swift */,
 				F6BFFD902924EB7B00431A8B /* VehicleInfoVC.swift */,
 				F64A96EA293F2FA5006A095F /* CTabBarController.swift */,
+				F6ADC75029703C0D00C22338 /* CAlertVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -323,6 +331,7 @@
 				F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */,
 				F6BFFD922924F54800431A8B /* CVehicleDetailInfoItem.swift */,
 				F658864E292F589E00437D8F /* CEmptyState.swift */,
+				F6ADC75329703CA200C22338 /* CAlertContainer.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -476,6 +485,7 @@
 			files = (
 				F6BFFD952924F65400431A8B /* CBodyLabel.swift in Sources */,
 				F6588651292F5B0200437D8F /* CLoadingVC.swift in Sources */,
+				F6ADC7562970417A00C22338 /* UIViewController+Ext.swift in Sources */,
 				F65818C0290129C9009059EA /* SearchViewModel.swift in Sources */,
 				F634F5AB290D142700DA10CF /* Provinces.swift in Sources */,
 				F6469C6D291B975D0079BE52 /* CSearchResultCell.swift in Sources */,
@@ -487,10 +497,12 @@
 				F6F481FA2912E0DD00B285F1 /* VehicleSeachInfo.swift in Sources */,
 				F65818BE28FF1025009059EA /* CError.swift in Sources */,
 				F65818BA28FF0EA3009059EA /* NetworkManager.swift in Sources */,
+				F6ADC75129703C0D00C22338 /* CAlertVC.swift in Sources */,
 				F6E2DB8828FE8CC500A77743 /* SearchVC.swift in Sources */,
 				F6F481FE2913B0B100B285F1 /* DataType.swift in Sources */,
 				F65818C6290139A9009059EA /* SFSymbols.swift in Sources */,
 				F634F5B2290D5D1500DA10CF /* Date+Ext.swift in Sources */,
+				F6ADC75429703CA200C22338 /* CAlertContainer.swift in Sources */,
 				F6BB4D1829067C9A00DC71FE /* CDatePickerVC.swift in Sources */,
 				F6BFFD972925421600431A8B /* VehicleInfoViewModel.swift in Sources */,
 				F658864D292E21EE00437D8F /* DatePickerViewModel.swift in Sources */,

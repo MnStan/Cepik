@@ -20,6 +20,17 @@ class CButton: UIButton {
     
     convenience init(title: String, color: UIColor) {
         self.init(frame: .zero)
+        set(title: title, color: color)
+    }
+    
+    func set(title: String, color: UIColor) {
+        configuration?.title = title
+        configuration?.baseBackgroundColor = color
+        configuration?.baseForegroundColor = color
+        configureTextSettings()
+    }
+    
+    private func configureTextSettings() {
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
         titleLabel?.maximumContentSizeCategory = .accessibilityExtraLarge
         titleLabel?.adjustsFontForContentSizeCategory = true
@@ -27,13 +38,6 @@ class CButton: UIButton {
         titleLabel?.adjustsFontSizeToFitWidth = true
         titleLabel?.numberOfLines = 0
         titleLabel?.sizeToFit()
-        set(title: title, color: color)
-    }
-    
-    private func set(title: String, color: UIColor) {
-        configuration?.title = title
-        configuration?.baseBackgroundColor = color
-        configuration?.baseForegroundColor = color
     }
     
     private func configureButton() {

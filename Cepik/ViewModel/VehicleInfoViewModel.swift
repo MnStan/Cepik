@@ -11,6 +11,7 @@ import UIKit
 class VehicleInfoViewModel {
     
     let vehicleDetailNetworkRequest: ObservableObject<VehicleDetailInfo?> = ObservableObject(value: nil)
+    let networkAlert: ObservableObject<CError?> = ObservableObject(value: nil)
     
     func getInformation(vehicleInfo: VehiclesDetailDataAttributes) -> [Dictionary<String, String>.Element]{
         let mirror = Mirror(reflecting: vehicleInfo)
@@ -37,8 +38,14 @@ class VehicleInfoViewModel {
         Task {
             do {
                 vehicleDetailNetworkRequest.value = try await NetworkManager.shared.getVehiclesDetailInfo(id: vehicleId)
+            } catch CError.invalidVehicleInfo {
+                networkAlert.value = CError.invalidVehicleInfo
+            } catch CError.invalidResponse {
+                networkAlert.value = CError.invalidResponse
+            } catch CError.invalidDataFromServer {
+                networkAlert.value = CError.invalidDataFromServer
             } catch {
-                print("Something went wrong with detailData")
+                networkAlert.value = CError.defaultError
             }
         }
     }

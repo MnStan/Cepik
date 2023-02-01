@@ -34,10 +34,10 @@ class CItemSettingsView: UIView {
         NSLayoutConstraint.activate([
             itemLabel.topAnchor.constraint(equalTo: self.topAnchor),
             itemLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            itemLabel.heightAnchor.constraint(equalToConstant: 40),
+            itemLabel.heightAnchor.constraint(equalToConstant: 45),
             itemLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             
-            textField.topAnchor.constraint(equalTo: itemLabel.bottomAnchor, constant: 10),
+            textField.topAnchor.constraint(equalTo: itemLabel.bottomAnchor, constant: 5),
             textField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             textField.bottomAnchor.constraint(equalTo: self.bottomAnchor)

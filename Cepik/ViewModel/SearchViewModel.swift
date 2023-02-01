@@ -13,7 +13,7 @@ class SearchViewModel {
     
     let pickedDate: ObservableObject<Date?> = ObservableObject(value: nil)
     let pickedDateTo: ObservableObject<Date?> = ObservableObject(value: nil)
-    let networkError: ObservableObject<Bool> = ObservableObject(value: false)
+    let networkAlert: ObservableObject<CError?> = ObservableObject(value: nil)
 
     let datesNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     
@@ -21,8 +21,14 @@ class SearchViewModel {
         Task {
             do {
                 datesNetworkRequest.value = try await NetworkManager.shared.getDatesForDatePicker()
+            } catch CError.invalidVehicleInfo {
+                networkAlert.value = CError.invalidVehicleInfo
+            } catch CError.invalidResponse {
+                networkAlert.value = CError.invalidResponse
+            } catch CError.invalidDataFromServer {
+                networkAlert.value = CError.invalidDataFromServer
             } catch {
-                networkError.value = true
+                networkAlert.value = CError.defaultError
             }
         }
     }
@@ -46,10 +52,7 @@ class SearchViewModel {
         let province = province.removeDiacritics().replacingOccurrences(of: "-", with: "_")
         
         let info = VehicleSearchInfo(provinceNumber: Provinces(rawValue: province)?.info.number, dateFrom: self.pickedDate.value, dateTo: self.pickedDateTo.value, dataType: dataType)
-        
-        #warning("SEARCHVM PRINT")
-        print(info)
-        
+
         let vehiclesVC = VehiclesVC()
         vehiclesVC.viewModel.vehicleInfo = info
         

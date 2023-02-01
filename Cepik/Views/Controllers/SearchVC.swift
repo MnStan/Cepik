@@ -38,12 +38,22 @@ class SearchVC: UIViewController {
         setupButtonConstraints()
         setupButton()
         createDismissKeyboardTapGesture()
+        setBinders()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func setBinders() {
+        viewModel.networkAlert.bind { [weak self] error in
+            guard let self else { return }
+            if error != nil {
+                self.presentCAlert(title: CError.defaultCase.rawValue, message: error?.rawValue ?? "", buttonTitle: "Ok")
+            }
+        }
     }
     
     // MARK: Bindings and Observers functions
@@ -138,17 +148,11 @@ class SearchVC: UIViewController {
                     }
                     
                 } else {
-                    #warning("First date bigger than second alert")
-                    let ac = UIAlertController(title: "Złe daty!", message: "Data od nie może być późniejsza niż data do", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                    self.present(ac, animated: true)
+                    self.presentCAlert(title: CError.dates.rawValue, message: CError.datesError.rawValue, buttonTitle: "Ok")
                 }
             }
         } else {
-            #warning("Show alert")
-            let ac = UIAlertController(title: "Wszystkie pola muszą być uzupełnione", message: nil, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
-            present(ac, animated: true)
+            self.presentCAlert(title: CError.empty.rawValue, message: CError.emptyError.rawValue, buttonTitle: "Ok")
         }
     }
     
@@ -157,7 +161,6 @@ class SearchVC: UIViewController {
     }
     
     // MARK: TextFields check
-    
     private func checkTextFields() {
         emptyTextField = false
         

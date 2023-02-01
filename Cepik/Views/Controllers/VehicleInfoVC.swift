@@ -44,6 +44,14 @@ class VehicleInfoVC: CLoadingVC {
                 }
             }
         }
+        
+        viewModel.networkAlert.bind { [weak self] boolean in
+            guard let self else { return }
+            if (boolean != nil) {
+                self.dismissLoadingView()
+                self.presentCAlert(title: CError.defaultCase.rawValue, message: boolean?.rawValue ?? "", buttonTitle: "Ok")
+            }
+        }
     }
     
     private func configureContentView() {

@@ -16,6 +16,7 @@ class VehicleViewModel {
     var dispatchGroup: DispatchGroup!
 
     var areThereMoreVehicles: ObservableObject<Bool> = ObservableObject(value: true)
+    var networkAlert: ObservableObject<CError?> = ObservableObject(value: nil)
     
     func countVehicles() -> Int {
         return vehicles.data.count
@@ -188,8 +189,14 @@ class VehicleViewModel {
                     guard let nextPage = vehiclesNetworkRequest.meta?.page else { return }
                     taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: nextPage + 1)
                 }
+            } catch CError.invalidVehicleInfo {
+                networkAlert.value = CError.invalidVehicleInfo
+            } catch CError.invalidResponse {
+                networkAlert.value = CError.invalidResponse
+            } catch CError.invalidDataFromServer {
+                networkAlert.value = CError.invalidDataFromServer
             } catch {
-                print("Something went wrong in taskFetchData", error, error.localizedDescription.debugDescription, error.localizedDescription.description)
+                networkAlert.value = CError.defaultError
             }
         }
     }

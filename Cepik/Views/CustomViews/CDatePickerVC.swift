@@ -70,19 +70,11 @@ class CDatePickerVC: CLoadingVC {
             }
         }
         
-        viewModel.networkError.bind { [weak self] errorBool in
+        viewModel.networkAlert.bind { [weak self] error in
             guard let self else { return }
-            
-            if errorBool {
-                DispatchQueue.main.async {
-                    let ac = UIAlertController(title: "Nie można pobrać dat modyfikacji bazy danych", message: "Spróbuj ponownie", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
-                        self.dismissLoadingView()
-                        self.dismissView()
-                    }))
-                    
-                    self.present(ac, animated: true)
-                }
+            if error != nil {
+                self.dismissLoadingView()
+                self.presentCAlert(title: CError.defaultCase.rawValue, message: error?.rawValue ?? "", buttonTitle: "Ok")
             }
         }
     }

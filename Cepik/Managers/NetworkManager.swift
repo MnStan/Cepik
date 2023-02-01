@@ -27,9 +27,6 @@ class NetworkManager {
                 throw CError.invalidVehicleInfo
             }
         
-#warning("Url print")
-        print(url)
-        
         let (data, response) = try await
         URLSession.shared.data(from: url)
         
@@ -51,9 +48,7 @@ class NetworkManager {
         guard let url = URL(string: endPoint) else {
             throw CError.invalidVehicleInfo
         }
-        
-#warning("Url print")
-        
+
         let (data, response) = try await
         URLSession.shared.data(from: url)
         
@@ -74,7 +69,7 @@ class NetworkManager {
         let endPoint = baseURL + "pojazdy?wojewodztwo=12&data-od=\(todayDate)&data-do=\(todayDate)&typ-daty=1&tylko-zarejestrowane=true&pokaz-wszystkie-pola=false&limit=1&page=1"
         
         guard let url = URL(string: endPoint) else {
-            throw CError.invalidVehicleInfo
+            throw CError.invalidDates
         }
         
         let (data, response) = try await

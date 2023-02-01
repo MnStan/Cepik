@@ -84,6 +84,14 @@ class VehiclesVC: CLoadingVC {
                 self.checkIfThereAreVehicles()
             }
         }
+        
+        viewModel.networkAlert.bind { [weak self] error in
+            guard let self else { return }
+            if (error != nil) {
+                self.dismissLoadingView()
+                self.presentCAlert(title: CError.defaultCase.rawValue, message: error?.rawValue ?? "", buttonTitle: "Ok")
+            }
+        }
     }
     
     private func checkIfThereAreVehicles() {
