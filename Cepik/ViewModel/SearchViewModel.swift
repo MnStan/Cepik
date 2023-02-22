@@ -74,20 +74,4 @@ class SearchViewModel {
         
         return vehiclesVC
     }
-    
-    private func countObjects(vehiclesData: Vehicles) {
-        var vehiclesDictionary: [String: Int] = [:]
-        
-        vehiclesData.data.forEach {
-            var valueToDictionary: Int!
-            
-            if let value = vehiclesDictionary[$0.attributes?.marka ?? "Nieznany"] {
-                valueToDictionary = value + 1
-            } else {
-                valueToDictionary = 1
-            }
-            
-            vehiclesDictionary.updateValue(valueToDictionary, forKey: $0.attributes?.marka ?? "Nieznany")
-        }
-    }
 }
