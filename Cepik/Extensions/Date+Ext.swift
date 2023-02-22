@@ -13,8 +13,6 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         formatter.locale = Locale(identifier: "en_PL_POSIX")
-//        formatter.timeStyle = .none
-//        formatter.dateStyle = .short
         return formatter.string(from: self)
     }
 }

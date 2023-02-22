@@ -21,7 +21,7 @@ class VehicleInfoViewModel {
             if let key = child.label {
                 if let value = child.value as? String {
                     if value != "---" && value != "-" {
-                        if let keyToDisplay = VehicleInfoDescription(rawValue: key) {
+                        if let keyToDisplay = CVehicleInfoDescription(rawValue: key) {
                             dictionary.updateValue(value, forKey: keyToDisplay.info)
                         } else {
                             dictionary.updateValue(value, forKey: key)

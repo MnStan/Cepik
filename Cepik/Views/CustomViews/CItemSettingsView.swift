@@ -21,7 +21,7 @@ class CItemSettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(title: String, symbol: String, tag: Int) {
+    convenience init(title: String, tag: Int) {
         self.init(frame: .zero)
         itemLabel.setTitle(title: title)
         textField.tag = tag

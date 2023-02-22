@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CAlertVC: UIViewController {
+class AlertVC: UIViewController {
     
     let containerView = CAlertContainer()
     let titleLabel = CTitleLabel()
@@ -64,7 +64,7 @@ class CAlertVC: UIViewController {
     }
     
     private func configureTitleLabel() {
-        titleLabel.text = alertTitle ?? "Coś poszło nie tak"
+        titleLabel.text = alertTitle ?? CError.defaultCase.rawValue
         titleLabel.textAlignment = .center
         titleLabel.lineBreakMode = .byWordWrapping
         

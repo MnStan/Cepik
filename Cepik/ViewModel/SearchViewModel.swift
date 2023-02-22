@@ -17,6 +17,22 @@ class SearchViewModel {
 
     let datesNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     
+    func checkTextFields(viewsArray: [CItemSettingsView], emptyHandler: (String?, CItemSettingsView?) -> (), completion: (Bool) -> ()) {
+        var empty = false
+        
+        viewsArray.forEach {
+            guard let input = $0.textField.text else { return }
+            if input.isEmpty {
+                empty = true
+                emptyHandler(CError.emptyTextField.rawValue, $0)
+            } else {
+                emptyHandler(nil, nil)
+            }
+        }
+        
+        empty == true ? completion(true) : completion(false)
+    }
+    
     func getDates() {
         Task {
             do {
@@ -51,7 +67,7 @@ class SearchViewModel {
     func createVC(province: String, dataType: String) -> VehiclesVC {
         let province = province.removeDiacritics().replacingOccurrences(of: "-", with: "_")
         
-        let info = VehicleSearchInfo(provinceNumber: Provinces(rawValue: province)?.info.number, dateFrom: self.pickedDate.value, dateTo: self.pickedDateTo.value, dataType: dataType)
+        let info = VehicleSearchInfo(provinceNumber: CProvinces(rawValue: province)?.info.number, dateFrom: self.pickedDate.value, dateTo: self.pickedDateTo.value, dataType: dataType)
 
         let vehiclesVC = VehiclesVC()
         vehiclesVC.viewModel.vehicleInfo = info

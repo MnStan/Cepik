@@ -9,7 +9,7 @@ import UIKit
 
 class CImageView: UIImageView {
 
-    let placeholderImage = UIImage(systemName: SFSymbols.placeholder)
+    let placeholderImage = UIImage(systemName: CSFSymbols.placeholder)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

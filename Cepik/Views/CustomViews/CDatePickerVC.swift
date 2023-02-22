@@ -11,7 +11,7 @@ protocol DatePickerVCDelegate: UITextField {
     func updateTextLabel(withText text: String)
 }
 
-class CDatePickerVC: CLoadingVC {
+class CDatePickerVC: LoadingVC {
     
     var viewModel: SearchViewModel!
     

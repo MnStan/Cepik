@@ -31,7 +31,7 @@ class VehicleViewModel {
     }
     
     func getTitle(dataType: String) -> String {
-        VehicleOrigin(rawValue: dataType)?.info.name ?? ""
+        CVehicleOrigin(rawValue: dataType)?.info.name ?? ""
     }
     
     func searchVehicles(filter: String) {
@@ -136,8 +136,8 @@ class VehicleViewModel {
             guard let dateTo = vehicleInfo.dateTo else { return }
             guard let dataType = vehicleInfo.dataType else { return }
 
-            if dataType == VehicleOrigin.all.rawValue {
-                guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else { return }
+            if dataType == CVehicleOrigin.all.rawValue {
+                guard let origin = CVehicleOrigin(rawValue: dataType)?.info.urlComponent else { return }
                 taskFetchData(province: province, dateFrom: dateFrom, dateTo: dateTo, origin: origin, page: 1)
             } else {
                 DispatchQueue.global().async {
@@ -145,7 +145,7 @@ class VehicleViewModel {
                     self.dispatchGroup.enter()
                     
                     
-                    guard let origin = VehicleOrigin(rawValue: dataType)?.info.urlComponent else {
+                    guard let origin = CVehicleOrigin(rawValue: dataType)?.info.urlComponent else {
                         self.dispatchGroup.leave()
                         return
                     }
@@ -155,7 +155,7 @@ class VehicleViewModel {
                     self.dispatchGroup.wait()
                     self.dispatchGroup.enter()
                     
-                    guard let secondOrigin = VehicleOrigin(rawValue: dataType)?.info.urlSecondComponent else {
+                    guard let secondOrigin = CVehicleOrigin(rawValue: dataType)?.info.urlSecondComponent else {
                         self.dispatchGroup.leave()
                         self.areThereMoreVehicles.value = false
                         return

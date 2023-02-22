@@ -8,6 +8,7 @@
 import Foundation
 
 enum CError: String, Error {
+    case emptyTextField = "Nie może być puste"
     case defaultCase = "Coś poszło nie tak"
     case defaultError = "Proszę spróbować ponownie"
     case invalidResponse = "Nieprawidłowa odpowiedź serwera. Proszę spróbować ponownie"

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DataType: String {
+enum CDataType: String {
     case all
     case registered
     

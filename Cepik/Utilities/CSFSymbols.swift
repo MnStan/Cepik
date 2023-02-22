@@ -7,11 +7,8 @@
 
 import UIKit
 
-enum SFSymbols {
-    static let province = "flag"
-    static let checkList = "checklist"
+enum CSFSymbols {
     static let placeholder = "questionmark"
-    static let calendar = "calendar"
-    static let checkmark = "checkmark"
     static let sort = "list.bullet.clipboard.fill"
+    static let number = "number"
 }

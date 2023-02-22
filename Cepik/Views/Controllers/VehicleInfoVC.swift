@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VehicleInfoVC: CLoadingVC {
+class VehicleInfoVC: LoadingVC {
 
     let scrollView = UIScrollView()
     let stackView = CItemsStackView()
@@ -22,7 +22,7 @@ class VehicleInfoVC: CLoadingVC {
         self.tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .systemBackground
         title = "Szczegóły"
-        addItems()
+
         setBindings()
         showLoadingView(backgroundColor: true)
         viewModel.fetchData(vehicleId: vehicleId)
@@ -40,7 +40,7 @@ class VehicleInfoVC: CLoadingVC {
                 self.configureContentView()
                 self.configureStackView()
                 info.forEach {
-                    self.stackView.addArrangedSubview(CVehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: "number"))
+                    self.stackView.addArrangedSubview(CVehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: CSFSymbols.number))
                 }
             }
         }
@@ -65,10 +65,6 @@ class VehicleInfoVC: CLoadingVC {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
-    }
-    
-    func addItems() {
-        
     }
     
     private func configureStackView() {

@@ -17,10 +17,10 @@ struct VehiclesData: Codable {
     
     var id: String?
     var type: String?
-    var attributes: VehiclesDataAtributes?
+    var attributes: VehiclesDataAttributes?
 }
 
-struct VehiclesDataAtributes: Codable {
+struct VehiclesDataAttributes: Codable {
     
     var marka: String?
     var model: String?

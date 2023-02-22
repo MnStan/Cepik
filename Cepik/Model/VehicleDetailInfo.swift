@@ -20,6 +20,75 @@ struct VehiclesDetailData: Codable {
 }
 
 struct VehiclesDetailDataAttributes: Codable {
+    var rejestracjaGmina: String?
+    var rejestracjaPowiat: String?
+    var rejestracjaWojewodztwo: String?
+    var dataOstatniejRejestracjiWKraju: String?
+    var dataPierwszejRejestracji: String?
+    var dataPierwszejRejestracjiwkraju: String?
+    var dataPierwszejRejestracjiZaGranica: String?
+    var dataWprowadzeniaDanych: String?
+    var dataWyrejestrowaniaPojazdu: String?
+    var dopuszczalnaLadownosc: Int?
+    var dopuszczalnaMasaCalkowita: Int?
+    var dopuszczalnaMasaCalkowitaZespoluPojazdow: Int?
+    var poziomEmisjiCo2: Double?
+    var poziomEmisjiCo2PierwszePaliwoAlternatwne: Double?
+    var poziomEmisjiCo2DrugiePaliwoAlternatwne: Double?
+    var kategoriaPojazdu: String?
+    var kodInstytutuTransportuSamochodowego: String?
+    var kodRodzajPodrodzajPrzeznaczenie: String?
+    var liczbaMiejscOgolem: Int?
+    var liczbaMiejscSiedzacych: Int?
+    var liczbaMiejscStojacych: Int?
+    var liczbaOsi: Int?
+    var maksymalnaLadownosc: Int?
+    var maksymalnaMasaCalkowita: Int?
+    var maxMasaCalkowitaCiagnietejPrzyczepyBezHamulca: Int?
+    var maxMasaCalkowitaPrzyczepyBezHamulca: Int?
+    var maxMocNettoSilnikowPojazduHybrydowego: Double?
+    var maxRozstawKol: Int?
+    var mocNettoSilnika: Double?
+    var marka: String?
+    var masaPojazduGotowegoDoJazdy: Int?
+    var masaWlasna: Int?
+    var minRozstawKol: Int?
+    var model: String?
+    var dopuszczalnyNaciskOsi: Double?
+    var maksymalnyNaciskOsi: Double?
+    var nazwaProducenta: String?
+    var pochodzeniePojazdu: String?
+    var podrodzajPojazdu: String?
+    var pojemnoscSkokowaSilnika: Double?
+    var przeznaczeniePojazdu: String?
+    var przyczynaWyrejestrowaniaPojazdu: String?
+    var redukcjaEmisjiSpalin: Double?
+    var rodzajDrugiegoPaliwaAlternatywnego: String?
+    var rodzajKodowaniaRodzajPodrodzajPrzeznaczenie: String?
+    var rodzajPaliwa: String?
+    var rodzajPierwszegoPaliwaAlternatywnego: String?
+    var rodzajPojazdu: String?
+    var rodzajTabliczkiZnamionowej: String?
+    var rodzajZwieszenia: String?
+    var rokProdukcji: String?
+    var rozstawKolOsiKierowanejPozostalychOsi: String?
+    var wlascicielGmina: String?
+    var wlascicielPowiat: String?
+    var wlascicielWojewodztwo: String?
+    var sposobProdukcji: String?
+    var avgRozstawKol: Int?
+    var avgZuzyciePaliwa: Double?
+    var stosunekMocySilnikaDoMasyWlasnejMotocykle: Double?
+    var typ: String?
+    var wariant: String?
+    var wersja: String?
+    var wyposazenieIRodzajUrzadzeniaRadarowego: String?
+    var kierownicaPoPrawejStronie: Bool?
+    var kierownicaPoPrawejStroniePierwotnie: Bool?
+    var hak: Bool?
+    var katalizatorPochlaniacz: Bool?
+    var wojewodztwoKod: String?
+    var wlascicielWojewodztwoKod: String?
     
     private enum CodingKeys: String, CodingKey {
         case rejestracjaGmina = "rejestracja-gmina"
@@ -93,74 +162,4 @@ struct VehiclesDetailDataAttributes: Codable {
         case wlascicielWojewodztwoKod = "wlasciciel-wojewodztwo-kod"
 
     }
-    
-var rejestracjaGmina: String?
-var rejestracjaPowiat: String?
-var rejestracjaWojewodztwo: String?
-var dataOstatniejRejestracjiWKraju: String?
-var dataPierwszejRejestracji: String?
-var dataPierwszejRejestracjiwkraju: String?
-var dataPierwszejRejestracjiZaGranica: String?
-var dataWprowadzeniaDanych: String?
-var dataWyrejestrowaniaPojazdu: String?
-var dopuszczalnaLadownosc: Int?
-var dopuszczalnaMasaCalkowita: Int?
-var dopuszczalnaMasaCalkowitaZespoluPojazdow: Int?
-var poziomEmisjiCo2: Double?
-var poziomEmisjiCo2PierwszePaliwoAlternatwne: Double?
-var poziomEmisjiCo2DrugiePaliwoAlternatwne: Double?
-var kategoriaPojazdu: String?
-var kodInstytutuTransportuSamochodowego: String?
-var kodRodzajPodrodzajPrzeznaczenie: String?
-var liczbaMiejscOgolem: Int?
-var liczbaMiejscSiedzacych: Int?
-var liczbaMiejscStojacych: Int?
-var liczbaOsi: Int?
-var maksymalnaLadownosc: Int?
-var maksymalnaMasaCalkowita: Int?
-var maxMasaCalkowitaCiagnietejPrzyczepyBezHamulca: Int?
-var maxMasaCalkowitaPrzyczepyBezHamulca: Int?
-var maxMocNettoSilnikowPojazduHybrydowego: Double?
-var maxRozstawKol: Int?
-var mocNettoSilnika: Double?
-var marka: String?
-var masaPojazduGotowegoDoJazdy: Int?
-var masaWlasna: Int?
-var minRozstawKol: Int?
-var model: String?
-var dopuszczalnyNaciskOsi: Double?
-var maksymalnyNaciskOsi: Double?
-var nazwaProducenta: String?
-var pochodzeniePojazdu: String?
-var podrodzajPojazdu: String?
-var pojemnoscSkokowaSilnika: Double?
-var przeznaczeniePojazdu: String?
-var przyczynaWyrejestrowaniaPojazdu: String?
-var redukcjaEmisjiSpalin: Double?
-var rodzajDrugiegoPaliwaAlternatywnego: String?
-var rodzajKodowaniaRodzajPodrodzajPrzeznaczenie: String?
-var rodzajPaliwa: String?
-var rodzajPierwszegoPaliwaAlternatywnego: String?
-var rodzajPojazdu: String?
-var rodzajTabliczkiZnamionowej: String?
-var rodzajZwieszenia: String?
-var rokProdukcji: String?
-var rozstawKolOsiKierowanejPozostalychOsi: String?
-var wlascicielGmina: String?
-var wlascicielPowiat: String?
-var wlascicielWojewodztwo: String?
-var sposobProdukcji: String?
-var avgRozstawKol: Int?
-var avgZuzyciePaliwa: Double?
-var stosunekMocySilnikaDoMasyWlasnejMotocykle: Double?
-var typ: String?
-var wariant: String?
-var wersja: String?
-var wyposazenieIRodzajUrzadzeniaRadarowego: String?
-var kierownicaPoPrawejStronie: Bool?
-var kierownicaPoPrawejStroniePierwotnie: Bool?
-var hak: Bool?
-var katalizatorPochlaniacz: Bool?
-var wojewodztwoKod: String?
-var wlascicielWojewodztwoKod: String?
 }

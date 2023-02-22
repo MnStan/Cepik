@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CLoadingVC: UIViewController {
+class LoadingVC: UIViewController {
     
     var containerView: UIView!
     var loadingIndicator: UIActivityIndicatorView!

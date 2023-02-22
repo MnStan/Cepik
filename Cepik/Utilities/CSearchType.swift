@@ -7,8 +7,7 @@
 
 import Foundation
 
-enum SearchType {
-    
+enum CSearchType {
     case vehicle
     case vehicleInfo
 }

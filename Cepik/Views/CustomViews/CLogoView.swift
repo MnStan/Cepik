@@ -31,7 +31,7 @@ class CLogoView: UIView {
         logoImageView.contentMode = .scaleAspectFit
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(systemName: SFSymbols.placeholder)
+        logoImageView.image = UIImage(systemName: CSFSymbols.placeholder)
         configureLayout()
     }
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VehiclesVC: CLoadingVC {
+class VehiclesVC: LoadingVC {
 
     private let tableView = UITableView()
     var viewModel = VehicleViewModel()
@@ -57,7 +57,7 @@ class VehiclesVC: CLoadingVC {
     // MARK: Sorting vehicles
     
     private func showSortingButton() {
-        let sortingBarButton = UIBarButtonItem(image: UIImage(systemName: SFSymbols.sort), style: .done, target: self, action: #selector(sortVehicles))
+        let sortingBarButton = UIBarButtonItem(image: UIImage(systemName: CSFSymbols.sort), style: .done, target: self, action: #selector(sortVehicles))
         navigationItem.rightBarButtonItem = sortingBarButton
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum VehicleInfoDescription: String{
+enum CVehicleInfoDescription: String{
    case rejestracjaGmina
    case rejestracjaPowiat
    case rejestracjaWojewodztwo

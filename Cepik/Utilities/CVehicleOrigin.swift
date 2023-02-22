@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum VehicleOrigin: String, CaseIterable {
+enum CVehicleOrigin: String, CaseIterable {
     case new
     case newFromCountry
     case newImported
