@@ -17,6 +17,12 @@ class SearchViewModel {
 
     let datesNetworkRequest: ObservableObject<Vehicles?> = ObservableObject(value: nil)
     
+    
+    /// Checking if textfield text property is not empty
+    /// - Parameters:
+    ///   - viewsArray: Array of views with textfields
+    ///   - emptyHandler: A way to pass String for Alert
+    ///   - completion: A way to pass if there is even one empty textField
     func checkTextFields(viewsArray: [CItemSettingsView], emptyHandler: (String?, CItemSettingsView?) -> (), completion: (Bool) -> ()) {
         var empty = false
         

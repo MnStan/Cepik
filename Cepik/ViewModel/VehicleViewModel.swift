@@ -61,7 +61,12 @@ class VehicleViewModel {
         vehicles = startVehicles
     }
     
-    func getNameToDisplay(vehicle: VehiclesData) -> String{
+    
+    /// This function creates name to display from server response
+    /// Sometimes names from server contain strange dashes
+    /// - Parameter vehicle: Server response
+    /// - Returns: Name to display
+    func getNameToDisplay(vehicle: VehiclesData) -> String {
         if let vehicleCompany = vehicle.attributes?.marka, let vehicleName = vehicle.attributes?.model {
             if vehicleName.contains("---") {
                 return vehicleCompany

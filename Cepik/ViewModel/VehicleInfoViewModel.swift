@@ -13,7 +13,13 @@ class VehicleInfoViewModel {
     let vehicleDetailNetworkRequest: ObservableObject<VehicleDetailInfo?> = ObservableObject(value: nil)
     let networkAlert: ObservableObject<CError?> = ObservableObject(value: nil)
     
+    
+    /// This function takes each Vehicle Detail Data Attribute thanks to reflection which describes parts that make up this struct and check if they contain useful information for user and put it in dictionary
+    /// - Parameter vehicleInfo: Vehicle info fetched from server
+    /// - Returns: Dictionary that contain detail element name and associated value
     func getInformation(vehicleInfo: VehiclesDetailDataAttributes) -> [Dictionary<String, String>.Element]{
+        print(vehicleInfo)
+        
         let mirror = Mirror(reflecting: vehicleInfo)
         var dictionary: [String: String] = [:]
         

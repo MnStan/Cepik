@@ -42,6 +42,7 @@ class CLogoView: UIView {
             logoImageView.topAnchor.constraint(equalTo: self.topAnchor),
             logoImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalTo: self.heightAnchor),
+            logoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }

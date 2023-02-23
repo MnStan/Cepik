@@ -30,6 +30,9 @@ class CDatePickerVC: LoadingVC {
         addSubviews()
         setupConstraints()
         configureButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         viewModel.getDates()
         showLoadingView(backgroundColor: true)
     }

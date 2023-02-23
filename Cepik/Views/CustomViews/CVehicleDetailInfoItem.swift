@@ -24,6 +24,7 @@ class CVehicleDetailInfoItem: UIView {
     convenience init(titleText: String, bodyText: String, logo: String) {
         self.init(frame: .zero)
         self.title = CTitleLabel(title: titleText)
+        self.title.numberOfLines = 0
         self.body = CBodyLabel(text: bodyText)
         self.logo = CLogoView(image: logo)
         configureLayout()
@@ -35,16 +36,17 @@ class CVehicleDetailInfoItem: UIView {
         self.addSubview(body)
         
         let padding: CGFloat = 10
-        
         NSLayoutConstraint.activate([
-            logo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
-            logo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            logo.widthAnchor.constraint(equalToConstant: 40),
-            logo.heightAnchor.constraint(equalTo: logo.widthAnchor),
-            
             title.leadingAnchor.constraint(equalTo: logo.trailingAnchor, constant: padding),
             title.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
             title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
+            title.heightAnchor.constraint(equalToConstant: title.font.lineHeight + 20),
+            
+            logo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
+            logo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            logo.topAnchor.constraint(equalTo: logo.topAnchor),
+            logo.widthAnchor.constraint(equalToConstant: 40),
+            logo.heightAnchor.constraint(equalTo: logo.widthAnchor),
             
             body.leadingAnchor.constraint(equalTo: title.leadingAnchor),
             body.topAnchor.constraint(equalTo: title.bottomAnchor, constant: padding),
