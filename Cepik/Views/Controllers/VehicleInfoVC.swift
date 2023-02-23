@@ -28,6 +28,8 @@ class VehicleInfoVC: LoadingVC {
         viewModel.fetchData(vehicleId: vehicleId)
     }
     
+    // MARK: Bindings
+    
     private func setBindings() {
         viewModel.vehicleDetailNetworkRequest.bind { [weak self] vehicle in
             guard let self else { return }
@@ -54,6 +56,8 @@ class VehicleInfoVC: LoadingVC {
         }
     }
     
+    // MARK: Content view configuration
+    
     private func configureContentView() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
@@ -67,6 +71,8 @@ class VehicleInfoVC: LoadingVC {
         ])
     }
     
+    // MARK: Stack view configuration
+    
     private func configureStackView() {
         contentView.addSubview(stackView)
         
@@ -77,6 +83,8 @@ class VehicleInfoVC: LoadingVC {
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+    
+    // MARK: Scroll view configuration
     
     private func configureScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false

@@ -43,6 +43,8 @@ class SearchVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: Bindings for network error
+    
     private func setBinders() {
         viewModel.networkAlert.bind { [weak self] error in
             guard let self else { return }

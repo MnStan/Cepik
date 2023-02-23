@@ -12,6 +12,8 @@ class LoadingVC: UIViewController {
     var containerView: UIView!
     var loadingIndicator: UIActivityIndicatorView!
     
+    // MARK: Configuration of loading view
+    
     func showLoadingView(backgroundColor: Bool) {
         containerView = UIView()
         

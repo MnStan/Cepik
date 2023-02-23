@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol CAlertDelegate {
+    func okButtonPressed()
+}
+
 class AlertVC: UIViewController {
     
+    var delegate: CAlertDelegate?
     let containerView = CAlertContainer()
     let titleLabel = CTitleLabel()
     let messageLabel = CBodyLabel()
@@ -54,6 +59,8 @@ class AlertVC: UIViewController {
         view.addSubview(messageLabel)
         view.addSubview(button)
     }
+    
+    // MARK: Elements of Alert configurationa
     
     private func configureContainerView() {
         NSLayoutConstraint.activate([
@@ -102,6 +109,7 @@ class AlertVC: UIViewController {
     
     @objc func dismissVC() {
         dismiss(animated: true)
+        delegate?.okButtonPressed()
     }
     
 }
