@@ -168,6 +168,7 @@
 		F64A96E9293F2F76006A095F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */,
 				F6E2DB8728FE8CC500A77743 /* SearchVC.swift */,
 				F6588650292F5B0200437D8F /* LoadingVC.swift */,
 				F6469C68291B95160079BE52 /* VehiclesVC.swift */,
@@ -319,7 +320,6 @@
 				F6E2DB8D28FEBDBA00A77743 /* CLogoView.swift */,
 				F65818C12901384B009059EA /* CItemsStackView.swift */,
 				F65818C929013EEF009059EA /* CItemSettingsView.swift */,
-				F6BB4D1729067C9A00DC71FE /* CDatePickerVC.swift */,
 				F6BFFD922924F54800431A8B /* CVehicleDetailInfoItem.swift */,
 				F658864E292F589E00437D8F /* CEmptyState.swift */,
 				F6ADC75329703CA200C22338 /* CAlertContainer.swift */,
