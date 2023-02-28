@@ -25,6 +25,7 @@
 
 ### Search screen
   In this screen user sees and can choose parameters about the query.
+  Application implements Dynamic Text on all screens.
   <p align="center">
     <img src="https://user-images.githubusercontent.com/58117854/221962496-b9955daa-3ab6-4969-8193-60cc2f26c1e2.jpg" height="500" />
   </p>
