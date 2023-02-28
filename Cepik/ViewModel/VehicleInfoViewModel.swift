@@ -18,7 +18,6 @@ class VehicleInfoViewModel {
     /// - Parameter vehicleInfo: Vehicle info fetched from server
     /// - Returns: Dictionary that contain detail element name and associated value
     func getInformation(vehicleInfo: VehiclesDetailDataAttributes) -> [Dictionary<String, String>.Element]{
-        print(vehicleInfo)
         
         let mirror = Mirror(reflecting: vehicleInfo)
         var dictionary: [String: String] = [:]
