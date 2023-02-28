@@ -54,3 +54,5 @@
  ## Features to add
  - [ ] API call for driving licenses
  - [ ] SwiftUI screen with BarChart for number of vehicles registered in given month/year
+ - [ ] Unit tests
+ 
