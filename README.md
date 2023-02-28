@@ -2,11 +2,11 @@
   Simple app created in Swift using UIKit to observe data about registered vehicles in Central Register Of Vehicles And Drivers (CEPIK) in Poland.
 
 ## Table of Contents
-  * [Introduction](*introduction)
-  * [Technologies](*technologies)
-  * [API](*API)
-  * [App presentation](*app-presentation)
-  * [Features to add](*features-to-add)
+  * [Introduction](#introduction)
+  * [Technologies](#technologies)
+  * [API](#api)
+  * [App presentation](#app-presentation)
+  * [Features to add](#features-to-add)
 
 ## Introduction
   I build this app for training purposes. I wanted to combine most skills that I gained while learning Swift. I also wanted to polish building a user interface programatically and try to make an app using MVVM Design Pattern.
