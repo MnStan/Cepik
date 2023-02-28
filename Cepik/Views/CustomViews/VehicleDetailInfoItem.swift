@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CVehicleDetailInfoItem: UIView {
+class VehicleDetailInfoItem: UIView {
 
     var logo: CLogoView!
     var title: CTitleLabel!

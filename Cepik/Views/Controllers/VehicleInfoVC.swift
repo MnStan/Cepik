@@ -42,7 +42,7 @@ class VehicleInfoVC: LoadingVC {
                 self.configureContentView()
                 self.configureStackView()
                 info.forEach {
-                    self.stackView.addArrangedSubview(CVehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: CSFSymbols.number))
+                    self.stackView.addArrangedSubview(VehicleDetailInfoItem(titleText: $0.key, bodyText: $0.value, logo: CSFSymbols.number))
                 }
             }
         }
