@@ -9,7 +9,7 @@
   * [Features to add](#features-to-add)
 
 ## Introduction
-  I build this app for training purposes. I wanted to combine skills that I gained while learning Swift. I also wanted to polish building a user interface programatically and try to make an app using MVVM.
+  I built this app for training purposes. I wanted to combine skills that I gained while learning Swift. I also wanted to polish building a user interface programatically and make an app using MVVM.
   
   The application allows to search and view detailed information about vehicles in a given province in a given period and type of registration.
 
