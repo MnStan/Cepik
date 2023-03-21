@@ -1,5 +1,5 @@
 # Cepik
-  Simple app created in Swift using UIKit to observe data about registered vehicles in Central Register Of Vehicles And Drivers (CEPIK) in Poland.
+  App created in Swift using UIKit to observe data about registered vehicles in Central Register Of Vehicles And Drivers (CEPIK) in Poland.
 
 ## Table of Contents
   * [Introduction](#introduction)
