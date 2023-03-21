@@ -38,7 +38,7 @@
   </p>
   
 ### Returned vehicles screen
-  This screen shows the reulsts from query in Table View with search option and sort option.
+  This screen shows the results from query in Table View with search option and sort option.
   <p align="center">
     <img src="https://user-images.githubusercontent.com/58117854/221963885-e9f7753e-7ca8-4a84-9081-93dc12fdfd46.jpg" height="500" />
   </p>
@@ -54,5 +54,4 @@
  ## Features to add
  - [ ] API call for driving licenses
  - [ ] SwiftUI screen with BarChart for number of vehicles registered in given month/year
- - [ ] Unit tests
  
