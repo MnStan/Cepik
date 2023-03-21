@@ -9,7 +9,7 @@
   * [Features to add](#features-to-add)
 
 ## Introduction
-  I build this app for training purposes. I wanted to combine most skills that I gained while learning Swift. I also wanted to polish building a user interface programatically and try to make an app using MVVM Design Pattern.
+  I build this app for training purposes. I wanted to combine skills that I gained while learning Swift. I also wanted to polish building a user interface programatically and try to make an app using MVVM.
   
   The application allows to search and view detailed information about vehicles in a given province in a given period and type of registration.
 
@@ -44,7 +44,7 @@
   </p>
   
 ### Vehicle detail screen
-  This screen shows details information about specific vehicle.
+  This screen shows details information about specific vehicle with Scroll View
   <p align="center">
     <img src="https://user-images.githubusercontent.com/58117854/221963951-60e18d10-e428-45e7-a74d-d34d03317453.png" height="500" />
   </p>
